@@ -1,0 +1,76 @@
+grammar MythGenerator
+    rule interface_definitions
+       interface_definition* <InterfaceDefinitions>
+    end
+
+    rule interface_definition
+        whitespace? interface_token whitespace identifier superclass_definition? whitespace supports_definitions? property_definitions end_token whitespace? <InterfaceDefinition>
+    end
+
+    rule superclass_definition
+        whitespace? ':' whitespace? identifier <SuperclassDefinition>
+    end
+
+    rule identifier
+        [a-zA-Z_] [a-zA-Z0-9_]* <Identifier>
+    end
+
+    rule type
+        identifier whitespace? '*'? whitespace? <Type>
+    end
+
+    rule supports_definitions
+        support_definition* <SupportsDefinition>
+    end
+
+    rule support_definition
+        '@supports ' identifier whitespace <SupportDefinition>
+    end
+
+    rule property_definitions
+        property_definition* <PropertyDefinitions>
+    end
+
+    rule property_definition
+        property_token property_options? type identifier EOL <PropertyDefinition>
+    end
+
+    rule property_options
+        whitespace? '(' whitespace? property_option ( whitespace? ',' whitespace? property_option )* whitespace? ')' whitespace? <PropertyOptions>
+    end
+
+    rule property_option
+        'atomic' <PropertyOption> /
+        'nonatomic' <PropertyOption> /
+        'strong' <PropertyOption> /
+        'weak' <PropertyOption> /
+        'assign' <PropertyOption> /
+        'copy' <PropertyOption> /
+        'readwrite' <PropertyOption> /
+        'readonly' <PropertyOption> /
+        'mutable' <PropertyOption> /
+        'immutable' <PropertyOption> /
+        'nonnull' <PropertyOption> /
+        'nullable' <PropertyOption>
+    end
+
+    rule interface_token
+        '@interface' <Keyword>
+    end
+
+    rule end_token
+        '@end' <Keyword>
+    end
+
+    rule property_token
+        '@property' <Keyword>
+    end
+
+    rule EOL
+         whitespace? ';' whitespace?
+    end
+
+    rule whitespace
+        [\s\t\r\n]+ <Whitespace>
+    end
+end
