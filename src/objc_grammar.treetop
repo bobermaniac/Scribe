@@ -16,7 +16,15 @@ grammar MythGenerator
     end
 
     rule type
-        identifier whitespace? '*'? whitespace? <Type>
+        identifier whitespace? generic_subtype? whitespace? '*'? whitespace? <Type>
+    end
+
+    rule generic_subtype
+        '<' whitespace? type generic_subtype_s2? whitespace? '>' <GenericSubtype>
+    end
+
+    rule generic_subtype_s2
+        whitespace? ',' whitespace? type generic_subtype_s2? <GenericSubtypeS2>
     end
 
     rule supports_definitions

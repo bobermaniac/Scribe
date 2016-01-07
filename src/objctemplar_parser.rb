@@ -160,7 +160,37 @@ module MythGenerator
 
   class Type < Treetop::Runtime::SyntaxNode
     def text_value
-      super.gsub(/(?<l>[a-zA-Z0-9_$])\W*\*/, '\k<l> *').strip
+      Type.normalize_type(self)
     end
+
+    def self.normalize_type(type)
+      buffer = StringIO.new
+
+      for element in type.elements
+        if element.is_a?(Type) or element.is_a?(Identifier)
+          buffer << element.text_value
+        elsif element.is_a?(GenericSubtype)
+          buffer << "<#{normalize_type(element)}>"
+        elsif element.is_a?(GenericSubtypeS2)
+          buffer << normalize_type(element)
+        elsif element.is_a? Treetop::Runtime::SyntaxNode
+          if element.text_value == ','
+            buffer << ', '
+          elsif element.text_value == '*'
+            buffer << ' *'
+          end
+        end
+      end
+
+      buffer.string
+    end
+  end
+
+  class GenericSubtype < Treetop::Runtime::SyntaxNode
+
+  end
+
+  class GenericSubtypeS2 < Treetop::Runtime::SyntaxNode
+
   end
 end

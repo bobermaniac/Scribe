@@ -70,13 +70,17 @@
 
     return self;
 }
+
+- (nonnull NSArray<NSString *> *)changedKeys {
+    return _tracker.changedKeys;
+}
 {% endif %}
 {% for property in class.all_mutable_properties %}@dynamic {{ property.name }}
 
 - (void){{ property.setter_name }}:({{ property.type_qualified }}){{ property.name }} {
     [self willChangeValueForKey:@"{{ property.name }}"];
     {{ property.field_name }} = {% if property.copy_on_assign? %}[{{ property.name}} copy]{% else %}{{ property.name }}{% endif %};
-    {% if class.should_track_changes %}[_tracker fieldWithNameWasChanged:@"{{ property.name }}" forObject:self];
+    {% if class.should_track_changes %}[_tracker keyChanged:@"{{ property.name }}" forObject:self];
     {% endif %}[self didChangeValueForKey:@"{{ property.name }}"];
 }
 
