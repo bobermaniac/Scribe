@@ -28,17 +28,18 @@ module Liquid
       '_' + @objc_property.name
     end
 
+    def attributes_string(attributes)
+      attributes.reject { |opt| [:nullable, :nonnull].include? opt }
+                .map { |opt| opt.to_s }
+                .reduce { |f, s| f + ', ' + s }
+    end
+
     def attributes
-      attributes = @objc_property.options.reject { |opt| [:mutable, :immutable, :nullable, :nonnull].include? opt }
-          .map { |opt| opt.to_s }
-          .reduce { |f, s| f + ', ' + s }
-      return attributes unless @objc_property.options.include? :immutable
-      "#{attributes}, readonly"
+      attributes_string(@objc_property.options)
     end
 
     def readonly_attributes
-       return attributes if attributes.include? 'readonly'
-       "#{attributes}, readonly"
+      attributes_string(@objc_property.options - [ :readwrite, :readonly ] + [ :readonly ])
     end
 
     def setter_name

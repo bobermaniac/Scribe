@@ -65,8 +65,6 @@ grammar MythGenerator
         'copy' <PropertyOption> /
         'readwrite' <PropertyOption> /
         'readonly' <PropertyOption> /
-        'mutable' <PropertyOption> /
-        'immutable' <PropertyOption> /
         'nonnull' <PropertyOption> /
         'nullable' <PropertyOption>
     end

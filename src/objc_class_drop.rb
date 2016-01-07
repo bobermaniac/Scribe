@@ -44,11 +44,11 @@ module Liquid
     end
 
     def immutable_properties
-      @objc_class.all_properties.select { |p| p.options.include?(:immutable) }
+      @objc_class.all_properties.select { |p| p.options.include?(:readonly) }
     end
 
     def immutable_own_properties
-      @objc_class.properties.select { |p| p.options.include?(:immutable) }
+      @objc_class.properties.select { |p| p.options.include?(:readonly) }
     end
 
     def all_mutable_properties

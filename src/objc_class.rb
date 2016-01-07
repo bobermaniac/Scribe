@@ -45,7 +45,7 @@ module Objc
     end
 
     def all_mutable_properties
-      return all_properties.reject { |property| property.options.include? :immutable }
+      return all_properties.reject { |property| property.options.include? :readonly }
     end
 
     def self.NSObject

@@ -104,10 +104,10 @@ module MythGenerator
         result << :strong
       end
 
-      if options.include? :immutable
-        result << :immutable
+      if options.include? :readonly
+        result << :readonly
       else
-        result << :mutable
+        result << :readwrite
       end
 
       if options.include? :nullable
