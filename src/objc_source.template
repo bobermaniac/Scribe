@@ -15,6 +15,7 @@
 {% if class.close_parent_ctor? %}#pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
 - (instancetype _Nonnull)init{{ class.parent.prim_ctor_definition }} {
+    NSAssert(NO, @"Forbidden");
     @throw [NSException exceptionWithName:@"Forbidden" reason:@"This object have its own immutable fields" userInfo:nil];
 }
 #pragma clang diagnostic pop
@@ -24,35 +25,48 @@
         {{ property.field_name }} = {% if property.copy_on_assign? %}[{{ property.name}} copy]{% else %}{{ property.name }}{% endif %};{% endfor %}
     }
 
+    NSAssert(self != nil, @"Internal error: object was not created");
     return self;
 }
 
 - (instancetype _Nonnull)init{{ class.copy_ctor_definition }} {
+    NSParameterAssert({{class.copy_ctor_param}} != nil);
+
     if (self = [super init{{ class.parent.copy_ctor_call }}]) { {% for property in class.own_properties %}
         {{ property.field_name }} = {% if property.copy_on_assign? %}[{{class.copy_ctor_param}}->{{ property.field_name }} copy]{% else %}{{class.copy_ctor_param}}->{{ property.field_name }}{% endif %};{% endfor %}
     }
 
+    NSAssert(self != nil, @"Internal error: object was not created");
     return self;
 }
 
 {% if class.supports_builder? %}
 - (instancetype _Nonnull)initWithBuilder:({{ class.class_name }}Builder * _Nonnull)builder {
+    NSParameterAssert(builder != nil);
+
     if (self = [self init{{ class.prim_ctor_call_for_builder }}]) { {% for property in class.all_mutable_properties %}
         {{ property.field_name }} = {% if property.copy_on_assign? %}[builder.{{ property.name }} copy]{% else %}builder.{{ property.name }}{% endif %};{% endfor %}
     }
 
+    NSAssert(self != nil, @"Internal error: object was not created");
     return self;
 }
 
 + ({{ class.class_name }}Builder * _Nonnull)builder {
-    return [[{{ class.class_name }}Builder alloc] init];
+    {{ class.class_name }}Builder *builder = [[{{ class.class_name }}Builder alloc] init];
+
+    NSAssert(builder != nil, @"Internal error: builder was not created");
+    return builder;
 }
 {% endif %}
 
 {% if class.supports_mutable_copy? %}
 - (id)mutableCopyWithZone:(NSZone *)zone {
-    {{ class.class_name }} *item = self;
-    return [[{{class.mutable_class_name}} allocWithZone:zone] init{{ class.copy_ctor_call }}];
+    {{ class.class_name }} *{{ class.copy_ctor_param }} = self;
+    {{ class.copy_ctor_param }} = [[{{class.mutable_class_name}} allocWithZone:zone] init{{ class.copy_ctor_call }}];
+
+    NSAssert({{ class.copy_ctor_param }} != nil, @"Internal error: object was not copied");
+    return {{ class.copy_ctor_param }};
 } {% endif %}
 
 {% for property in class.own_properties %}@dynamic {{ property.name }};
@@ -77,18 +91,22 @@
         _tracker = [[TCTrackChangesImplementation alloc] init];
     }
 
+    NSAssert(self != nil, @"Internal error: object was not created");
     return self;
 }
 
 - (instancetype _Nonnull)init{{ class.copy_ctor_definition }} {
+    NSParameterAssert({{class.copy_ctor_param}} != nil);
+
     if (self = [super init{{ class.copy_ctor_call }}]) {
         if ([item isKindOfClass:[{{ class.mutable_class_name }} class]]) {
-            _tracker = [(({{ class.mutable_class_name }} *)item)->_tracker copy];
+            _tracker = [(({{ class.mutable_class_name }} *){{ class.copy_ctor_param }})->_tracker copy];
         } else {
             _tracker = [[TCTrackChangesImplementation alloc] init];
         }
     }
 
+    NSAssert(self != nil, @"Internal error: object was not created");
     return self;
 }
 

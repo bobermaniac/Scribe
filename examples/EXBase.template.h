@@ -1,7 +1,7 @@
 #import "ExternalHeader.h"
 
 @interface EXBase : NSObject
-@supports mutable_copy
+@implement mutable_copy
 
 @property (nonatomic, readonly, nonnull, copy) NSString *Id;
 @property (nonatomic) NSString *name;

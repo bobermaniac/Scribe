@@ -41,7 +41,7 @@ grammar MythGenerator
     end
 
     rule support_definition
-        '@supports ' identifier whitespace <SupportDefinition>
+        '@implement ' identifier whitespace <SupportDefinition>
     end
 
     rule property_definitions

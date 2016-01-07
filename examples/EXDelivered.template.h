@@ -1,6 +1,6 @@
 @interface EXDelivered : EXBase
-@supports builder
-@supports track_changes
+@implement builder
+@implement track_changes
 
 @property (nonatomic, readonly) id customData;
 @property (nonatomic, copy) NSString *author;
