@@ -40,12 +40,13 @@ if results.include? nil
 else
   classes_raw = results.flat_map { |result| result.classes }
   classes = [ Objc::Class.NSObject ]
+  ancestors = classes
 
   while classes_raw.any?
-    ancestor = classes.last
-    descendants = classes_raw.select { |class_raw| class_raw.superclass_name == ancestor.name }
+    descendants = classes_raw.select { |class_raw| ancestors.any? { |ancestor| ancestor.name == class_raw.superclass_name } }
     classes_raw -= descendants
-    classes += descendants.map do |class_raw|
+    ancestors = descendants.map do |class_raw|
+      ancestor = ancestors.first {|cls| cls.name == class_raw.superclass_name}
       Objc::Class.new(class_raw.class_name, ancestor) do |cls|
         cls.supports = class_raw.supports
         cls.imports = class_raw.imports
@@ -58,14 +59,17 @@ else
         end
       end
     end
+    classes += ancestors
   end
 
-  for cls in classes.reject { |c| c.root? }
+  classes = classes = classes.reject { |c| c.root? }
+  for cls in classes
+    other_classes = classes.reject { |c| c == cls }
     File.open("#{parameters[:destination]}/#{cls.name}.h", 'w') do |header|
-      header.write(header_template.render 'class' => cls)
+      header.write(header_template.render 'class' => cls, 'other_classes' => other_classes.map { |cls| cls.name } )
     end
     File.open("#{parameters[:destination]}/#{cls.name}.m", 'w') do |source|
-      source.write(source_template.render 'class' => cls)
+      source.write(source_template.render 'class' => cls, 'other_classes' => other_classes.map { |cls| cls.name })
     end
   end
 end

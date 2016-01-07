@@ -60,7 +60,7 @@ module Liquid
     end
 
     def mutable_protocols
-      dump_protocols({ :track_changes => 'TCTrackChangesProtocol' })
+      dump_protocols({ :track_changes => 'TCTrackChanges' })
     end
 
     def imports
@@ -101,7 +101,8 @@ module Liquid
 
     def copy_ctor_call
       return '' if @objc_class.root?
-      "With#{nontrivial_ancestor_info[:name].upcase_1l}:self"
+      ancestor_info = nontrivial_ancestor_info
+      "With#{ancestor_info[:name].upcase_1l}:#{ancestor_info[:name].downcase_1l}"
     end
 
     def copy_ctor_param
