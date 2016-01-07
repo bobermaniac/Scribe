@@ -17,6 +17,8 @@ module Objc
     attr_accessor :properties
     attr_accessor :supports
 
+    attr_accessor :imports
+
     def root?
       name == 'NSObject'
     end

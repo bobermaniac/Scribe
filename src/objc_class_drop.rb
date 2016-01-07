@@ -63,6 +63,11 @@ module Liquid
       dump_protocols({ :track_changes => 'TCTrackChangesProtocol' })
     end
 
+    def imports
+      import = @objc_class.ancestor.root? ? '<Foundation/Foundation.h>' : "\"#{@objc_class.ancestor.name}.h\""
+      "#import #{import}\n#{@objc_class.imports}".strip
+    end
+
     def prim_ctor_definition
       immutable_props = immutable_properties
       return ' ' if not immutable_props.any?

@@ -1,5 +1,5 @@
-#import <Foundation/Foundation.h>
-{% if class.should_track_changes %}#import "TCTrackChanges.h"{% endif %}
+{{ class.imports }}{% if class.should_track_changes %}
+#import "TCTrackChanges.h"{% endif %}
 
 @interface {{ class.class_name }} : {{ class.parent.class_name }} {{ class.protocols }} {
     @protected

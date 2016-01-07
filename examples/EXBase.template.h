@@ -1,3 +1,5 @@
+#import "ExternalHeader.h"
+
 @interface EXBase : NSObject
 @supports mutable_copy
 

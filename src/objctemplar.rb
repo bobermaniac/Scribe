@@ -48,6 +48,7 @@ else
     classes += descendants.map do |class_raw|
       Objc::Class.new(class_raw.class_name, ancestor) do |cls|
         cls.supports = class_raw.supports
+        cls.imports = class_raw.imports
         cls.properties = class_raw.properties.map do |property_raw|
           Objc::Property.new do |property|
             property.type = property_raw.type_name

@@ -12,11 +12,15 @@ module MythGenerator
 
   class InterfaceDefinitions < Treetop::Runtime::SyntaxNode
     def classes
-      children_of_type InterfaceDefinition
+      self.elements[1].children_of_type InterfaceDefinition
     end
   end
 
   class InterfaceDefinition < Treetop::Runtime::SyntaxNode
+    def imports
+      self.parent.parent.text_value_of_child ImportDefinitions
+    end
+
     def supports
       supports = children_of_type SupportsDefinition
       supports = supports.flat_map { |item| item.elements }
@@ -191,6 +195,10 @@ module MythGenerator
   end
 
   class GenericSubtypeS2 < Treetop::Runtime::SyntaxNode
+
+  end
+
+  class ImportDefinitions < Treetop::Runtime::SyntaxNode
 
   end
 end

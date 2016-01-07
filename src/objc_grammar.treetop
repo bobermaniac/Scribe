@@ -1,6 +1,15 @@
 grammar MythGenerator
     rule interface_definitions
+       import_definitions?
        interface_definition* <InterfaceDefinitions>
+    end
+
+    rule import_definitions
+        import_definition* <ImportDefinitions>
+    end
+
+    rule import_definition
+        '#import' whitespace? ["<] identifier ".h" [">] whitespace?
     end
 
     rule interface_definition
