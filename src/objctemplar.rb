@@ -10,15 +10,15 @@ require_relative 'objctemplar_parser'
 parameters = { :source => [], :destination => Dir.pwd }
 
 OptionParser.new do |opts|
-  opts.banner = "Usage: objctemplar.rb [options]"
-  opts.on('-s [ARG]', '--source [ARG]', "Source files") do |v|
+  opts.banner = "Usage: objctemplar [options]"
+  opts.on('-s [ARG]', '--source [ARG]', "Source files (could be multiple)") do |v|
     parameters[:source] += [ v ]
   end
   opts.on('-d [ARG]', '--destination [ARG]', "Destination folder (default = working directory)") do |v|
     parameters[:destination] = v
   end
   opts.on('--version', 'Display the version') do
-    puts "objctemplar.rb version 0.1a"
+    puts "objctemplar version 0.1a"
     exit
   end
   opts.on('-h', '--help', 'Display this help') do
@@ -27,10 +27,10 @@ OptionParser.new do |opts|
   end
 end.parse!
 
-header_template = Liquid::Template.parse(IO.read 'objc_header.template')
-source_template = Liquid::Template.parse(IO.read 'objc_source.template')
+header_template = Liquid::Template.parse(IO.read 'src/objc_header.template')
+source_template = Liquid::Template.parse(IO.read 'src/objc_source.template')
 
-Treetop.load 'objc_grammar'
+Treetop.load 'src/objc_grammar'
 parser = MythGeneratorParser.new
 
 results = parameters[:source].map { |s| parser.parse(IO.read s) }
