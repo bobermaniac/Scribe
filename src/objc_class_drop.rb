@@ -68,6 +68,10 @@ module Liquid
       "#import #{import}\n#{@objc_class.imports}".strip
     end
 
+    def close_parent_ctor?
+      immutable_own_properties.any?
+    end
+
     def prim_ctor_definition
       immutable_props = immutable_properties
       return ' ' if not immutable_props.any?

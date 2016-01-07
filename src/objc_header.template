@@ -20,7 +20,7 @@
 {% if class.have_mutable_version %}
 @interface {{ class.mutable_class_name }} : {{ class.class_name }} {{ class.mutable_protocols }}
 
-{% for property in class.all_properties %}@property ({{property.attributes}}) {{ property.type_qualified }} {{ property.name }};
+{% for property in class.all_mutable_properties %}@property ({{property.attributes}}) {{ property.type_qualified }} {{ property.name }};
 {% endfor %}
 @end
 {% endif %}
