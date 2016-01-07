@@ -35,7 +35,19 @@ module Liquid
       @objc_class.ancestor
     end
 
-    def properties
+    def supports_mutable_copy?
+      @objc_class.supports.include? :mutable_copy
+    end
+
+    def supports_track_changes?
+      @objc_class.supports.include? :track_changes
+    end
+
+    def supports_builder?
+      @objc_class.supports.include? :builder
+    end
+
+    def own_properties
       @objc_class.properties
     end
 
@@ -43,12 +55,12 @@ module Liquid
       @objc_class.all_properties
     end
 
-    def immutable_properties
-      @objc_class.all_properties.select { |p| p.options.include?(:readonly) }
+    def own_immutable_properties
+      @objc_class.properties.select { |p| p.options.include?(:readonly) }
     end
 
-    def immutable_own_properties
-      @objc_class.properties.select { |p| p.options.include?(:readonly) }
+    def all_immutable_properties
+      @objc_class.all_properties.select { |p| p.options.include?(:readonly) }
     end
 
     def all_mutable_properties
@@ -69,11 +81,11 @@ module Liquid
     end
 
     def close_parent_ctor?
-      immutable_own_properties.any?
+      own_immutable_properties.any?
     end
 
     def prim_ctor_definition
-      immutable_props = immutable_properties
+      immutable_props = all_immutable_properties
       return ' ' if not immutable_props.any?
 
       immutable_props.map do |property|
@@ -82,7 +94,7 @@ module Liquid
     end
 
     def prim_ctor_call
-      immutable_props = immutable_properties
+      immutable_props = all_immutable_properties
       return '' if not immutable_props.any?
 
       immutable_props.map do |property|
@@ -109,16 +121,17 @@ module Liquid
       "With#{ancestor_info[:name].upcase_1l}:#{ancestor_info[:name].downcase_1l}"
     end
 
+    def prim_ctor_call_for_builder
+      immutable_props = all_immutable_properties
+      return '' if not immutable_props.any?
+
+      immutable_props.map do |property|
+        "#{property.name.upcase_1l}:builder.#{property.name} "
+      end.reduce('With') { |acc, item| acc + (acc.end_with?(' ') ? item.downcase_1l : item) }.strip
+    end
+
     def copy_ctor_param
       nontrivial_ancestor_info[:name].downcase_1l
-    end
-
-    def have_mutable_version
-      @objc_class.supports.include? :mutable_copy
-    end
-
-    def should_track_changes
-      @objc_class.supports.include? :track_changes
     end
   end
 end

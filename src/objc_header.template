@@ -4,23 +4,32 @@
 #import "TCTrackChanges.h"{% endif %}
 
 {% for other_class in other_classes %}@class {{ other_class }};
-{% endfor %}
+{% endfor %}{% if class.supports_builder? %}@class {{ class.class_name }}Builder;{% endif %}
+
 @interface {{ class.class_name }} : {{ class.parent.class_name }} {{ class.protocols }} {
     @protected
-{% for property in class.properties %}    {{ property.type_qualified }} {{ property.field_name }};
+{% for property in class.own_properties %}    {{ property.type_qualified }} {{ property.field_name }};
 {% endfor %} }
 
-- (nonnull instancetype)init{{ class.prim_ctor_definition }}NS_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init{{ class.copy_ctor_definition }}NS_DESIGNATED_INITIALIZER;
-
-{% for property in class.properties %} @property ({{property.readonly_attributes}}) {{ property.type_qualified }} {{ property.name }};
+- (instancetype _Nonnull)init{{ class.prim_ctor_definition }}NS_DESIGNATED_INITIALIZER;
+- (instancetype _Nonnull)init{{ class.copy_ctor_definition }}NS_DESIGNATED_INITIALIZER;
+{% if class.supports_builder? %}+ (nonnull {{ class.class_name }}Builder *)builder;
+{% endif %}
+{% for property in class.own_properties %} @property ({{property.readonly_attributes}}) {{ property.type_qualified }} {{ property.name }};
 {% endfor %}
 @end
 
-{% if class.have_mutable_version %}
+{% if class.supports_mutable_copy? %}
 @interface {{ class.mutable_class_name }} : {{ class.class_name }} {{ class.mutable_protocols }}
 
 {% for property in class.all_mutable_properties %}@property ({{property.attributes}}) {{ property.type_qualified }} {{ property.name }};
 {% endfor %}
-@end
-{% endif %}
+@end{% endif %}
+
+{% if class.supports_builder? %}@interface {{ class.class_name }}Builder : NSObject
+
+{% for property in class.all_properties %} @property ({{property.builder_attributes}}) {{ property.builder_type_qualified }} {{ property.name }};
+{% endfor %}
+- ({{ class.class_name }} * _Nonnull)build;
+
+@end{% endif %}

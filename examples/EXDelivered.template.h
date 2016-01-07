@@ -1,5 +1,5 @@
 @interface EXDelivered : EXBase
-@supports mutable_copy
+@supports builder
 @supports track_changes
 
 @property (nonatomic, readonly) id customData;

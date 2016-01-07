@@ -12,6 +12,10 @@ module Liquid
       @objc_property.type_qualified
     end
 
+    def builder_type_qualified
+      @objc_property.builder_type_qualified
+    end
+
     def name
       @objc_property.name
     end
@@ -39,7 +43,17 @@ module Liquid
     end
 
     def readonly_attributes
-      attributes_string(@objc_property.options - [ :readwrite, :readonly ] + [ :readonly ])
+      attributes_string(@objc_property.options.map { |opt| opt == :readwrite ? :readonly : opt })
+    end
+
+    def builder_attributes
+      options = @objc_property.options
+      # remove readonly semantics
+      options = options.map { |opt| opt == :readonly ? :readwrite : opt }
+      # remove copy semantics
+      options = options.map { |opt| opt == :copy ? :retain : opt }
+
+      attributes_string(options)
     end
 
     def setter_name

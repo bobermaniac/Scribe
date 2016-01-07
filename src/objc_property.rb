@@ -15,5 +15,11 @@ module Objc
       return "#{type} _Nullable" if options.include? :nullable
       type
     end
+
+    def builder_type_qualified
+      return "#{type} _Nullable" if (options.include?(:nullable) or options.include?(:nonnull))
+      type
+    end
+
   end
 end
