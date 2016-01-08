@@ -47,6 +47,10 @@ module Liquid
       @objc_class.supports.include? :builder
     end
 
+    def abstract?
+      @objc_class.supports.include? :abstract
+    end
+
     def own_properties
       @objc_class.properties
     end

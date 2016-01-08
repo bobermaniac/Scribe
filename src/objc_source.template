@@ -25,7 +25,8 @@
         {{ property.field_name }} = {% if property.copy_on_assign? %}[{{ property.name}} copy]{% else %}{{ property.name }}{% endif %};{% endfor %}
     }
 
-    NSAssert(self != nil, @"Internal error: object was not created");
+    NSAssert(self != nil, @"Internal error: object was not created");{% if class.abstract? %}
+    NSAssert(self.class != [{{ class.class_name }} class], @"Unable to create instance of abstract class");{% endif %}
     return self;
 }
 
@@ -36,7 +37,8 @@
         {{ property.field_name }} = {% if property.copy_on_assign? %}[{{class.copy_ctor_param}}->{{ property.field_name }} copy]{% else %}{{class.copy_ctor_param}}->{{ property.field_name }}{% endif %};{% endfor %}
     }
 
-    NSAssert(self != nil, @"Internal error: object was not created");
+    NSAssert(self != nil, @"Internal error: object was not created");{% if class.abstract? %}
+    NSAssert(self.class != [{{ class.class_name }} class], @"Unable to create instance of abstract class");{% endif %}
     return self;
 }
 
@@ -48,7 +50,8 @@
         {{ property.field_name }} = {% if property.copy_on_assign? %}[builder.{{ property.name }} copy]{% else %}builder.{{ property.name }}{% endif %};{% endfor %}
     }
 
-    NSAssert(self != nil, @"Internal error: object was not created");
+    NSAssert(self != nil, @"Internal error: object was not created");{% if class.abstract? %}
+    NSAssert(self.class != [{{ class.class_name }} class], @"Unable to create instance of abstract class");{% endif %}
     return self;
 }
 
@@ -65,7 +68,8 @@
     {{ class.class_name }} *{{ class.copy_ctor_param }} = self;
     {{ class.copy_ctor_param }} = [[{{class.mutable_class_name}} allocWithZone:zone] init{{ class.copy_ctor_call }}];
 
-    NSAssert({{ class.copy_ctor_param }} != nil, @"Internal error: object was not copied");
+    NSAssert({{ class.copy_ctor_param }} != nil, @"Internal error: object was not copied");{% if class.abstract? %}
+    NSAssert(self.class != [{{ class.mutable_class_name }} class], @"Unable to create instance of abstract class");{% endif %}
     return {{ class.copy_ctor_param }};
 } {% endif %}
 
@@ -91,7 +95,8 @@
         _tracker = [[TCTrackChangesImplementation alloc] init];
     }
 
-    NSAssert(self != nil, @"Internal error: object was not created");
+    NSAssert(self != nil, @"Internal error: object was not created");{% if class.abstract? %}
+    NSAssert(self.class != [{{ class.mutable_class_name }} class], @"Unable to create instance of abstract class");{% endif %}
     return self;
 }
 
@@ -106,7 +111,8 @@
         }
     }
 
-    NSAssert(self != nil, @"Internal error: object was not created");
+    NSAssert(self != nil, @"Internal error: object was not created");{% if class.abstract? %}
+    NSAssert(self.class != [{{ class.mutable_class_name }} class], @"Unable to create instance of abstract class");{% endif %}
     return self;
 }
 
@@ -128,7 +134,10 @@
 
 {% if class.supports_builder? %}
 @implementation {{ class.class_name }}Builder
-
+{% if class.abstract? %}- (instancetype _Nonnull)init {
+    NSAssert(NO, @"Unable to create builder instance for abstract class");
+    return nil;
+}{% endif %}
 {% for property in class.all_properties %}@synthesize {{ property.name }} = {{ property.field_name }};
 
 {% endfor %}- ({{ class.class_name }} * _Nonnull)build {
