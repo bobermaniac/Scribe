@@ -28,6 +28,10 @@ module Liquid
       @objc_property.options.include? :atomic
     end
 
+    def reference_type?
+      (@objc_property.options & [:strong, :weak]).any?
+    end
+
     def field_name
       '_' + @objc_property.name
     end
