@@ -51,6 +51,10 @@ module Liquid
       @objc_class.supports.include? :abstract
     end
 
+    def parent_have_builder?
+      @objc_class.ancestor.supports.include? :builder
+    end
+
     def own_properties
       @objc_class.properties
     end
@@ -69,6 +73,14 @@ module Liquid
 
     def all_mutable_properties
       @objc_class.all_mutable_properties
+    end
+
+    def builder_properties
+      if parent_have_builder?
+        own_properties
+      else
+        all_properties
+      end
     end
 
     def protocols

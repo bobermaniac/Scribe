@@ -140,7 +140,7 @@
     NSAssert(NO, @"Unable to create builder instance for abstract class");
     return nil;
 }{% endif %}
-{% for property in class.all_properties %}@synthesize {{ property.name }} = {{ property.field_name }};
+{% for property in class.builder_properties %}@synthesize {{ property.name }} = {{ property.field_name }};
 
 {% endfor %}- ({{ class.class_name }} * _Nonnull)build {
     return [[{{ class.class_name }} alloc] initWithBuilder:self];

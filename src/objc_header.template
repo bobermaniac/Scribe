@@ -26,9 +26,9 @@
 {% endfor %}
 @end{% endif %}
 
-{% if class.supports_builder? %}@interface {{ class.class_name }}Builder : NSObject
+{% if class.supports_builder? %}@interface {{ class.class_name }}Builder : {% if class.parent_have_builder? %}{{ class.parent.class_name }}Builder{% else %}NSObject{% endif %}
 
-{% for property in class.all_properties %} @property ({{property.builder_attributes}}) {{ property.builder_type_qualified }} {{ property.name }};
+{% for property in class.builder_properties %} @property ({{property.builder_attributes}}) {{ property.builder_type_qualified }} {{ property.name }};
 {% endfor %}
 - ({{ class.class_name }} * _Nonnull)build;
 
