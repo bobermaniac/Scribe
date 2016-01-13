@@ -1,6 +1,7 @@
 # ObjCTempar
 
 ## TODO
+* Check object graph
 * ~~Builder support~~
 * ~~Abstract class support~~
 * getter= and setter= support

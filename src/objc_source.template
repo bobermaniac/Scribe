@@ -137,8 +137,13 @@
 {% if class.supports_builder? %}
 @implementation {{ class.class_name }}Builder
 {% if class.abstract? %}- (instancetype _Nonnull)init {
-    NSAssert(NO, @"Unable to create builder instance for abstract class");
-    return nil;
+    if (self = [super init]) {
+        if (self.class == [{{ class.class_name }}Builder class]) {
+            NSAssert(NO, @"Unable to create builder instance for abstract class {{ class.class_name }}");
+            return nil;
+        }
+    }
+    return self;
 }{% endif %}
 {% for property in class.builder_properties %}@synthesize {{ property.name }} = {{ property.field_name }};
 
