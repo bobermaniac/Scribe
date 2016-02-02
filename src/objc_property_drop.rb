@@ -36,6 +36,11 @@ module Liquid
       '_' + @objc_property.name
     end
 
+    def field_name_boxed
+      return field_name if reference_type?
+      "@(#{field_name})"
+    end
+
     def attributes_string(attributes)
       attributes.reject { |opt| [:nullable, :nonnull].include? opt }
                 .map { |opt| opt.to_s }

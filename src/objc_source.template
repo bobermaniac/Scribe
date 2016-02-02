@@ -124,10 +124,11 @@
 
 - (void){{ property.setter_name }}:({{ property.type_qualified }}){{ property.name }} {
     if ({% if property.reference_type? %}![{{ property.field_name }} isEqual:{{ property.name }}]{% else %}{{ property.field_name }} != {{ property.name }}{% endif %}) {
+        {% if class.supports_track_changes? %}[_tracker beforeValue:{{ property.field_name_boxed }} willBeChangedForKey:@"{{ property.name }}"];{% endif %}
         [self willChangeValueForKey:@"{{ property.name }}"];
         {{ property.field_name }} = {% if property.copy_on_assign? %}[{{ property.name}} copy]{% else %}{{ property.name }}{% endif %};
-        {% if class.supports_track_changes? %}[_tracker keyChanged:@"{{ property.name }}" forObject:self];
-        {% endif %}[self didChangeValueForKey:@"{{ property.name }}"];
+        [self didChangeValueForKey:@"{{ property.name }}"];
+        {% if class.supports_track_changes? %}[_tracker newValue:{{ property.field_name_boxed }} wasSetForKey:@"{{ property.name }}"];{% endif %}
     }
 }
 
