@@ -27,13 +27,19 @@ OptionParser.new do |opts|
   end
 end.parse!
 
+def sanitize(input)
+  input.gsub!(/\/\/[^\n]*\n/, ' ')
+  input.gsub!(/\/\*.*?\*\//, ' ')
+  input
+end
+
 header_template = Liquid::Template.parse(IO.read 'src/objc_header.template')
 source_template = Liquid::Template.parse(IO.read 'src/objc_source.template')
 
 Treetop.load 'src/objc_grammar'
 parser = MythGeneratorParser.new
 
-results = parameters[:source].map { |s| parser.parse(IO.read s) }
+results = parameters[:source].map { |s| parser.parse(sanitize IO.read s) }
 
 if results.include? nil
   puts parser.failure_reason

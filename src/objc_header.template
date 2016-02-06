@@ -6,24 +6,32 @@
 {% for other_class in other_classes %}@class {{ other_class }};
 {% endfor %}{% if class.supports_builder? %}@class {{ class.class_name }}Builder;{% endif %}
 
-@interface {{ class.class_name }} : {{ class.parent.class_name }} {{ class.protocols }} {
+@protocol {{ class.class_name }} : {{ class.protocols }}
+
+{% for property in class.own_properties %}@property ({{property.readonly_attributes}}) {{ property.type_qualified }} {{ property.name }};
+{% endfor %}
+@end
+
+@interface {{ class.class_name }} : {{ class.parent.class_name }} <{{ class.class_name }}> {
     @protected
 {% for property in class.own_properties %}    {{ property.type_qualified }} {{ property.field_name }};
 {% endfor %} }
 
 - (instancetype _Nonnull)init{{ class.prim_ctor_definition }}NS_DESIGNATED_INITIALIZER;
 - (instancetype _Nonnull)init{{ class.copy_ctor_definition }}NS_DESIGNATED_INITIALIZER;
-{% if class.supports_builder? %}+ (nonnull {{ class.class_name }}Builder *)builder;
+{% if class.supports_builder? %}
++ (nonnull {{ class.class_name }}Builder *)builder;
 {% endif %}
-{% for property in class.own_properties %} @property ({{property.readonly_attributes}}) {{ property.type_qualified }} {{ property.name }};
-{% endfor %}
 @end
 
-{% if class.supports_mutable_copy? %}
-@interface {{ class.mutable_class_name }} : {{ class.class_name }} {{ class.mutable_protocols }}
+{% if class.supports_mutable_copy? %}@protocol {{ class.mutable_class_name }} : {{ class.mutable_protocols }}
 
 {% for property in class.all_mutable_properties %}@property ({{property.attributes}}) {{ property.type_qualified }} {{ property.name }};
 {% endfor %}
+@end
+
+@interface {{ class.mutable_class_name }} : {{ class.class_name }} <{{ class.mutable_class_name }}>
+
 @end{% endif %}
 
 {% if class.supports_builder? %}@interface {{ class.class_name }}Builder : {% if class.parent_have_builder? %}{{ class.parent.class_name }}Builder{% else %}NSObject{% endif %}

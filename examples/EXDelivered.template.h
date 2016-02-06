@@ -1,4 +1,5 @@
 @interface EXDelivered : EXBase
+@implement mutable_copy
 @implement builder
 @implement track_changes
 

@@ -12,9 +12,10 @@ module Liquid
   class ObjcClassDrop < Drop
 
     private
-    def dump_protocols(dict)
+    def dump_protocols(dict, additional = nil)
       protocols = dict.select {|k, v| @objc_class.supports.include? k }.map { |k, v| v }
-      return '' if not protocols.any?
+      protocols = additional + protocols unless additional == nil
+      return '' unless protocols.any?
       "<#{ protocols.reduce { |f, s| f + ', ' + s} }>"
     end
 
@@ -32,7 +33,7 @@ module Liquid
     end
 
     def parent
-      @objc_class.ancestor
+      @objc_class.ancestor.to_liquid
     end
 
     def supports_mutable_copy?
@@ -84,11 +85,14 @@ module Liquid
     end
 
     def protocols
-      dump_protocols({ :mutable_copy => 'NSMutableCopying' })
+      dump_protocols({ :mutable_copy => 'NSMutableCopying' }, [ @objc_class.ancestor.name, 'NSCopying' ] )
     end
 
     def mutable_protocols
-      dump_protocols({ :track_changes => 'TCTrackChanges' })
+      additional = [ class_name ]
+      additional << parent.mutable_class_name if parent.supports_mutable_copy?
+
+      dump_protocols({ :track_changes => 'TCTrackChanges' }, additional)
     end
 
     def imports
@@ -102,7 +106,7 @@ module Liquid
 
     def prim_ctor_definition
       immutable_props = all_immutable_properties
-      return ' ' if not immutable_props.any?
+      return ' ' unless immutable_props.any?
 
       immutable_props.map do |property|
         "#{property.name.upcase_1l}:(#{property.type_qualified})#{property.name} "
@@ -111,7 +115,7 @@ module Liquid
 
     def prim_ctor_call
       immutable_props = all_immutable_properties
-      return '' if not immutable_props.any?
+      return '' unless immutable_props.any?
 
       immutable_props.map do |property|
         "#{property.name.upcase_1l}:#{property.name} "
@@ -139,7 +143,7 @@ module Liquid
 
     def prim_ctor_call_for_builder
       immutable_props = all_immutable_properties
-      return '' if not immutable_props.any?
+      return '' unless immutable_props.any?
 
       immutable_props.map do |property|
         "#{property.name.upcase_1l}:builder.#{property.name} "

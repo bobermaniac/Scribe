@@ -11,7 +11,6 @@ module Objc
   end
 
   def self.typename_without_prefix(typename)
-    result = typename[prefix_for_typename(typename).length..-1]
-    result
+    typename[prefix_for_typename(typename).length..-1]
   end
 end

@@ -126,7 +126,7 @@ module MythGenerator
     public
     def options
       options = children_of_type PropertyOptions
-      return [] if not options.any?
+      return [] unless options.any?
 
       options = PropertyDefinition.all_options(options)
       extend_options_with_defaults options.map { |opt| opt.text_value.to_sym }
