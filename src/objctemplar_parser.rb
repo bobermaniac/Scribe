@@ -2,7 +2,24 @@ module MythGenerator
   class Treetop::Runtime::SyntaxNode
     protected
     def children_of_type(type)
+      return [] if self.elements.nil?
       self.elements.select { |item| item.is_a? type }
+    end
+
+    def self.recursive_children_of_type(elements, type)
+      return [] if elements == nil
+
+      elements.flat_map do |e|
+        if e.is_a? type
+          [ e ]
+        else
+          self.recursive_children_of_type(e.elements, type)
+        end
+      end
+    end
+
+    def recursive_children_of_type(type)
+      self.class.recursive_children_of_type(self.elements, type)
     end
 
     def text_value_of_child(type)
@@ -12,13 +29,17 @@ module MythGenerator
 
   class InterfaceDefinitions < Treetop::Runtime::SyntaxNode
     def classes
-      self.elements[1].children_of_type InterfaceDefinition
+      self.elements.flat_map { |item| item.children_of_type InterfaceDefinition  }
     end
   end
 
   class InterfaceDefinition < Treetop::Runtime::SyntaxNode
     def imports
       self.parent.parent.text_value_of_child ImportDefinitions
+    end
+
+    def scribes
+      self.children_of_type ScribeDefinitions
     end
 
     def supports
@@ -196,6 +217,63 @@ module MythGenerator
   end
 
   class ImportDefinitions < Treetop::Runtime::SyntaxNode
+
+  end
+
+  class ScribeDefinitions < Treetop::Runtime::SyntaxNode
+    private
+    def self.all_directive_groups(elements)
+
+    end
+
+    public
+    def all_definitions
+      elements.flat_map do |scribe_definition|
+        scribe_definition.recursive_children_of_type(ScribeDirectiveGroup).flat_map do |scribe_directive_group|
+          verb = scribe_directive_group.text_value_of_child Identifier
+
+          scribe_directive_group.recursive_children_of_type(ScribeDirective).map do |scribe_directive|
+            item = ScribeFlatDefinition.new
+            item.verb = verb
+            item.pattern = scribe_directive.text_value_of_child Identifier
+
+            parameter = scribe_directive.children_of_type(ScribeDirectiveParameter).first
+            item.parameter = parameter.text_value_of_child Identifier unless parameter.nil?
+
+            item
+          end
+        end
+      end
+    end
+  end
+
+  class ScribeFlatDefinition
+    def initialize
+
+    end
+
+    attr_accessor :verb
+    attr_accessor :pattern
+    attr_accessor :parameter
+  end
+
+  class ScribeDefinition < Treetop::Runtime::SyntaxNode
+
+  end
+
+  class ScribeDirectiveGroup < Treetop::Runtime::SyntaxNode
+
+  end
+
+  class ScribeDirective < Treetop::Runtime::SyntaxNode
+
+  end
+
+  class ScribeDirectiveParameter < Treetop::Runtime::SyntaxNode
+
+  end
+
+  class ScribeDefaultsMarker < Treetop::Runtime::SyntaxNode
 
   end
 end

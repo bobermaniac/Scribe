@@ -1,5 +1,6 @@
 grammar MythGenerator
     rule interface_definitions
+       scribe_definitions?
        import_definitions?
        interface_definition* <InterfaceDefinitions>
     end
@@ -13,6 +14,7 @@ grammar MythGenerator
     end
 
     rule interface_definition
+        scribe_definitions?
         whitespace? interface_token whitespace identifier superclass_definition? whitespace supports_definitions? property_definitions end_token whitespace? <InterfaceDefinition>
     end
 
@@ -72,8 +74,28 @@ grammar MythGenerator
         [\s\t\r\n]+ <Whitespace>
     end
 
+    rule scribe_definitions
+        scribe_definition+ <ScribeDefinitions>
+    end
+
+    rule scribe_definition
+        'scribe' left_parenthesis scribe_directive_group (semicolon scribe_directive_group)* right_parenthesis <ScribeDefinition>
+    end
+
+    rule scribe_directive_group
+        identifier whitespace scribe_directive ( comma scribe_directive )* <ScribeDirectiveGroup>
+    end
+
     rule scribe_directive
-        'scribe' opening
+        identifier scribe_directive_parameter? <ScribeDirective>
+    end
+
+    rule scribe_directive_parameter
+        equals_sign identifier <ScribeDirectiveParameter>
+    end
+
+    rule scribe_default_marker
+        'default' colon <ScribeDefaultsMarker>
     end
 
     rule left_parenthesis
@@ -106,5 +128,9 @@ grammar MythGenerator
 
     rule asterisk
         whitespace? '*' whitespace?
+    end
+
+    rule equals_sign
+        whitespace? '=' whitespace?
     end
 end

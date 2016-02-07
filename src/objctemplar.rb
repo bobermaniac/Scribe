@@ -5,6 +5,7 @@ require 'treetop'
 require 'liquid'
 require 'optparse'
 require_relative 'objc'
+require_relative 'scribe'
 require_relative 'objctemplar_parser'
 
 parameters = { :source => [], :destination => Dir.pwd }
@@ -39,10 +40,14 @@ source_template = Liquid::Template.parse(IO.read 'src/objc_source.template')
 Treetop.load 'src/objc_grammar'
 parser = MythGeneratorParser.new
 
-results = parameters[:source].map { |s| parser.parse(sanitize IO.read s) }
+results = parameters[:source].map do |s|
+  result = parser.parse(sanitize IO.read s)
+  abort "Error processing file #{s}: #{parser.failure_reason}" if result.nil?
+  result
+end
 
 if results.include? nil
-  puts parser.failure_reason
+  abort parser.failure_reason
 else
   classes_raw = results.flat_map { |result| result.classes }
   classes = [ Objc::Class.NSObject ]
@@ -56,6 +61,12 @@ else
       Objc::Class.new(class_raw.class_name, ancestor) do |cls|
         cls.supports = class_raw.supports
         cls.imports = class_raw.imports
+        cls.scribes = class_raw.scribes.flat_map { |d| d.all_definitions }.map do |scribe_raw|
+          Scribe::Definition.new do |scribe|
+            scribe.pattern = scribe_raw.pattern
+            scribe.parameter = scribe_raw.parameter
+          end
+        end
         cls.properties = class_raw.properties.map do |property_raw|
           Objc::Property.new do |property|
             property.type = property_raw.type_name
@@ -68,7 +79,7 @@ else
     classes += ancestors
   end
 
-  classes = classes = classes.reject { |c| c.root? }
+  classes = classes.reject { |c| c.root? }
   for cls in classes
     other_classes = classes.reject { |c| c == cls }
     File.open("#{parameters[:destination]}/#{cls.name}.h", 'w') do |header|

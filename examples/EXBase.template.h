@@ -1,7 +1,7 @@
 #import "ExternalHeader.h"
-
 // Comments, comments everywhere
 
+scribe(implement mutable=Mut, builder=Bldr; make abstract)
 @interface EXBase : NSObject
 @implement mutable_copy
 @implement abstract
