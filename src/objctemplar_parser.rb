@@ -66,7 +66,7 @@ module MythGenerator
       return [] if options == nil
 
       options.flat_map do |opt|
-        if opt.is_a? PropertyOption
+        if opt.is_a? Identifier
           [ opt ]
         else
           self.all_options(opt.elements)
@@ -150,9 +150,6 @@ module MythGenerator
   class PropertyOptions < Treetop::Runtime::SyntaxNode
   end
 
-  class PropertyOption < Treetop::Runtime::SyntaxNode
-  end
-
   class Keyword < Treetop::Runtime::SyntaxNode
   end
 
@@ -178,9 +175,9 @@ module MythGenerator
         elsif element.is_a?(GenericSubtypeS2)
           buffer << normalize_type(element)
         elsif element.is_a? Treetop::Runtime::SyntaxNode
-          if element.text_value == ','
+          if element.text_value.strip == ','
             buffer << ', '
-          elsif element.text_value == '*'
+          elsif element.text_value.strip == '*'
             buffer << ' *'
           end
         end

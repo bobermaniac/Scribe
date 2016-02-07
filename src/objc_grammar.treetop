@@ -17,7 +17,7 @@ grammar MythGenerator
     end
 
     rule superclass_definition
-        whitespace? ':' whitespace? identifier <SuperclassDefinition>
+        colon identifier <SuperclassDefinition>
     end
 
     rule identifier
@@ -25,15 +25,15 @@ grammar MythGenerator
     end
 
     rule type
-        identifier whitespace? generic_subtype? whitespace? '*'? whitespace? <Type>
+        identifier generic_subtype? asterisk? <Type>
     end
 
     rule generic_subtype
-        '<' whitespace? type generic_subtype_s2? whitespace? '>' <GenericSubtype>
+        left_broket type generic_subtype_s2? right_broket <GenericSubtype>
     end
 
     rule generic_subtype_s2
-        whitespace? ',' whitespace? type generic_subtype_s2? <GenericSubtypeS2>
+        comma type generic_subtype_s2? <GenericSubtypeS2>
     end
 
     rule supports_definitions
@@ -49,24 +49,11 @@ grammar MythGenerator
     end
 
     rule property_definition
-        property_token property_options? type identifier EOL <PropertyDefinition>
+        property_token property_options? type whitespace? identifier semicolon <PropertyDefinition>
     end
 
     rule property_options
-        whitespace? '(' whitespace? property_option ( whitespace? ',' whitespace? property_option )* whitespace? ')' whitespace? <PropertyOptions>
-    end
-
-    rule property_option
-        'atomic' <PropertyOption> /
-        'nonatomic' <PropertyOption> /
-        'strong' <PropertyOption> /
-        'weak' <PropertyOption> /
-        'assign' <PropertyOption> /
-        'copy' <PropertyOption> /
-        'readwrite' <PropertyOption> /
-        'readonly' <PropertyOption> /
-        'nonnull' <PropertyOption> /
-        'nullable' <PropertyOption>
+        left_parenthesis identifier ( comma identifier )* right_parenthesis <PropertyOptions>
     end
 
     rule interface_token
@@ -81,11 +68,43 @@ grammar MythGenerator
         '@property' <Keyword>
     end
 
-    rule EOL
-         whitespace? ';' whitespace?
-    end
-
     rule whitespace
         [\s\t\r\n]+ <Whitespace>
+    end
+
+    rule scribe_directive
+        'scribe' opening
+    end
+
+    rule left_parenthesis
+        whitespace? '(' whitespace?
+    end
+
+    rule right_parenthesis
+        whitespace? ')' whitespace?
+    end
+
+    rule left_broket
+        whitespace? '<' whitespace?
+    end
+
+    rule right_broket
+        whitespace? '>' whitespace?
+    end
+
+    rule semicolon
+        whitespace? ';' whitespace?
+    end
+
+    rule colon
+        whitespace? ':' whitespace?
+    end
+
+    rule comma
+        whitespace? ',' whitespace?
+    end
+
+    rule asterisk
+        whitespace? '*' whitespace?
     end
 end
