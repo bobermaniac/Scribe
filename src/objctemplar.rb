@@ -72,6 +72,12 @@ else
             property.type = property_raw.type_name
             property.name = property_raw.name
             property.options = property_raw.options
+            property.scribes = property_raw.scribes.flat_map { |d| d.all_definitions }.map do |scribe_raw|
+              Scribe::Definition.new do |scribe|
+                scribe.pattern = scribe_raw.pattern
+                scribe.parameter = scribe_raw.parameter
+              end
+            end
           end
         end
       end

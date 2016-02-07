@@ -51,7 +51,7 @@ grammar MythGenerator
     end
 
     rule property_definition
-        property_token property_options? type whitespace? identifier semicolon <PropertyDefinition>
+        scribe_definitions? property_token property_options? type whitespace? identifier semicolon <PropertyDefinition>
     end
 
     rule property_options

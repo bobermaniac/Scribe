@@ -145,6 +145,10 @@ module MythGenerator
     end
 
     public
+    def scribes
+      self.children_of_type(ScribeDefinitions)
+    end
+
     def options
       options = children_of_type PropertyOptions
       return [] unless options.any?

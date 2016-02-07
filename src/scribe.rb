@@ -15,4 +15,8 @@ module Objc
   class Class
     attr_accessor :scribes
   end
+
+  class Property
+    attr_accessor :scribes
+  end
 end
