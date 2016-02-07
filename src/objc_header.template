@@ -6,7 +6,7 @@
 {% for other_class in other_classes %}@class {{ other_class }};
 {% endfor %}{% if class.supports_builder? %}@class {{ class.class_name }}Builder;{% endif %}
 
-@protocol {{ class.class_name }} : {{ class.protocols }}
+@protocol {{ class.class_name }} {{ class.protocols }}
 
 {% for property in class.own_properties %}@property ({{property.readonly_attributes}}) {{ property.type_qualified }} {{ property.name }};
 {% endfor %}
@@ -24,7 +24,7 @@
 {% endif %}
 @end
 
-{% if class.supports_mutable_copy? %}@protocol {{ class.mutable_class_name }} : {{ class.mutable_protocols }}
+{% if class.supports_mutable_copy? %}@protocol {{ class.mutable_class_name }} {{ class.mutable_protocols }}
 
 {% for property in class.all_mutable_properties %}@property ({{property.attributes}}) {{ property.type_qualified }} {{ property.name }};
 {% endfor %}
