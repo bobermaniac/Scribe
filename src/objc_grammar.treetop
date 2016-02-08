@@ -16,8 +16,7 @@ grammar Scribe
     end
 
     rule interface_definition
-        scribe_definitions?
-        whitespace? interface_token whitespace identifier superclass_definition? whitespace property_definitions end_token whitespace? <ClassDefinition>
+        scribe_definitions? whitespace? interface_token whitespace identifier superclass_definition? whitespace property_definitions end_token whitespace? <ClassDefinition>
     end
 
     rule superclass_definition

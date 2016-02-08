@@ -7,7 +7,7 @@ module Scribe
     end
 
     def to_s
-      self.value
+      "\n\t#{self.element_of_type(Identifier).value}.h"
     end
   end
 end

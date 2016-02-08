@@ -7,12 +7,12 @@ module Scribe
     end
 
     def directives
-      groups = self.recursive_elements_of_type ScribeDirectiveGroup
-      groups
+      self.recursive_elements_of_type ScribeDirectiveGroup
     end
 
     def to_s
-      "scribe definition default=#{self.default?} groups=#{self.directives.join ','}"
+      return "\n\tdefault: { #{self.directives.join ''} \n\t}" if self.default?
+      "\n\tapply: { #{self.directives.join ''} \n\t}"
     end
   end
 end

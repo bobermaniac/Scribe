@@ -7,7 +7,7 @@ module Scribe
     end
 
     def to_s
-      "imports: #{self.definitions.join(',')}"
+      "imports { #{self.definitions.join(', ')} \n}"
     end
   end
 end

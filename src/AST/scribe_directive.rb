@@ -11,7 +11,8 @@ module Scribe
     end
 
     def to_s
-      "#{self.directive} parameter:#{self.parameter}"
+      "#{self.directive}=#{self.parameter}" unless self.parameter.nil?
+      "#{self.directive}"
     end
   end
 end

@@ -11,7 +11,7 @@ module Scribe
     end
 
     def to_s
-      "#{self.verb}: #{self.directives.join ','}"
+      "\n\t\t#{self.verb}: #{self.directives.join ', '}"
     end
   end
 end

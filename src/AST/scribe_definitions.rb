@@ -7,7 +7,7 @@ module Scribe
     end
 
     def to_s
-      "#{definitions.join('\n')}"
+      "scribes { #{definitions.join('\n\t')} \n}"
     end
   end
 end

@@ -6,7 +6,7 @@ module Objc
       @name = name
       @ancestor = ancestor
       @properties = []
-      @supports = []
+      @scribes = []
 
       yield(self) if block_given?
     end
@@ -15,7 +15,7 @@ module Objc
 
     attr_accessor :name
     attr_accessor :properties
-    attr_accessor :supports
+    attr_accessor :scribes
 
     attr_accessor :imports
 

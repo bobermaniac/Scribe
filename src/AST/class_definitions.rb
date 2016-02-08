@@ -15,7 +15,7 @@ module Scribe
     end
 
     def to_s
-      "#{imports} #{scribes_defaults} #{interfaces}"
+      "#{imports}\n#{scribes_defaults}\n#{interfaces.join "\n"}"
     end
   end
 end
