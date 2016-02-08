@@ -1,6 +1,6 @@
 #import "ExternalHeader.h"
 // Comments, comments everywhere
-scribe(default: implement nothing)
+scribe(default: implement nothing; synthesize properties=all, variables=all; extract interfaces=all)
 
 scribe(implement mutable, builder; make abstract)
 @interface EXBase : NSObject
@@ -12,5 +12,9 @@ scribe(additional validate=SomeValidatorInstance2)
 @property (nonatomic) NSString *name;
 @property (nonatomic) int counter;
 @property (nonatomic) NSDictionary<NSString*,NSString*>*someArray;
+
+@end
+
+@interface EXSideway
 
 @end

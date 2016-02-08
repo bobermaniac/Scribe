@@ -1,6 +1,6 @@
 grammar Scribe
     rule interface_definitions
-       import_definitions? scribe_defaults_definition? interface_definition* <ClassDefinitions>
+       import_definitions? scribe_defaults_definitions? interface_definition* <ClassDefinitions>
     end
 
     rule import_definitions

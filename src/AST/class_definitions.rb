@@ -2,12 +2,20 @@ require_relative 'core'
 
 module Scribe
   class ClassDefinitions < NONTERMINAL_CLASS
-    def global_scribes
-      []
+    def imports
+      self.element_of_type ImportDefinitions
     end
 
-    def classes
-      self.elements.flat_map { |item| item.children_of_type InterfaceDefinition  }
+    def scribes_defaults
+      self.element_of_type ScribeDefinitions
+    end
+
+    def interfaces
+      self.elements.flat_map { |item| item.elements_of_type ClassDefinition }
+    end
+
+    def to_s
+      "#{imports} #{scribes_defaults} #{interfaces}"
     end
   end
 end

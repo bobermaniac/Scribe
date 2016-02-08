@@ -17,7 +17,8 @@ module Scribe
       return [] if elements == nil
 
       elements.flat_map do |element|
-        return [ element ] if element.is_a? type
+        next [ element ] if element.is_a? type
+        next [] if element.is_a? Scribe::TERMINAL_CLASS
         recursive_elements_of_type(element.elements, type)
       end
     end

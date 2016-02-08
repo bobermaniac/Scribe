@@ -1,7 +1,7 @@
 require_relative 'core'
 
 module Scribe
-  class ImportDefinition < NONTERMINAL_CLASS
+  class Identifier < NONTERMINAL_CLASS
     def value
       self.text_value
     end

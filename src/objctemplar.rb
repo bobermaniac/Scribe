@@ -43,6 +43,7 @@ parser = parser_class.new
 
 results = parameters[:source].map do |s|
   result = parser.parse(sanitize IO.read s)
+  puts result
   abort "Error processing file #{s}: #{parser.failure_reason}" if result.nil?
   result
 end
