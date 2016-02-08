@@ -51,8 +51,7 @@ end
 if results.include? nil
   abort parser.failure_reason
 else
-  classes_raw = results.flat_map { |result| result.classes }
-  classes = [ Objc::Class.NSObject ]
+  classes = Objc.from_scribe results
   ancestors = classes
 
   while classes_raw.any?
