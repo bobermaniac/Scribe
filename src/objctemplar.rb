@@ -7,6 +7,7 @@ require 'optparse'
 require_relative 'objc'
 require_relative 'scribe'
 require_relative 'objctemplar_parser'
+require_relative 'AST/scribe'
 
 parameters = { :source => [], :destination => Dir.pwd }
 
@@ -37,8 +38,8 @@ end
 header_template = Liquid::Template.parse(IO.read 'src/objc_header.template')
 source_template = Liquid::Template.parse(IO.read 'src/objc_source.template')
 
-Treetop.load 'src/objc_grammar'
-parser = MythGeneratorParser.new
+parser_class = Treetop.load 'src/objc_grammar'
+parser = parser_class.new
 
 results = parameters[:source].map do |s|
   result = parser.parse(sanitize IO.read s)

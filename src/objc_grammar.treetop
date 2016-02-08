@@ -1,8 +1,6 @@
-grammar MythGenerator
+grammar Scribe
     rule interface_definitions
-       scribe_definitions?
-       import_definitions?
-       interface_definition* <InterfaceDefinitions>
+       import_definitions? scribe_defaults_definition? interface_definition* <ClassDefinitions>
     end
 
     rule import_definitions
@@ -10,12 +8,16 @@ grammar MythGenerator
     end
 
     rule import_definition
-        '#import' whitespace? ["<] identifier ".h" [">] whitespace?
+        import_keyword whitespace? ["<] identifier ".h" [">] whitespace? <ImportDefinition>
+    end
+
+    rule import_keyword
+        '#import' <ImportKeyword>
     end
 
     rule interface_definition
         scribe_definitions?
-        whitespace? interface_token whitespace identifier superclass_definition? whitespace supports_definitions? property_definitions end_token whitespace? <InterfaceDefinition>
+        whitespace? interface_token whitespace identifier superclass_definition? whitespace property_definitions end_token whitespace? <ClassDefinition>
     end
 
     rule superclass_definition
@@ -27,23 +29,11 @@ grammar MythGenerator
     end
 
     rule type
-        identifier generic_subtype? asterisk? <Type>
+        identifier type_generic_params? asterisk? <Type>
     end
 
-    rule generic_subtype
-        left_broket type generic_subtype_s2? right_broket <GenericSubtype>
-    end
-
-    rule generic_subtype_s2
-        comma type generic_subtype_s2? <GenericSubtypeS2>
-    end
-
-    rule supports_definitions
-        support_definition* <SupportsDefinition>
-    end
-
-    rule support_definition
-        '@implement ' identifier whitespace <SupportDefinition>
+    rule type_generic_params
+        left_broket type (comma type)* right_broket <TypeGenericParams>
     end
 
     rule property_definitions
@@ -55,19 +45,23 @@ grammar MythGenerator
     end
 
     rule property_options
-        left_parenthesis identifier ( comma identifier )* right_parenthesis <PropertyOptions>
+        left_parenthesis property_option ( comma property_option )* right_parenthesis <PropertyOptions>
+    end
+
+    rule property_option
+        identifier (equals_sign identifier)? <PropertyOption>
     end
 
     rule interface_token
-        '@interface' <Keyword>
+        '@interface' <InterfaceKeyword>
     end
 
     rule end_token
-        '@end' <Keyword>
+        '@end' <EndKeyword>
     end
 
     rule property_token
-        '@property' <Keyword>
+        '@property' <PropertyKeyword>
     end
 
     rule whitespace
@@ -78,8 +72,20 @@ grammar MythGenerator
         scribe_definition+ <ScribeDefinitions>
     end
 
+    rule scribe_defaults_definitions
+        scribe_defaults_definition+ <ScribeDefinitions>
+    end
+
     rule scribe_definition
-        'scribe' left_parenthesis scribe_directive_group (semicolon scribe_directive_group)* right_parenthesis <ScribeDefinition>
+        scribe_keyword left_parenthesis scribe_directive_group (semicolon scribe_directive_group)* right_parenthesis <ScribeDefinition>
+    end
+
+    rule scribe_defaults_definition
+        scribe_keyword left_parenthesis scribe_default_marker scribe_directive_group (semicolon scribe_directive_group)* right_parenthesis <ScribeDefinition>
+    end
+
+    rule scribe_keyword
+        'scribe' <ScribeKeyword>
     end
 
     rule scribe_directive_group
@@ -95,42 +101,46 @@ grammar MythGenerator
     end
 
     rule scribe_default_marker
-        'default' colon <ScribeDefaultsMarker>
+        default_keyword colon <ScribeDefaultsMarker>
+    end
+
+    rule default_keyword
+        'default' <DefaultKeyword>
     end
 
     rule left_parenthesis
-        whitespace? '(' whitespace?
+        whitespace? '(' whitespace? <LeftParenthesis>
     end
 
     rule right_parenthesis
-        whitespace? ')' whitespace?
+        whitespace? ')' whitespace? <RightParenthesis>
     end
 
     rule left_broket
-        whitespace? '<' whitespace?
+        whitespace? '<' whitespace? <LeftBroket>
     end
 
     rule right_broket
-        whitespace? '>' whitespace?
+        whitespace? '>' whitespace? <RightBroket>
     end
 
     rule semicolon
-        whitespace? ';' whitespace?
+        whitespace? ';' whitespace? <Semicolon>
     end
 
     rule colon
-        whitespace? ':' whitespace?
+        whitespace? ':' whitespace? <Colon>
     end
 
     rule comma
-        whitespace? ',' whitespace?
+        whitespace? ',' whitespace? <Comma>
     end
 
     rule asterisk
-        whitespace? '*' whitespace?
+        whitespace? '*' whitespace? <Asterisk>
     end
 
     rule equals_sign
-        whitespace? '=' whitespace?
+        whitespace? '=' whitespace? <EqualsSign>
     end
 end

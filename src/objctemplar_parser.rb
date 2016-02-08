@@ -166,13 +166,17 @@ module MythGenerator
     end
   end
 
-  class SupportsDefinition < Treetop::Runtime::SyntaxNode
-  end
-
-  class SupportDefinition < Treetop::Runtime::SyntaxNode
-  end
-
   class PropertyOptions < Treetop::Runtime::SyntaxNode
+  end
+
+  class PropertyOption < Treetop::Runtime::SyntaxNode
+    def option
+
+    end
+
+    def parameter
+
+    end
   end
 
   class Keyword < Treetop::Runtime::SyntaxNode
