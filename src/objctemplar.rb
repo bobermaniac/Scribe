@@ -51,7 +51,7 @@ end
 if results.include? nil
   abort parser.failure_reason
 else
-  classes = Objc.from_scribe results
+  classes = Scribe.to_objc results
   ancestors = classes
 
   while classes_raw.any?
