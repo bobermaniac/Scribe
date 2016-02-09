@@ -2,7 +2,7 @@ require_relative 'core'
 
 module Scribe
   class ScribeDirective < NONTERMINAL_CLASS
-    def directive
+    def option
       self.element_of_type Identifier
     end
 
@@ -11,8 +11,8 @@ module Scribe
     end
 
     def to_s
-      "#{self.directive}=#{self.parameter}" unless self.parameter.nil?
-      "#{self.directive}"
+      "#{self.option}=#{self.parameter}" unless self.parameter.nil?
+      "#{self.option}"
     end
   end
 end

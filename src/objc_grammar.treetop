@@ -1,10 +1,10 @@
 grammar Scribe
-    rule interface_definitions
-       import_definitions? scribe_defaults_definitions? interface_definition* <ClassDefinitions>
+    rule interfaces_definition
+       imports_definition? scribe_defaults_definition? interface_definition* <InterfacesDefinition>
     end
 
-    rule import_definitions
-        import_definition* <ImportDefinitions>
+    rule imports_definition
+        import_definition* <ImportsDefinition>
     end
 
     rule import_definition
@@ -16,7 +16,7 @@ grammar Scribe
     end
 
     rule interface_definition
-        scribe_definitions? whitespace? interface_token whitespace identifier superclass_definition? whitespace property_definitions end_token whitespace? <ClassDefinition>
+        scribes_definition? whitespace? interface_token whitespace identifier superclass_definition? whitespace properties_definition end_token whitespace? <InterfaceDefinition>
     end
 
     rule superclass_definition
@@ -35,12 +35,12 @@ grammar Scribe
         left_broket type (comma type)* right_broket <TypeGenericParams>
     end
 
-    rule property_definitions
-        property_definition* <PropertyDefinitions>
+    rule properties_definition
+        property_definition* <PropertiesDefinition>
     end
 
     rule property_definition
-        scribe_definitions? property_token property_options? type whitespace? identifier semicolon <PropertyDefinition>
+        scribes_definition? property_token property_options? type whitespace? identifier semicolon <PropertyDefinition>
     end
 
     rule property_options
@@ -67,19 +67,19 @@ grammar Scribe
         [\s\t\r\n]+ <Whitespace>
     end
 
-    rule scribe_definitions
-        scribe_definition+ <ScribeDefinitions>
+    rule scribes_definition
+        scribe_definition+ <ScribesDefinition>
     end
 
-    rule scribe_defaults_definitions
-        scribe_defaults_definition+ <ScribeDefinitions>
+    rule scribe_defaults_definition
+        scribe_default_definition+ <ScribesDefinition>
     end
 
     rule scribe_definition
         scribe_keyword left_parenthesis scribe_directive_group (semicolon scribe_directive_group)* right_parenthesis <ScribeDefinition>
     end
 
-    rule scribe_defaults_definition
+    rule scribe_default_definition
         scribe_keyword left_parenthesis scribe_default_marker scribe_directive_group (semicolon scribe_directive_group)* right_parenthesis <ScribeDefinition>
     end
 

@@ -1,13 +1,13 @@
 require_relative 'core'
 
 module Scribe
-  class PropertyDefinitions < NONTERMINAL_CLASS
-    def definitions
+  class PropertiesDefinition < NONTERMINAL_CLASS
+    def items
       elements_of_type PropertyDefinition
     end
 
     def to_s
-      self.definitions.join("\n")
+      self.items.join("\n")
     end
   end
 end
