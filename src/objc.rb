@@ -1,5 +1,6 @@
 require_relative 'objc_class'
 require_relative 'objc_property'
+require_relative 'objc_type'
 require_relative 'objc_class_drop'
 require_relative 'objc_property_drop'
 
