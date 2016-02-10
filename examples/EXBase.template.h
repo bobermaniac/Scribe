@@ -1,6 +1,5 @@
 #import "ExternalHeader.h"
 // Comments, comments everywhere
-scribe(default: implement nothing; synthesize properties=all, variables=all; extract interfaces=all)
 
 scribe(implement mutable, builder; make abstract)
 @interface EXBase

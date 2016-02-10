@@ -21,7 +21,7 @@ module Scribe
     end
 
     def is(params)
-      (verb, option, parameter) = params
+      (verb, option, _) = params
       (self.verb == verb and self.option == option) ? (self.parameter or true) : false
     end
 
@@ -141,7 +141,7 @@ module Objc
     def self.accepted_scribes
       {
           implement: %i[ mutable, builder ],
-          extract: %i[ interfaces ],
+          extract: %i[ interface ],
           make: %i[ abstract ]
       }
     end

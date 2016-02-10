@@ -51,5 +51,14 @@ module Objc
     def self.NSObject
       Class.new('NSObject', nil)
     end
+
+    def supports
+      Enumerator.new do |enumerator|
+        enumerator << :mutable_copy if self.should %i[ implement mutable ]
+        enumerator << :builder if self.should %i[ implement builder ]
+        enumerator << :abstract if self.should %i[ make abstract ]
+        enumerator << :extract_interface if self.should %i[ extract interface ]
+      end
+    end
   end
 end
