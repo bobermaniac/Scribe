@@ -37,23 +37,23 @@ module Liquid
     end
 
     def supports_mutable_copy?
-      @objc_class.supports.include? :mutable_copy
+      @objc_class.should %i[ implement mutable ]
     end
 
     def supports_track_changes?
-      @objc_class.supports.include? :track_changes
+      @objc_class.should %i[ implement tracking ]
     end
 
     def supports_builder?
-      @objc_class.supports.include? :builder
+      @objc_class.should %i[ implement builder ]
     end
 
     def abstract?
-      @objc_class.supports.include? :abstract
+      @objc_class.should %i[ make abstract ]
     end
 
     def parent_have_builder?
-      @objc_class.ancestor.supports.include? :builder
+      @objc_class.ancestor.should %i[ implement builder ]
     end
 
     def own_properties

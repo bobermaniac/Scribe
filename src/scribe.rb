@@ -20,6 +20,11 @@ module Scribe
       yield(self) if block_given?
     end
 
+    def is(params)
+      (verb, option, parameter) = params
+      (self.verb == verb and self.option == option) ? (self.parameter or true) : false
+    end
+
     def to_s
       "#{self.scope} #{self.verb}: #{self.option}#{self.parameter? ? (' = ' + self.parameter) : ''}"
     end
@@ -74,13 +79,13 @@ module Scribe
   end
 
   def self.parse_scribe_directive_group(scope, directive_group)
-    verb = directive_group.verb.value
+    verb = directive_group.verb.value.to_sym
     directive_group.directives.map { |directive| self.parse_scribe_directive(scope, verb, directive) }
   end
 
   def self.parse_scribe_directive(scope, verb, directive)
     Directive.new(scope, verb) do |obj|
-      obj.option = directive.option.value
+      obj.option = directive.option.value.to_sym
       obj.parameter = directive.parameter.value unless directive.parameter.nil?
     end
   end
@@ -119,8 +124,18 @@ module Scribe
 end
 
 module Objc
-  class Class
+  module ScribesSupport
     attr_accessor :scribes
+
+    def should(params)
+      result = self.scribes.map{ |s| s.is params }.select { |r| r }.first
+      puts "#{self.class} should #{params}: #{result}"
+      result
+    end
+  end
+
+  class Class
+    include ScribesSupport
 
     def self.accepted_scribes
       {
@@ -129,10 +144,11 @@ module Objc
           make: %i[ abstract ]
       }
     end
+
   end
 
   class Property
-    attr_accessor :scribes
+    include ScribesSupport
 
     def self.accepted_scribes
       {

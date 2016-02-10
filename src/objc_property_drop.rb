@@ -32,6 +32,10 @@ module Liquid
       (@objc_property.options & [:strong, :weak]).any?
     end
 
+    def validate?
+      @objc_property.should %i[ implement validator ]
+    end
+
     def field_name
       '_' + @objc_property.name
     end

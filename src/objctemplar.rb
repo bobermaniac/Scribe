@@ -52,41 +52,7 @@ if results.include? nil
   abort parser.failure_reason
 else
   classes = Scribe.to_objc results
-  ancestors = classes
 
-  while classes_raw.any?
-    descendants = classes_raw.select { |class_raw| ancestors.any? { |ancestor| ancestor.name == class_raw.superclass_name } }
-    classes_raw -= descendants
-    ancestors = descendants.map do |class_raw|
-      ancestor = ancestors.first {|cls| cls.name == class_raw.superclass_name}
-      Objc::Class.new(class_raw.class_name, ancestor) do |cls|
-        cls.supports = class_raw.supports
-        cls.imports = class_raw.imports
-        cls.scribes = class_raw.scribes.flat_map { |d| d.all_definitions }.map do |scribe_raw|
-          Scribe::Definition.new do |scribe|
-            scribe.pattern = scribe_raw.pattern
-            scribe.parameter = scribe_raw.parameter
-          end
-        end
-        cls.properties = class_raw.properties.map do |property_raw|
-          Objc::Property.new do |property|
-            property.type = property_raw.type_name
-            property.name = property_raw.name
-            property.options = property_raw.options
-            property.scribes = property_raw.scribes.flat_map { |d| d.all_definitions }.map do |scribe_raw|
-              Scribe::Definition.new do |scribe|
-                scribe.pattern = scribe_raw.pattern
-                scribe.parameter = scribe_raw.parameter
-              end
-            end
-          end
-        end
-      end
-    end
-    classes += ancestors
-  end
-
-  classes = classes.reject { |c| c.root? }
   for cls in classes
     other_classes = classes.reject { |c| c == cls }
     File.open("#{parameters[:destination]}/#{cls.name}.h", 'w') do |header|
