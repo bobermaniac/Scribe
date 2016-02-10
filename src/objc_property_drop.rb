@@ -5,15 +5,15 @@ module Liquid
     end
 
     def type
-      @objc_property.type
+      @objc_property.type.unqualified_string
     end
 
     def type_qualified
-      @objc_property.type_qualified
+      @objc_property.type.qualified_string
     end
 
     def builder_type_qualified
-      @objc_property.builder_type_qualified
+      @objc_property.builder_type.qualified_string
     end
 
     def name

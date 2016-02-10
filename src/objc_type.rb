@@ -1,5 +1,40 @@
 module Objc
   class Type
+    class << self
+      def init
+        @markers = { nullable: '_Nullable', nonnull: '_Nonnull' }
+      end
+
+      attr_reader :markers
+    end
+
+    def markers
+      self.class.markers
+    end
+
+    def initialize(type_string, nullability)
+      @type_string = type_string
+      @nullability = nullability
+    end
+
+    def qualified_string
+      return self.unqualified_string if @nullability.nil?
+      "#{self.unqualified_string} #{self.markers[@nullability]}"
+    end
+
+    def unqualified_string
+      @type_string
+    end
+
+    def reference_type?
+      self.class.reference_type? @type_string
+    end
+
+    def self.reference_type?(type)
+      return true if type[-1, 1] == '*'
+      [ self.reference_types, self.block_types ].any? { |t| t.include? @type_string }
+    end
+
     def self.array_types
       %w[ NSArray NSMutableArray ]
     end
