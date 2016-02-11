@@ -1,15 +1,9 @@
 module Objc
   class Type
-    class << self
-      def init
-        @markers = { nullable: '_Nullable', nonnull: '_Nonnull' }
-      end
-
-      attr_reader :markers
-    end
+    @@markers = { nullable: '_Nullable', nonnull: '_Nonnull' }
 
     def markers
-      self.class.markers
+      @@markers
     end
 
     def initialize(type_string, nullability)

@@ -33,7 +33,11 @@ module Liquid
     end
 
     def validate?
-      @objc_property.should %i[ implement validator ]
+      @objc_property.validate?
+    end
+
+    def validators
+      @objc_property.validators
     end
 
     def field_name
@@ -43,6 +47,11 @@ module Liquid
     def field_name_boxed
       return field_name if reference_type?
       "@(#{field_name})"
+    end
+
+    def name_boxed
+      return @objc_property.name if reference_type?
+      "@(#{@objc_property.name})"
     end
 
     def attributes_string(attributes)

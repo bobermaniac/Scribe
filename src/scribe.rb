@@ -128,7 +128,8 @@ module Objc
     attr_accessor :scribes
 
     def should(params)
-      result = self.scribes.map{ |s| s.is params }.select { |r| r }.first
+      result = self.scribes.map{ |s| s.is params }.select { |r| r }
+      result = false unless result.any?
       puts "#{self.class} should #{params}: #{result}"
       result
     end
@@ -149,6 +150,14 @@ module Objc
 
   class Property
     include ScribesSupport
+
+    def validate?
+      self.validators
+    end
+
+    def validators
+      self.should %i[ implement validator ]
+    end
 
     def self.accepted_scribes
       {

@@ -8,7 +8,7 @@ scribe(implement mutable, builder; make abstract)
 scribe(implement validator=SomeValidatorInstance)
 @property (nonatomic, readonly, nonnull, copy) /* or here */ NSString *Id;
 
-scribe(implement validator=SomeValidatorInstance2)
+scribe(implement validator=SomeValidatorInstance2, validator=SomeValidatorInstance3)
 @property (nonatomic) NSString *name;
 
 scribe(hint kind=boxed, primitive=NSInteger, wrap=numberWithInteger, unwrap=integerValue; synthesize primitive)

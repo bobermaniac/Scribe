@@ -122,7 +122,14 @@
 {% endif %}
 {% for property in class.all_mutable_properties %}@dynamic {{ property.name }};
 
-- (void){{ property.setter_name }}:({{ property.type_qualified }}){{ property.name }} {
+- (void){{ property.setter_name }}:({{ property.type_qualified }}){{ property.name }} {% if property.validate? %}error:(NSError **)error{% endif %}{
+    {% if property.validate? %}
+    for (id<SCValidator>> *validator in @[ {% for validator in property.validators %}[[{{ validator }} alloc] init], {% endfor %} ]) {
+        if (![validator validateValue:{{ property.name_boxed }} ofProperty:@"{{ property.name }}" forObject:self error:error]) {
+            return;
+        }
+    }
+    {% endif %}
     if ({% if property.reference_type? %}![{{ property.field_name }} isEqual:{{ property.name }}]{% else %}{{ property.field_name }} != {{ property.name }}{% endif %}) {
         {% if class.supports_track_changes? %}[_tracker beforeValue:{{ property.field_name_boxed }} willBeChangedForKey:@"{{ property.name }}"];{% endif %}
         [self willChangeValueForKey:@"{{ property.name }}"];
