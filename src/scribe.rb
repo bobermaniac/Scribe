@@ -140,7 +140,7 @@ module Objc
 
     def self.accepted_scribes
       {
-          implement: %i[ mutable, builder ],
+          implement: %i[ mutable, builder, archivable ],
           extract: %i[ interface ],
           make: %i[ abstract ]
       }
@@ -168,7 +168,7 @@ module Objc
               wrap: nil,
               unwrap: nil,
           },
-          synthesize: %i[ default primitive, extended ]
+          synthesize: %i[ default, primitive, extended ]
       }
     end
   end

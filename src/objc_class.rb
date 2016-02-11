@@ -58,6 +58,7 @@ module Objc
         enumerator << :builder if self.should %i[ implement builder ]
         enumerator << :abstract if self.should %i[ make abstract ]
         enumerator << :extract_interface if self.should %i[ extract interface ]
+        enumerator << :make_archivable if self.should %i[ implement archivable ]
       end
     end
   end

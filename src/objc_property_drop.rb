@@ -85,6 +85,10 @@ module Liquid
     def validator_name
       "_validate#{name.upcase_1l}"
     end
+
+    def decoding_method
+      'decodeObjectForKey'
+    end
   end
 end
 

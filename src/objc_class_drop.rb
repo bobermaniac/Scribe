@@ -52,6 +52,10 @@ module Liquid
       @objc_class.should %i[ make abstract ]
     end
 
+    def archivable?
+      @objc_class.should %i[ implement archivable ]
+    end
+
     def parent_have_builder?
       @objc_class.ancestor.should %i[ implement builder ]
     end
@@ -93,7 +97,7 @@ module Liquid
     end
 
     def protocols
-      dump_protocols({ :mutable_copy => 'NSMutableCopying' }, [ @objc_class.ancestor.name, 'NSCopying' ] )
+      dump_protocols({ mutable_copy: 'NSMutableCopying', make_archivable: 'NSCoding' }, [ @objc_class.ancestor.name, 'NSCopying' ] )
     end
 
     def mutable_protocols

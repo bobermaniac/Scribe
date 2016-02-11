@@ -43,6 +43,21 @@
     return self;
 }
 
+{% if class.archivable? %}
+- (instancetype)initWithCoder:(NSCoder *)decoder {
+    {% for property in class.all_immutable_properties %}
+    {{ property.type }}{{ property.name }} = [decoder {{ property.decoding_method}}:@"{{ property.name }}"];
+    {% endfor %}
+    if (self = [self init{{ class.prim_ctor_call }}]) {
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)encoder {
+
+}
+{% endif %}
+
 {% if class.supports_builder? %}
 - (instancetype _Nonnull)initWithBuilder:({{ class.class_name }}Builder * _Nonnull)builder {
     NSParameterAssert(builder != nil);
