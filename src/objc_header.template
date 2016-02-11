@@ -17,7 +17,7 @@
 {% for property in class.own_properties %}    {{ property.type_qualified }} {{ property.field_name }};
 {% endfor %} }
 
-- (instancetype _Nonnull)init{{ class.prim_ctor_definition }}NS_DESIGNATED_INITIALIZER;
+- (instancetype _Nonnull)init{{ class.prim_ctor_definition }}{% if class.constructor_could_fail? %}error:(NSError * _Nullable __autoreleasing * _Nullable)error {% endif %}NS_DESIGNATED_INITIALIZER;
 - (instancetype _Nonnull)init{{ class.copy_ctor_definition }}NS_DESIGNATED_INITIALIZER;
 {% if class.supports_builder? %}
 + (nonnull {{ class.class_name }}Builder *)builder;
@@ -39,6 +39,6 @@
 
 {% for property in class.builder_properties %} @property ({{property.builder_attributes}}) {{ property.builder_type_qualified }} {{ property.name }};
 {% endfor %}
-- ({{ class.class_name }} * _Nonnull)build;
+- ({{ class.class_name }} * _Nonnull)build{% if class.builder_could_fail? %}WithError:(NSError * _Nullable __autoreleasing * _Nullable)error{% endif %};
 
 @end{% endif %}

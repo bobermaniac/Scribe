@@ -56,6 +56,14 @@ module Liquid
       @objc_class.ancestor.should %i[ implement builder ]
     end
 
+    def constructor_could_fail?
+      @objc_class.properties.any? { |p| p.validate? and p.readonly? }
+    end
+
+    def builder_could_fail?
+      @objc_class.properties.any? { |p| p.validate? }
+    end
+
     def own_properties
       @objc_class.properties
     end
@@ -108,7 +116,7 @@ module Liquid
       immutable_props = all_immutable_properties
       return ' ' unless immutable_props.any?
 
-      immutable_props.map do |property|
+      definition = immutable_props.map do |property|
         "#{property.name.upcase_1l}:(#{property.type.qualified_string})#{property.name} "
       end.reduce('With') { |acc, item| acc + (acc.end_with?(' ') ? item.downcase_1l : item) }
     end

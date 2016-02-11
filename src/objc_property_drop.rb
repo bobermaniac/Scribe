@@ -81,6 +81,10 @@ module Liquid
     def setter_name
       "set#{name.upcase_1l}"
     end
+
+    def validator_name
+      "_validate#{name.upcase_1l}"
+    end
   end
 end
 

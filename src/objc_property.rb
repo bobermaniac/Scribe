@@ -35,6 +35,14 @@ module Objc
       Objc::Type.reference_type? @type
     end
 
+    def validate?
+      self.scribes.should %i[ implement validator ]
+    end
+
+    def readonly?
+      @options.include? :readonly
+    end
+
     def extract_option(opts)
       @options.select { |v| opts.include? v }.first
     end

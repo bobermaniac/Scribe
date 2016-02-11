@@ -7,7 +7,8 @@
 @interface {{ class.class_name }} ()
 
 {% if class.supports_builder? %}- (instancetype _Nonnull)initWithBuilder:({{ class.class_name }}Builder * _Nonnull)builder;
-{% endif %}
+{% endif %}{% for property in class.all_properties %}{% if property.validate? %}- (BOOL){{ property.validator_name }}:({{ property.type }}){{ property.name }} error:(NSError **error);
+{% endif %}{% endfor %}
 @end
 
 @implementation {{ class.class_name }}
@@ -73,6 +74,17 @@
     return {{ class.copy_ctor_param }};
 } {% endif %}
 
+{% for property in class.all_properties %}{% if property.validate? %}- (BOOL){{ property.validator_name }}:({{ property.type }}){{ property.name }} error:(NSError **error) {
+    for (id<SCValidator>> *validator in @[ {% for validator in property.validators %}[[{{ validator }} alloc] init], {% endfor %} ]) {
+        if (![validator validateValue:{{ property.name_boxed }} ofProperty:@"{{ property.name }}" forObject:self error:error]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
+{% endif %}{% endfor %}
+
 {% for property in class.own_properties %}@dynamic {{ property.name }};
 
 - ({{ property.type_qualified }}){{ property.name }} {
@@ -124,11 +136,7 @@
 
 - (void){{ property.setter_name }}:({{ property.type_qualified }}){{ property.name }} {% if property.validate? %}error:(NSError **)error{% endif %}{
     {% if property.validate? %}
-    for (id<SCValidator>> *validator in @[ {% for validator in property.validators %}[[{{ validator }} alloc] init], {% endfor %} ]) {
-        if (![validator validateValue:{{ property.name_boxed }} ofProperty:@"{{ property.name }}" forObject:self error:error]) {
-            return;
-        }
-    }
+    if (![self {{ property.validator_name}}:{{ property.name }} error:error]) { return; }
     {% endif %}
     if ({% if property.reference_type? %}![{{ property.field_name }} isEqual:{{ property.name }}]{% else %}{{ property.field_name }} != {{ property.name }}{% endif %}) {
         {% if class.supports_track_changes? %}[_tracker beforeValue:{{ property.field_name_boxed }} willBeChangedForKey:@"{{ property.name }}"];{% endif %}
