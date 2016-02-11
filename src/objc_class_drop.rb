@@ -109,7 +109,7 @@ module Liquid
       return ' ' unless immutable_props.any?
 
       immutable_props.map do |property|
-        "#{property.name.upcase_1l}:(#{property.type_qualified})#{property.name} "
+        "#{property.name.upcase_1l}:(#{property.type.qualified_string})#{property.name} "
       end.reduce('With') { |acc, item| acc + (acc.end_with?(' ') ? item.downcase_1l : item) }
     end
 
