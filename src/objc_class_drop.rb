@@ -61,11 +61,11 @@ module Liquid
     end
 
     def constructor_could_fail?
-      @objc_class.properties.any? { |p| p.validate? and p.readonly? }
+      @objc_class.properties.any? { |p| p.validate? and p.readonly? } or self.parent.constructor_could_fail?
     end
 
     def builder_could_fail?
-      @objc_class.properties.any? { |p| p.validate? }
+      @objc_class.properties.any? { |p| p.validate? } or self.parent.builder_could_fail?
     end
 
     def own_properties
@@ -104,7 +104,7 @@ module Liquid
       additional = [ class_name ]
       additional << parent.mutable_class_name if parent.supports_mutable_copy?
 
-      dump_protocols({ :track_changes => 'TCTrackChanges' }, additional)
+      dump_protocols({ :track_changes => Scribe.default_interfaces[:tracking] }, additional)
     end
 
     def imports

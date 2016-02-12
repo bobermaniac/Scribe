@@ -8,7 +8,11 @@ grammar Scribe
     end
 
     rule import_definition
-        import_keyword whitespace? ["<] identifier ".h" [">] whitespace? <ImportDefinition>
+        whitespace? import_keyword whitespace? ["<] file_path [">] whitespace? <ImportDefinition>
+    end
+
+    rule file_path
+        ( identifier '/' )* identifier ('.' identifier)? <FilePath>
     end
 
     rule import_keyword

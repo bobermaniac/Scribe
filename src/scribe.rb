@@ -121,6 +121,14 @@ module Scribe
     classes = interfaces_definitions.flat_map { |interface_definition| self.parse_interfaces_definition(interface_definition) }
     self.resolve_references classes
   end
+
+  def self.default_interfaces
+    @@default_interfaces
+  end
+
+  def self.default_interfaces=(value)
+    @@default_interfaces = value
+  end
 end
 
 module Objc

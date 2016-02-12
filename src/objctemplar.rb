@@ -51,6 +51,10 @@ end
 if results.include? nil
   abort parser.failure_reason
 else
+  Scribe.default_interfaces = {
+      tracking: 'SCTrackChanges',
+      validator: 'SCValidator',
+  }
   classes = Scribe.to_objc results
 
   for cls in classes
