@@ -10,7 +10,7 @@ module Objc
     end
 
     def initialize(type_string, nullability)
-      @type_string = type_string
+      @type_string = type_string.strip
       @nullability = nullability
     end
 
@@ -34,7 +34,7 @@ module Objc
 
     def coding_method
       return 'Object' if self.reference_type?
-      Objc.typename_without_prefix(@type_string).upcase_1l.strip
+      Objc.typename_without_prefix(@type_string).upcase_1l
     end
 
     def self.array_types

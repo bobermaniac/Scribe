@@ -82,6 +82,10 @@
 }
 {% endif %}
 
+- (id)copyWithZone:(NSZone *)zone {
+    return self;
+}
+
 {% if class.supports_mutable_copy? %}
 - (id)mutableCopyWithZone:(NSZone *)zone {
     {{ class.class_name }} *{{ class.copy_ctor_param }} = self;
@@ -150,6 +154,11 @@
     return _tracker.changedKeys;
 }
 {% endif %}
+
+- (id)copyWithZone:(NSZone *)zone {
+    return [[self allocWithZone:zone] init{{ class.copy_ctor_call }}];
+}
+
 {% for property in class.all_mutable_properties %}@dynamic {{ property.name }};
 
 - (void){{ property.setter_name }}:({{ property.type_qualified }}){{ property.name }} {% if property.validate? %}error:(NSError **)error{% endif %}{

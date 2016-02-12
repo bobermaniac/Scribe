@@ -59,6 +59,7 @@ module Objc
         enumerator << :abstract if self.should %i[ make abstract ]
         enumerator << :extract_interface if self.should %i[ extract interface ]
         enumerator << :make_archivable if self.should %i[ implement archivable ]
+        enumerator << :track_changes if self.should %i[ implement tracking ]
       end
     end
   end

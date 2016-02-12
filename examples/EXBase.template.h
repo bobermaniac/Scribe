@@ -1,7 +1,7 @@
 #import "ExternalHeader.h"
 // Comments, comments everywhere
 
-scribe(implement mutable, builder, archivable; make abstract)
+scribe(implement mutable, builder, archivable, tracking; make abstract)
 @interface EXBase
 // Even here
 scribe(implement validator=SomeValidatorInstance)
