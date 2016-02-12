@@ -16,4 +16,8 @@ FOUNDATION_EXPORT const unsigned char ScribeVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <Scribe/PublicHeader.h>
 
+#import <Scribe/SCValidator.h>
+#import <Scribe/SCTrackChanges.h>
+#import <Scribe/SCPropertyChangesTracker.h>
 
+#define scribe(...)

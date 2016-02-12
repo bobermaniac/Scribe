@@ -41,6 +41,7 @@
 		E7C110C51C67E98D008ADAE3 /* SCValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCValidator.h; sourceTree = "<group>"; };
 		E7C110C71C67EA3F008ADAE3 /* SCNonnullValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNonnullValidator.h; sourceTree = "<group>"; };
 		E7C110C81C67EA3F008ADAE3 /* SCNonnullValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNonnullValidator.m; sourceTree = "<group>"; };
+		E7C110E61C6E6530008ADAE3 /* SCExampleClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCExampleClass.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +95,7 @@
 		E7C110AF1C67E730008ADAE3 /* ScribeTests */ = {
 			isa = PBXGroup;
 			children = (
+				E7C110E51C6E64DB008ADAE3 /* Example */,
 				E7C110B01C67E730008ADAE3 /* ScribeTests.m */,
 				E7C110B21C67E730008ADAE3 /* Info.plist */,
 			);
@@ -118,6 +120,14 @@
 				E7C110C81C67EA3F008ADAE3 /* SCNonnullValidator.m */,
 			);
 			name = Validating;
+			sourceTree = "<group>";
+		};
+		E7C110E51C6E64DB008ADAE3 /* Example */ = {
+			isa = PBXGroup;
+			children = (
+				E7C110E61C6E6530008ADAE3 /* SCExampleClass.h */,
+			);
+			name = Example;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
