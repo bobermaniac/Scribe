@@ -13,5 +13,7 @@ scribe(implement validator=SomeValidatorInstance2, validator=SomeValidatorInstan
 scribe(hint kind=boxed, primitive=NSInteger, wrap=numberWithInteger, unwrap=integerValue; synthesize primitive)
 @property (nonatomic) NSNumber *counter;
 @property (nonatomic) NSDictionary<NSString*,NSString*>*someArray;
+@property (nonatomic) int count;
+@property (nonatomic) NSInteger count2;
 
 @end

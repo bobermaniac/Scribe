@@ -87,7 +87,11 @@ module Liquid
     end
 
     def decoding_method
-      'decodeObjectForKey'
+      "decode#{@objc_property.type.coding_method}ForKey"
+    end
+
+    def encoding_method
+      "encode#{@objc_property.type.coding_method}"
     end
   end
 end

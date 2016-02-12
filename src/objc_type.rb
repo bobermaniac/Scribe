@@ -1,6 +1,9 @@
 module Objc
   class Type
-    @@markers = { nullable: '_Nullable', nonnull: '_Nonnull' }
+    @@markers = {
+        nullable: '_Nullable',
+        nonnull: '_Nonnull'
+    }
 
     def markers
       @@markers
@@ -27,6 +30,11 @@ module Objc
     def self.reference_type?(type)
       return true if type[-1, 1] == '*'
       [ self.reference_types, self.block_types ].any? { |t| t.include? @type_string }
+    end
+
+    def coding_method
+      return 'Object' if self.reference_type?
+      Objc.typename_without_prefix(@type_string).upcase_1l.strip
     end
 
     def self.array_types

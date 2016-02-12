@@ -46,15 +46,18 @@
 {% if class.archivable? %}
 - (instancetype)initWithCoder:(NSCoder *)decoder {
     {% for property in class.all_immutable_properties %}
-    {{ property.type }}{{ property.name }} = [decoder {{ property.decoding_method}}:@"{{ property.name }}"];
+    {{ property.type }}{{ property.name }} = [decoder {{ property.decoding_method }}:@"{{ property.name }}"];
     {% endfor %}
     if (self = [self init{{ class.prim_ctor_call }}]) {
+        {% for property in class.all_mutable_properties %}{{ property.field_name }} = [decoder {{ property.decoding_method }}:@"{{ property.name }}"];
+        {% endfor %}
     }
     return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
-
+    {% for property in class.all_properties %}[encoder {{ property.encoding_method }}:{{ property.field_name }} forKey:@"{{ property.name }}"]
+    {% endfor %}
 }
 {% endif %}
 
