@@ -6,8 +6,8 @@
 {% endfor %}
 @interface {{ class.class_name }} ()
 
-{% if class.supports_builder? %}- (instancetype _Nonnull)initWithBuilder:({{ class.class_name }}Builder * _Nonnull)builder;
-{% endif %}{% for property in class.all_properties %}{% if property.validate? %}+ (BOOL){{ property.validator_name }}:({{ property.type }}){{ property.name }} error:(NSError **error);
+{% if class.supports_builder? %}- (instancetype)initWithBuilder:({{ class.class_name }}Builder *)builder {% if class.constructor_could_fail? %}error:(NSError **)error {% endif %};
+{% endif %}{% for property in class.all_properties %}{% if property.validate? %}+ (BOOL){{ property.validator_name }}:({{ property.type }}){{ property.name }} forObject:({{ class.class_name }} *)object error:(NSError **error);
 {% endif %}{% endfor %}
 @end
 
@@ -22,6 +22,8 @@
 #pragma clang diagnostic pop
 
 {% endif %}- (instancetype _Nonnull)init{{ class.prim_ctor_definition }}{% if class.constructor_could_fail? %}error:(NSError **)error {% endif %} {
+    {% for property in class.all_immutable_properties %}{% if property.validate? %}if (![{{ class.class_name }} {{ property.validator_name }}:{{ property.name }} error:error]) { return; }
+    {% endif %}{% endfor %}
     if (self = [super init{{ class.parent.prim_ctor_call }}]) { {% for property in class.own_immutable_properties %}
         {{ property.field_name }} = {% if property.copy_on_assign? %}[{{ property.name}} copy]{% else %}{{ property.name }}{% endif %};{% endfor %}
     }
@@ -62,9 +64,10 @@
 {% endif %}
 
 {% if class.supports_builder? %}
-- (instancetype _Nonnull)initWithBuilder:({{ class.class_name }}Builder * _Nonnull)builder {
+- (instancetype _Nonnull)initWithBuilder:({{ class.class_name }}Builder * _Nonnull)builder {% if class.constructor_could_fail? %}error:(NSError **)error {% endif %} {
     NSParameterAssert(builder != nil);
-
+    {% for property in class.all_immutable_properties %}{% if property.validate? %}if (![{{ class.class_name }} {{ property.validator_name }}:builder.{{ property.name }} error:error]) { return nil; }
+    {% endif %}{% endfor %}
     if (self = [self init{{ class.prim_ctor_call_for_builder }}]) { {% for property in class.all_mutable_properties %}
         {{ property.field_name }} = {% if property.copy_on_assign? %}[builder.{{ property.name }} copy]{% else %}builder.{{ property.name }}{% endif %};{% endfor %}
     }
@@ -96,9 +99,9 @@
     return {{ class.copy_ctor_param }};
 } {% endif %}
 
-{% for property in class.all_properties %}{% if property.validate? %}+ (BOOL){{ property.validator_name }}:({{ property.type }}){{ property.name }} error:(NSError **error) {
+{% for property in class.all_properties %}{% if property.validate? %}+ (BOOL){{ property.validator_name }}:({{ property.type }}){{ property.name }} forObject:({{ class.class_name }} *)object error:(NSError **error) {
     for (id<SCValidator>> *validator in @[ {% for validator in property.validators %}[[{{ validator }} alloc] init], {% endfor %} ]) {
-        if (![validator validateValue:{{ property.name_boxed }} ofProperty:@"{{ property.name }}" forObject:self error:error]) {
+        if (![validator validateValue:{{ property.name_boxed }} ofProperty:@"{{ property.name }}" forObject:object error:error]) {
             return NO;
         }
     }
@@ -189,8 +192,8 @@
 }{% endif %}
 {% for property in class.builder_properties %}@synthesize {{ property.name }} = {{ property.field_name }};
 
-{% endfor %}- ({{ class.class_name }} * _Nonnull)build {
-    return [[{{ class.class_name }} alloc] initWithBuilder:self];
+{% endfor %}- ({{ class.class_name }} *)build{% if class.builder_could_fail? %}WithError:(NSError **)error{% endif %} {
+    return [[{{ class.class_name }} alloc] initWithBuilder:self{% if class.constructor_could_fail? %} error:error{% endif %}];
 }
 
 @end
