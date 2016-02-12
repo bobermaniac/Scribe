@@ -7,7 +7,7 @@
 @interface {{ class.class_name }} ()
 
 {% if class.supports_builder? %}- (instancetype _Nonnull)initWithBuilder:({{ class.class_name }}Builder * _Nonnull)builder;
-{% endif %}{% for property in class.all_properties %}{% if property.validate? %}- (BOOL){{ property.validator_name }}:({{ property.type }}){{ property.name }} error:(NSError **error);
+{% endif %}{% for property in class.all_properties %}{% if property.validate? %}+ (BOOL){{ property.validator_name }}:({{ property.type }}){{ property.name }} error:(NSError **error);
 {% endif %}{% endfor %}
 @end
 
@@ -21,7 +21,7 @@
 }
 #pragma clang diagnostic pop
 
-{% endif %}- (instancetype _Nonnull)init{{ class.prim_ctor_definition }} {
+{% endif %}- (instancetype _Nonnull)init{{ class.prim_ctor_definition }}{% if class.constructor_could_fail? %}error:(NSError **)error {% endif %} {
     if (self = [super init{{ class.parent.prim_ctor_call }}]) { {% for property in class.own_immutable_properties %}
         {{ property.field_name }} = {% if property.copy_on_assign? %}[{{ property.name}} copy]{% else %}{{ property.name }}{% endif %};{% endfor %}
     }
@@ -96,7 +96,7 @@
     return {{ class.copy_ctor_param }};
 } {% endif %}
 
-{% for property in class.all_properties %}{% if property.validate? %}- (BOOL){{ property.validator_name }}:({{ property.type }}){{ property.name }} error:(NSError **error) {
+{% for property in class.all_properties %}{% if property.validate? %}+ (BOOL){{ property.validator_name }}:({{ property.type }}){{ property.name }} error:(NSError **error) {
     for (id<SCValidator>> *validator in @[ {% for validator in property.validators %}[[{{ validator }} alloc] init], {% endfor %} ]) {
         if (![validator validateValue:{{ property.name_boxed }} ofProperty:@"{{ property.name }}" forObject:self error:error]) {
             return NO;
@@ -162,8 +162,7 @@
 {% for property in class.all_mutable_properties %}@dynamic {{ property.name }};
 
 - (void){{ property.setter_name }}:({{ property.type_qualified }}){{ property.name }} {% if property.validate? %}error:(NSError **)error{% endif %}{
-    {% if property.validate? %}
-    if (![self {{ property.validator_name}}:{{ property.name }} error:error]) { return; }
+    {% if property.validate? %}if (![{{ class.class_name }} {{ property.validator_name}}:{{ property.name }} error:error]) { return; }
     {% endif %}
     if ({% if property.reference_type? %}![{{ property.field_name }} isEqual:{{ property.name }}]{% else %}{{ property.field_name }} != {{ property.name }}{% endif %}) {
         {% if class.supports_track_changes? %}[_tracker beforeValue:{{ property.field_name_boxed }} willBeChangedForKey:@"{{ property.name }}"];{% endif %}

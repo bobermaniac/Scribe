@@ -10,8 +10,9 @@ scribe(implement validator=SomeValidatorInstance)
 scribe(implement validator=SomeValidatorInstance2, validator=SomeValidatorInstance3)
 @property (nonatomic) NSString *name;
 
-scribe(hint kind=boxed, primitive=NSInteger, wrap=numberWithInteger, unwrap=integerValue; synthesize primitive)
 @property (nonatomic) NSNumber *counter;
+
+scribe(implement collection)
 @property (nonatomic) NSDictionary<NSString*,NSString*>*someArray;
 @property (nonatomic) int count;
 @property (nonatomic) NSInteger count2;
