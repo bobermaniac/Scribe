@@ -7,13 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SCTracker.h"
 
 typedef NS_ENUM(NSUInteger, SCPropertyChangesTrackerMode) {
     SCPropertyChangesTrackerAutomaticMode,
     SCPropertyChangesTrackerManualMode
 };
 
-@interface SCPropertyChangesTracker : NSObject<NSCopying>
+@interface SCPropertyChangesTracker : NSObject<NSCopying, SCTracking>
 
 - (nullable instancetype)initWithTrackingObject:(nonnull id)object mode:(SCPropertyChangesTrackerMode)mode;
 + (nullable instancetype)trackerWithTrackingObject:(nonnull id)object mode:(SCPropertyChangesTrackerMode)mode;

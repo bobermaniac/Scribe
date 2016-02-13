@@ -18,6 +18,9 @@
 		E7C110CA1C67EA3F008ADAE3 /* SCNonnullValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C110C81C67EA3F008ADAE3 /* SCNonnullValidator.m */; };
 		E7C110E91C6E67CA008ADAE3 /* SCExampleClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C110E81C6E67CA008ADAE3 /* SCExampleClass.m */; };
 		E7C110EC1C6E8C21008ADAE3 /* SCExampleDeliveredClass.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C110EB1C6E8C21008ADAE3 /* SCExampleDeliveredClass.m */; };
+		E7C110EE1C6FBB60008ADAE3 /* SCTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = E7C110ED1C6FBB60008ADAE3 /* SCTracker.h */; };
+		E7C110F11C6FC091008ADAE3 /* SCNonemptyStringValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = E7C110EF1C6FC091008ADAE3 /* SCNonemptyStringValidator.h */; };
+		E7C110F21C6FC091008ADAE3 /* SCNonemptyStringValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C110F01C6FC091008ADAE3 /* SCNonemptyStringValidator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,9 @@
 		E7C110E81C6E67CA008ADAE3 /* SCExampleClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCExampleClass.m; sourceTree = "<group>"; };
 		E7C110EA1C6E8C21008ADAE3 /* SCExampleDeliveredClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCExampleDeliveredClass.h; sourceTree = "<group>"; };
 		E7C110EB1C6E8C21008ADAE3 /* SCExampleDeliveredClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCExampleDeliveredClass.m; sourceTree = "<group>"; };
+		E7C110ED1C6FBB60008ADAE3 /* SCTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTracker.h; sourceTree = "<group>"; };
+		E7C110EF1C6FC091008ADAE3 /* SCNonemptyStringValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNonemptyStringValidator.h; sourceTree = "<group>"; };
+		E7C110F01C6FC091008ADAE3 /* SCNonemptyStringValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNonemptyStringValidator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +117,7 @@
 		E7C110BB1C67E75C008ADAE3 /* Tracking */ = {
 			isa = PBXGroup;
 			children = (
+				E7C110ED1C6FBB60008ADAE3 /* SCTracker.h */,
 				E7C110BC1C67E788008ADAE3 /* SCTrackChanges.h */,
 				E7C110C01C67E850008ADAE3 /* SCPropertyChangesTracker.h */,
 				E7C110C11C67E850008ADAE3 /* SCPropertyChangesTracker.m */,
@@ -124,6 +131,8 @@
 				E7C110C51C67E98D008ADAE3 /* SCValidator.h */,
 				E7C110C71C67EA3F008ADAE3 /* SCNonnullValidator.h */,
 				E7C110C81C67EA3F008ADAE3 /* SCNonnullValidator.m */,
+				E7C110EF1C6FC091008ADAE3 /* SCNonemptyStringValidator.h */,
+				E7C110F01C6FC091008ADAE3 /* SCNonemptyStringValidator.m */,
 			);
 			name = Validating;
 			sourceTree = "<group>";
@@ -148,6 +157,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7C110BD1C67E788008ADAE3 /* SCTrackChanges.h in Headers */,
+				E7C110EE1C6FBB60008ADAE3 /* SCTracker.h in Headers */,
+				E7C110F11C6FC091008ADAE3 /* SCNonemptyStringValidator.h in Headers */,
 				E7C110C91C67EA3F008ADAE3 /* SCNonnullValidator.h in Headers */,
 				E7C110C21C67E850008ADAE3 /* SCPropertyChangesTracker.h in Headers */,
 				E7C110A51C67E730008ADAE3 /* Scribe.h in Headers */,
@@ -253,6 +264,7 @@
 			files = (
 				E7C110C31C67E850008ADAE3 /* SCPropertyChangesTracker.m in Sources */,
 				E7C110CA1C67EA3F008ADAE3 /* SCNonnullValidator.m in Sources */,
+				E7C110F21C6FC091008ADAE3 /* SCNonemptyStringValidator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

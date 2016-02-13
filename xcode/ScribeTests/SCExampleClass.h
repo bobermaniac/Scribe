@@ -10,7 +10,7 @@
 @protocol SCExampleClass <NSObject, NSCopying, NSMutableCopying, NSCoding>
 
 @property (nonatomic, strong, readonly, retain) NSString * _Nonnull ID;
-@property (nonatomic, strong, retain, readonly) NSString * _Nullable description;
+@property (nonatomic, strong, retain, readonly) NSString * _Nullable objectDescription;
 @property (nonatomic, strong, retain, readonly) NSArray<NSString *> * _Nonnull components;
 @property (nonatomic, assign, readonly) int counter;
 
@@ -19,7 +19,7 @@
 @interface SCExampleClass : NSObject <SCExampleClass> {
     @protected
     NSString * _Nonnull _ID;
-    NSString * _Nullable _description;
+    NSString * _Nullable _objectDescription;
     NSArray<NSString *> * _Nonnull _components;
     int _counter;
  }
@@ -37,9 +37,9 @@
 
 @protocol SCMutableExampleClass <SCExampleClass, SCTrackChanges>
 
-@property (nonatomic, strong, retain, readwrite) NSString * _Nullable description;
+@property (nonatomic, strong, retain, readwrite) NSString * _Nullable objectDescription;
 @property (nonatomic, strong, retain, readwrite) NSArray<NSString *> * _Nonnull components;
-- (void)setCounter:(int)counter error:(NSError * _Nullable __autoreleasing * _Nullable)error;
+@property (nonatomic, assign, readwrite) int counter;
 
 @end
 
@@ -50,7 +50,7 @@
 @interface SCExampleClassBuilder : NSObject
 
  @property (nonatomic, strong, readwrite, retain) NSString * _Nullable ID;
- @property (nonatomic, strong, retain, readwrite) NSString * _Nullable description;
+ @property (nonatomic, strong, retain, readwrite) NSString * _Nullable objectDescription;
  @property (nonatomic, strong, retain, readwrite) NSArray<NSString *> * _Nullable components;
  @property (nonatomic, assign, readwrite) int counter;
 

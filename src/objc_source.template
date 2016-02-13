@@ -18,7 +18,7 @@
 
 {% if class.close_parent_ctor? %}#pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
-- (instancetype)init{{ class.parent.prim_ctor_definition }} {
+- (instancetype)init{{ class.parent.prim_ctor_definition }}{% if class.parent.constructor_could_fail? %} error:(NSError **)error{% endif %} {
     NSAssert(NO, @"Forbidden");
     @throw [NSException exceptionWithName:@"Forbidden" reason:@"This object have its own immutable fields" userInfo:nil];
 }
@@ -124,7 +124,7 @@
 
 {% if class.supports_mutable_copy? %}
 @interface {{ class.mutable_class_name }} () {% if class.supports_track_changes? %}{
-    {{ interfaces['tracker']['class'] }} * _Nonnull _tracker;
+    NSObject<{{ interfaces['tracker']['protocol']['int'] }}> * _Nonnull _tracker;
 }{% endif %}
 
 @end
@@ -133,7 +133,7 @@
 {% if class.supports_track_changes? %}
 - (instancetype)init{{ class.prim_ctor_definition }}{% if class.constructor_could_fail? %} error:(NSError **)error {% endif %} {
     if (self = [super init{{ class.prim_ctor_call }} {% if class.constructor_could_fail? %} error:error{% endif %}]) {
-        _tracker = [[{{ interfaces['tracker']['class'] }} alloc] init];
+        _tracker = [{{ interfaces['tracker']['class'] }} trackerWithTrackingObject:self mode:SCPropertyChangesTrackerManualMode];
     }
 
     NSAssert(self != nil, @"Internal error: object was not created");{% if class.abstract? %}
@@ -148,7 +148,7 @@
         if ([{{ class.copy_ctor_param }} isKindOfClass:[{{ class.mutable_class_name }} class]]) {
             _tracker = [(({{ class.mutable_class_name }} *){{ class.copy_ctor_param }})->_tracker copy];
         } else {
-            _tracker = [[{{ interfaces['tracker']['class'] }} alloc] init];
+            _tracker = [{{ interfaces['tracker']['class'] }} trackerWithTrackingObject:self mode:SCPropertyChangesTrackerManualMode];
         }
     }
 
@@ -157,8 +157,8 @@
     return self;
 }
 
-- (NSArray<NSString *> *)changedKeys {
-    return _tracker.changedKeys;
+- (id<{{interfaces['tracker']['protocol']['ext']}}>)changesTracker {
+    return _tracker;
 }
 {% endif %}
 
@@ -173,11 +173,11 @@
     {% if property.validate? %}if (![{{ class.class_name }} {{ property.validator_name}}:{{ property.name }} error:error]) { return; }
     {% endif %}
     if ({% if property.reference_type? %}![{{ property.field_name }} isEqual:{{ property.name }}]{% else %}{{ property.field_name }} != {{ property.name }}{% endif %}) {
-        {% if class.supports_track_changes? %}[_tracker beforeValue:{{ property.field_name_boxed }} willBeChangedForKey:@"{{ property.name }}"];{% endif %}
+        {% if class.supports_track_changes? %}[_tracker property:@"{{ property.name }}" beforeChangeValue:{{ property.field_name_boxed }}];{% endif %}
         [self willChangeValueForKey:@"{{ property.name }}"];
         {{ property.field_name }} = {% if property.copy_on_assign? %}[{{ property.name}} copy]{% else %}{{ property.name }}{% endif %};
         [self didChangeValueForKey:@"{{ property.name }}"];
-        {% if class.supports_track_changes? %}[_tracker newValue:{{ property.field_name_boxed }} wasSetForKey:@"{{ property.name }}"];{% endif %}
+        {% if class.supports_track_changes? %}[_tracker property:@"{{ property.name }}" afterChangeValue:{{ property.field_name_boxed }}];{% endif %}
     }
 }
 

@@ -16,13 +16,9 @@
     }
     
     if (error) {
-        *error = [self _validationError];
+        *error = [NSError errorWithDomain:@"" code:0 userInfo:@{}];
     }
     return NO;
-}
-
-- (NSError *)_validationError {
-    return nil;
 }
 
 @end

@@ -5,13 +5,13 @@
 #import "SCPropertyChangesTracker.h"
 #import "SCExampleClass.h"
 
+#import "SCNonemptyStringValidator.h"
 #import "SCNonnullValidator.h"
 
 @interface SCExampleDeliveredClass ()
 
 - (instancetype)initWithBuilder:(SCExampleDeliveredClassBuilder *)builder error:(NSError **)error;
 + (BOOL)_validateID:(NSString *)ID forObject:(SCExampleDeliveredClass *)object error:(NSError **)error;
-+ (BOOL)_validateCounter:(int)counter forObject:(SCExampleDeliveredClass *)object error:(NSError **)error;
 + (BOOL)_validateAdditionalValue:(NSValue *)additionalValue forObject:(SCExampleDeliveredClass *)object error:(NSError **)error;
 
 @end
@@ -20,7 +20,7 @@
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wobjc-designated-initializers"
-- (instancetype)initWithID:(NSString * _Nonnull)ID  {
+- (instancetype)initWithID:(NSString * _Nonnull)ID  error:(NSError **)error {
     NSAssert(NO, @"Forbidden");
     @throw [NSException exceptionWithName:@"Forbidden" reason:@"This object have its own immutable fields" userInfo:nil];
 }
@@ -58,7 +58,7 @@
     NSValue *additionalValue = [decoder decodeObjectForKey:@"additionalValue"];
     
     if (self = [self initWithID:ID additionalValue:additionalValue error:&error]) {
-        _description = [decoder decodeObjectForKey:@"description"];
+        _objectDescription = [decoder decodeObjectForKey:@"objectDescription"];
         _components = [decoder decodeObjectForKey:@"components"];
         _counter = [decoder decodeIntForKey:@"counter"];
         
@@ -68,7 +68,7 @@
 
 - (void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeObject:_ID forKey:@"ID"];
-    [encoder encodeObject:_description forKey:@"description"];
+    [encoder encodeObject:_objectDescription forKey:@"objectDescription"];
     [encoder encodeObject:_components forKey:@"components"];
     [encoder encodeInt:_counter forKey:@"counter"];
     [encoder encodeObject:_additionalValue forKey:@"additionalValue"];
@@ -83,7 +83,7 @@
     if (![SCExampleDeliveredClass _validateAdditionalValue:builder.additionalValue forObject:nil error:error]) { return nil; }
     
     if (self = [self initWithID:builder.ID additionalValue:builder.additionalValue error:error]) { 
-        _description = builder.description;
+        _objectDescription = builder.objectDescription;
         _components = builder.components;
         _counter = builder.counter;
     }
@@ -114,17 +114,8 @@
 } 
 
 + (BOOL)_validateID:(NSString *)ID forObject:(SCExampleDeliveredClass *)object error:(NSError **)error {
-    for (NSObject<SCValidator> *validator in @[ [[SCNonnullValidator alloc] init],  ]) {
+    for (NSObject<SCValidator> *validator in @[ [[SCNonemptyStringValidator alloc] init],  ]) {
         if (![validator validateValue:ID ofProperty:@"ID" forObject:object error:error]) {
-            return NO;
-        }
-    }
-    return YES;
-}
-
-+ (BOOL)_validateCounter:(int)counter forObject:(SCExampleDeliveredClass *)object error:(NSError **)error {
-    for (NSObject<SCValidator> *validator in @[ [[SCNonnullValidator alloc] init],  ]) {
-        if (![validator validateValue:@(counter) ofProperty:@"counter" forObject:object error:error]) {
             return NO;
         }
     }
@@ -152,7 +143,7 @@
 
 
 @interface SCMutableExampleDeliveredClass () {
-    SCPropertyChangesTracker * _Nonnull _tracker;
+    NSObject<SCTracking> * _Nonnull _tracker;
 }
 
 @end
@@ -161,7 +152,7 @@
 
 - (instancetype)initWithID:(NSString * _Nonnull)ID additionalValue:(NSValue * _Nullable)additionalValue  error:(NSError **)error  {
     if (self = [super initWithID:ID additionalValue:additionalValue  error:error]) {
-        _tracker = [[SCPropertyChangesTracker alloc] init];
+        _tracker = [SCPropertyChangesTracker trackerWithTrackingObject:self mode:SCPropertyChangesTrackerManualMode];
     }
 
     NSAssert(self != nil, @"Internal error: object was not created");
@@ -175,7 +166,7 @@
         if ([exampleClass isKindOfClass:[SCMutableExampleDeliveredClass class]]) {
             _tracker = [((SCMutableExampleDeliveredClass *)exampleClass)->_tracker copy];
         } else {
-            _tracker = [[SCPropertyChangesTracker alloc] init];
+            _tracker = [SCPropertyChangesTracker trackerWithTrackingObject:self mode:SCPropertyChangesTrackerManualMode];
         }
     }
 
@@ -183,8 +174,8 @@
     return self;
 }
 
-- (NSArray<NSString *> *)changedKeys {
-    return _tracker.changedKeys;
+- (id<SCTracker>)changesTracker {
+    return _tracker;
 }
 
 
@@ -193,16 +184,16 @@
     return [[SCExampleDeliveredClass allocWithZone:zone] initWithExampleClass:exampleClass];
 }
 
-@dynamic description;
+@dynamic objectDescription;
 
-- (void)setDescription:(NSString * _Nullable)description {
+- (void)setObjectDescription:(NSString * _Nullable)objectDescription {
     
-    if (![_description isEqual:description]) {
-        [_tracker beforeValue:_description willBeChangedForKey:@"description"];
-        [self willChangeValueForKey:@"description"];
-        _description = description;
-        [self didChangeValueForKey:@"description"];
-        [_tracker newValue:_description wasSetForKey:@"description"];
+    if (![_objectDescription isEqual:objectDescription]) {
+        [_tracker property:@"objectDescription" beforeChangeValue:_objectDescription];
+        [self willChangeValueForKey:@"objectDescription"];
+        _objectDescription = objectDescription;
+        [self didChangeValueForKey:@"objectDescription"];
+        [_tracker property:@"objectDescription" afterChangeValue:_objectDescription];
     }
 }
 
@@ -211,25 +202,24 @@
 - (void)setComponents:(NSArray<NSString *> * _Nonnull)components {
     
     if (![_components isEqual:components]) {
-        [_tracker beforeValue:_components willBeChangedForKey:@"components"];
+        [_tracker property:@"components" beforeChangeValue:_components];
         [self willChangeValueForKey:@"components"];
         _components = components;
         [self didChangeValueForKey:@"components"];
-        [_tracker newValue:_components wasSetForKey:@"components"];
+        [_tracker property:@"components" afterChangeValue:_components];
     }
 }
 
 @dynamic counter;
 
-- (void)setCounter:(int)counter error:(NSError **)error{
-    if (![SCExampleDeliveredClass _validateCounter:counter error:error]) { return; }
+- (void)setCounter:(int)counter {
     
     if (_counter != counter) {
-        [_tracker beforeValue:@(_counter) willBeChangedForKey:@"counter"];
+        [_tracker property:@"counter" beforeChangeValue:@(_counter)];
         [self willChangeValueForKey:@"counter"];
         _counter = counter;
         [self didChangeValueForKey:@"counter"];
-        [_tracker newValue:@(_counter) wasSetForKey:@"counter"];
+        [_tracker property:@"counter" afterChangeValue:@(_counter)];
     }
 }
 

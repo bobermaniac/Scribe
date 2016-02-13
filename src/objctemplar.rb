@@ -54,7 +54,7 @@ else
   Scribe.default_interfaces = {
       'foundation' => '<Foundation/Foundation.h>',
       'tracking' => { 'protocol' => 'SCTrackChanges', 'in' => '"SCTrackChanges.h"' },
-      'tracker' => { 'class' => 'SCPropertyChangesTracker', 'in' => '"SCPropertyChangesTracker.h"'},
+      'tracker' => { 'class' => 'SCPropertyChangesTracker', 'protocol' => { 'ext' => 'SCTracker', 'int' => 'SCTracking' }, 'in' => '"SCPropertyChangesTracker.h"'},
       'validator' => { 'protocol' => 'SCValidator', 'in' => '"SCValidator.h"'}
   }
   classes = Scribe.to_objc results

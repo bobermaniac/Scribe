@@ -31,9 +31,9 @@
 
 @protocol SCMutableExampleDeliveredClass <SCExampleDeliveredClass, SCMutableExampleClass, SCTrackChanges>
 
-@property (nonatomic, strong, retain, readwrite) NSString * _Nullable description;
+@property (nonatomic, strong, retain, readwrite) NSString * _Nullable objectDescription;
 @property (nonatomic, strong, retain, readwrite) NSArray<NSString *> * _Nonnull components;
-- (void)setCounter:(int)counter error:(NSError * _Nullable __autoreleasing * _Nullable)error;
+@property (nonatomic, assign, readwrite) int counter;
 
 @end
 
