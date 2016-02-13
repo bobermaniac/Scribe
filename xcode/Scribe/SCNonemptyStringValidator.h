@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <SCValidator.h>
+#import "SCValidator.h"
 
 @interface SCNonemptyStringValidator : NSObject <SCValidator>
 

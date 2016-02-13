@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "SCExampleClass.h"
 
 @interface ScribeTests : XCTestCase
 
@@ -24,9 +25,17 @@
     [super tearDown];
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
+- (void)testExampleClass {
+    NSError *error = nil;
+    SCExampleClassBuilder *builder = [SCExampleClass builder];
+    builder.ID = @"SomeID";
+    builder.objectDescription = @"some description";
+    builder.counter = 5;
+    SCExampleClass *class = [builder buildWithError:&error];
+    SCMutableExampleClass *mutableClass = [class mutableCopy];
+    [mutableClass addComponent:@"Component 1"];
+    [mutableClass addComponent:@"Component 2"];
+    class = [[SCExampleClass alloc] initWithExampleClass:mutableClass];
 }
 
 - (void)testPerformanceExample {
