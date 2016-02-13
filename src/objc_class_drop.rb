@@ -109,9 +109,21 @@ module Liquid
       dump_protocols({ :track_changes => Scribe.default_interfaces['tracking']['protocol'] }, additional)
     end
 
+    def imports_str(values)
+      '' if values.nil?
+      '' unless values.any?
+      values.map { |i| "#import #{i}"}.join "\n"
+    end
+
     def imports
-      import = @objc_class.ancestor.root? ? Scribe.default_interfaces['foundation'] : "\"#{@objc_class.ancestor.name}.h\""
-      "#import #{import}\n#{@objc_class.imports}".strip
+      superclass_import = @objc_class.ancestor.root? ? Scribe.default_interfaces['foundation'] : "\"#{@objc_class.ancestor.name}.h\""
+      self.imports_str [ superclass_import ]
+    end
+
+    def impl_imports
+      validator_imports = self.all_properties.flat_map { |p| p.should %i[ implement validator ] }
+                              .select { |v| v }.map { |(cls, path)| path.nil? ? "\"#{cls}.h\"" : path }.uniq
+      self.imports_str validator_imports
     end
 
     def close_parent_ctor?

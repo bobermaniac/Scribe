@@ -16,7 +16,7 @@ scribe(implement validator=SCNonnullValidator)
 scribe(implement mutable, builder, archivable, tracking)
 @interface SCExampleDeliveredClass : SCExampleClass
 
-scribe(implement validator=SCValueCGRectValidator, validator=SCNonnullValidator)
+scribe(implement validator=SCNonnullValidator)
 @property (nonatomic, strong, readonly) NSValue *additionalValue;
 
 @end

@@ -1,13 +1,13 @@
 require_relative 'core'
 
 module Scribe
-  class ImportDefinition < NONTERMINAL_CLASS
+  class ImportDefinitionValue < NONTERMINAL_CLASS
     def value
       self.text_value
     end
 
     def to_s
-      "\n\t#{self.element_of_type(ImportDefinitionValue).value}"
+      "\n\t#{self.value}"
     end
   end
 end

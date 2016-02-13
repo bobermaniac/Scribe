@@ -8,7 +8,11 @@ grammar Scribe
     end
 
     rule import_definition
-        whitespace? import_keyword whitespace? ["<] file_path [">] whitespace? <ImportDefinition>
+        whitespace? import_keyword whitespace? import_definition_value whitespace? <ImportDefinition>
+    end
+
+    rule import_definition_value
+        '"' file_path '"' <ImportDefinitionValue>  / '<' file_path '>' <ImportDefinitionValue>
     end
 
     rule file_path
@@ -100,7 +104,11 @@ grammar Scribe
     end
 
     rule scribe_directive_parameter
-        equals_sign identifier <ScribeDirectiveParameter>
+        equals_sign identifier scribe_directive_parameter_path? <ScribeDirectiveParameter>
+    end
+
+    rule scribe_directive_parameter_path
+        in_keyword import_definition_value <ScribeDirectiveParameterPath>
     end
 
     rule scribe_default_marker
@@ -109,6 +117,10 @@ grammar Scribe
 
     rule default_keyword
         'default' <DefaultKeyword>
+    end
+
+    rule in_keyword
+        whitespace? 'in' whitespace?
     end
 
     rule left_parenthesis

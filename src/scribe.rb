@@ -6,6 +6,7 @@ module Scribe
     attr_accessor :option
     attr_accessor :parameter
     attr_accessor :scope
+    attr_accessor :path
 
     def parameter?
       not self.parameter.nil?
@@ -22,7 +23,7 @@ module Scribe
 
     def is(params)
       (verb, option, _) = params
-      (self.verb == verb and self.option == option) ? (self.parameter or true) : false
+      (self.verb == verb and self.option == option) ? [ self.parameter, self.path ] : false
     end
 
     def to_s
@@ -87,6 +88,7 @@ module Scribe
     Directive.new(scope, verb) do |obj|
       obj.option = directive.option.value.to_sym
       obj.parameter = directive.parameter.value unless directive.parameter.nil?
+      obj.path = directive.parameter.container unless directive.parameter.nil?
     end
   end
 

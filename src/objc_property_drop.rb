@@ -37,7 +37,7 @@ module Liquid
     end
 
     def validators
-      @objc_property.validators
+      @objc_property.validators.map { |v| v.first }
     end
 
     def field_name

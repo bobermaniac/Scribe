@@ -5,6 +5,8 @@
 #import "SCPropertyChangesTracker.h"
 #import "SCExampleClass.h"
 
+#import "SCNonnullValidator.h"
+
 @interface SCExampleDeliveredClass ()
 
 - (instancetype)initWithBuilder:(SCExampleDeliveredClassBuilder *)builder error:(NSError **)error;
@@ -112,7 +114,7 @@
 } 
 
 + (BOOL)_validateID:(NSString *)ID forObject:(SCExampleDeliveredClass *)object error:(NSError **)error {
-    for (id<SCValidator> *validator in @[ [[SCNonnullValidator alloc] init],  ]) {
+    for (NSObject<SCValidator> *validator in @[ [[SCNonnullValidator alloc] init],  ]) {
         if (![validator validateValue:ID ofProperty:@"ID" forObject:object error:error]) {
             return NO;
         }
@@ -121,7 +123,7 @@
 }
 
 + (BOOL)_validateCounter:(int)counter forObject:(SCExampleDeliveredClass *)object error:(NSError **)error {
-    for (id<SCValidator> *validator in @[ [[SCNonnullValidator alloc] init],  ]) {
+    for (NSObject<SCValidator> *validator in @[ [[SCNonnullValidator alloc] init],  ]) {
         if (![validator validateValue:@(counter) ofProperty:@"counter" forObject:object error:error]) {
             return NO;
         }
@@ -130,7 +132,7 @@
 }
 
 + (BOOL)_validateAdditionalValue:(NSValue *)additionalValue forObject:(SCExampleDeliveredClass *)object error:(NSError **)error {
-    for (id<SCValidator> *validator in @[ [[SCValueCGRectValidator alloc] init], [[SCNonnullValidator alloc] init],  ]) {
+    for (NSObject<SCValidator> *validator in @[ [[SCNonnullValidator alloc] init],  ]) {
         if (![validator validateValue:additionalValue ofProperty:@"additionalValue" forObject:object error:error]) {
             return NO;
         }
@@ -157,8 +159,8 @@
 
 @implementation SCMutableExampleDeliveredClass
 
-- (instancetype _Nonnull)initWithID:(NSString * _Nonnull)ID additionalValue:(NSValue * _Nullable)additionalValue  {
-    if (self = [super initWithID:ID additionalValue:additionalValue]) {
+- (instancetype)initWithID:(NSString * _Nonnull)ID additionalValue:(NSValue * _Nullable)additionalValue  error:(NSError **)error  {
+    if (self = [super initWithID:ID additionalValue:additionalValue  error:error]) {
         _tracker = [[SCPropertyChangesTracker alloc] init];
     }
 
@@ -166,7 +168,7 @@
     return self;
 }
 
-- (instancetype _Nonnull)initWithExampleClass:(SCExampleDeliveredClass * _Nonnull)exampleClass  {
+- (instancetype)initWithExampleClass:(SCExampleDeliveredClass * _Nonnull)exampleClass  {
     NSParameterAssert(exampleClass != nil);
 
     if (self = [super initWithExampleClass:exampleClass]) {
@@ -181,13 +183,14 @@
     return self;
 }
 
-- (NSArray<NSString *> * _Nonnull)changedKeys {
+- (NSArray<NSString *> *)changedKeys {
     return _tracker.changedKeys;
 }
 
 
 - (id)copyWithZone:(NSZone *)zone {
-    return [[self allocWithZone:zone] initWithExampleClass:exampleClass];
+    SCExampleDeliveredClass *exampleClass = self;
+    return [[SCExampleDeliveredClass allocWithZone:zone] initWithExampleClass:exampleClass];
 }
 
 @dynamic description;

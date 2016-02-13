@@ -5,6 +5,8 @@
 #import "SCPropertyChangesTracker.h"
 #import "SCExampleDeliveredClass.h"
 
+#import "SCNonnullValidator.h"
+
 @interface SCExampleClass ()
 
 - (instancetype)initWithBuilder:(SCExampleClassBuilder *)builder error:(NSError **)error;
@@ -109,7 +111,7 @@
 } 
 
 + (BOOL)_validateID:(NSString *)ID forObject:(SCExampleClass *)object error:(NSError **)error {
-    for (id<SCValidator> *validator in @[ [[SCNonnullValidator alloc] init],  ]) {
+    for (NSObject<SCValidator> *validator in @[ [[SCNonnullValidator alloc] init],  ]) {
         if (![validator validateValue:ID ofProperty:@"ID" forObject:object error:error]) {
             return NO;
         }
@@ -118,7 +120,7 @@
 }
 
 + (BOOL)_validateCounter:(int)counter forObject:(SCExampleClass *)object error:(NSError **)error {
-    for (id<SCValidator> *validator in @[ [[SCNonnullValidator alloc] init],  ]) {
+    for (NSObject<SCValidator> *validator in @[ [[SCNonnullValidator alloc] init],  ]) {
         if (![validator validateValue:@(counter) ofProperty:@"counter" forObject:object error:error]) {
             return NO;
         }
@@ -163,8 +165,8 @@
 
 @implementation SCMutableExampleClass
 
-- (instancetype _Nonnull)initWithID:(NSString * _Nonnull)ID  {
-    if (self = [super initWithID:ID]) {
+- (instancetype)initWithID:(NSString * _Nonnull)ID  error:(NSError **)error  {
+    if (self = [super initWithID:ID  error:error]) {
         _tracker = [[SCPropertyChangesTracker alloc] init];
     }
 
@@ -172,7 +174,7 @@
     return self;
 }
 
-- (instancetype _Nonnull)initWithExampleClass:(SCExampleClass * _Nonnull)exampleClass  {
+- (instancetype)initWithExampleClass:(SCExampleClass * _Nonnull)exampleClass  {
     NSParameterAssert(exampleClass != nil);
 
     if (self = [super initWithExampleClass:exampleClass]) {
@@ -187,13 +189,14 @@
     return self;
 }
 
-- (NSArray<NSString *> * _Nonnull)changedKeys {
+- (NSArray<NSString *> *)changedKeys {
     return _tracker.changedKeys;
 }
 
 
 - (id)copyWithZone:(NSZone *)zone {
-    return [[self allocWithZone:zone] initWithExampleClass:exampleClass];
+    SCExampleClass *exampleClass = self;
+    return [[SCExampleClass allocWithZone:zone] initWithExampleClass:exampleClass];
 }
 
 @dynamic description;

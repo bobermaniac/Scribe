@@ -5,6 +5,8 @@
 #import {{ interfaces['tracker']['in'] }}{% endif %}
 {% for other_class in other_classes %}#import "{{ other_class }}.h"
 {% endfor %}
+{{ class.impl_imports }}
+
 @interface {{ class.class_name }} ()
 
 {% if class.supports_builder? %}- (instancetype)initWithBuilder:({{ class.class_name }}Builder *)builder{% if class.constructor_could_fail? %} error:(NSError **)error{% endif %};
@@ -102,7 +104,7 @@
 } {% endif %}
 
 {% for property in class.all_properties %}{% if property.validate? %}+ (BOOL){{ property.validator_name }}:({{ property.type }}){{ property.name }} forObject:({{ class.class_name }} *)object error:(NSError **)error {
-    for (id<SCValidator> *validator in @[ {% for validator in property.validators %}[[{{ validator }} alloc] init], {% endfor %} ]) {
+    for (NSObject<SCValidator> *validator in @[ {% for validator in property.validators %}[[{{ validator }} alloc] init], {% endfor %} ]) {
         if (![validator validateValue:{{ property.name_boxed }} ofProperty:@"{{ property.name }}" forObject:object error:error]) {
             return NO;
         }
@@ -129,8 +131,8 @@
 
 @implementation {{ class.mutable_class_name }}
 {% if class.supports_track_changes? %}
-- (instancetype _Nonnull)init{{ class.prim_ctor_definition }} {
-    if (self = [super init{{ class.prim_ctor_call }}]) {
+- (instancetype)init{{ class.prim_ctor_definition }}{% if class.constructor_could_fail? %} error:(NSError **)error {% endif %} {
+    if (self = [super init{{ class.prim_ctor_call }} {% if class.constructor_could_fail? %} error:error{% endif %}]) {
         _tracker = [[{{ interfaces['tracker']['class'] }} alloc] init];
     }
 
@@ -139,7 +141,7 @@
     return self;
 }
 
-- (instancetype _Nonnull)init{{ class.copy_ctor_definition }} {
+- (instancetype)init{{ class.copy_ctor_definition }} {
     NSParameterAssert({{class.copy_ctor_param}} != nil);
 
     if (self = [super init{{ class.copy_ctor_call }}]) {
@@ -155,13 +157,14 @@
     return self;
 }
 
-- (NSArray<NSString *> * _Nonnull)changedKeys {
+- (NSArray<NSString *> *)changedKeys {
     return _tracker.changedKeys;
 }
 {% endif %}
 
 - (id)copyWithZone:(NSZone *)zone {
-    return [[self allocWithZone:zone] init{{ class.copy_ctor_call }}];
+    {{ class.class_name }} *{{ class.copy_ctor_param }} = self;
+    return [[{{ class.class_name }} allocWithZone:zone] init{{ class.copy_ctor_call }}];
 }
 
 {% for property in class.all_mutable_properties %}@dynamic {{ property.name }};
@@ -183,7 +186,7 @@
 
 {% if class.supports_builder? %}
 @implementation {{ class.class_name }}Builder
-{% if class.abstract? %}- (instancetype _Nonnull)init {
+{% if class.abstract? %}- (instancetype)init {
     if (self = [super init]) {
         if (self.class == [{{ class.class_name }}Builder class]) {
             NSAssert(NO, @"Unable to create builder instance for abstract class {{ class.class_name }}");
