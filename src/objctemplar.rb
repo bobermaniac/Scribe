@@ -52,18 +52,24 @@ if results.include? nil
   abort parser.failure_reason
 else
   Scribe.default_interfaces = {
-      tracking: 'SCTrackChanges',
-      validator: 'SCValidator',
+      'foundation' => '<Foundation/Foundation.h>',
+      'tracking' => { 'protocol' => 'SCTrackChanges', 'in' => '"SCTrackChanges.h"' },
+      'tracker' => { 'class' => 'SCPropertyChangesTracker', 'in' => '"SCPropertyChangesTracker.h"'},
+      'validator' => { 'protocol' => 'SCValidator', 'in' => '"SCValidator.h"'}
   }
   classes = Scribe.to_objc results
 
   for cls in classes
     other_classes = classes.reject { |c| c == cls }
     File.open("#{parameters[:destination]}/#{cls.name}.h", 'w') do |header|
-      header.write(header_template.render 'class' => cls, 'other_classes' => other_classes.map { |cls| cls.name } )
+      header.write(header_template.render 'class' => cls,
+                                          'other_classes' => other_classes.map { |cls| cls.name },
+                                          'interfaces' => Scribe.default_interfaces )
     end
     File.open("#{parameters[:destination]}/#{cls.name}.m", 'w') do |source|
-      source.write(source_template.render 'class' => cls, 'other_classes' => other_classes.map { |cls| cls.name })
+      source.write(source_template.render 'class' => cls,
+                                          'other_classes' => other_classes.map { |cls| cls.name },
+                                          'interfaces' => Scribe.default_interfaces)
     end
   end
 end

@@ -2,26 +2,49 @@
 
 #import "SCExampleClass.h"
 
+#import "SCTrackChanges.h"
+
 @class SCExampleClass;
+@class SCExampleDeliveredClassBuilder;
 
+@protocol SCExampleDeliveredClass <SCExampleClass, NSCopying, NSMutableCopying, NSCoding>
 
-@protocol SCExampleDeliveredClass <SCExampleClass, NSCopying>
-
+@property (nonatomic, strong, readonly, retain) NSValue * _Nullable additionalValue;
 
 @end
 
 @interface SCExampleDeliveredClass : SCExampleClass <SCExampleDeliveredClass> {
     @protected
+    NSValue * _Nullable _additionalValue;
  }
 
 // Primary constructor
-- (instancetype _Nullable)initWithID:(NSString * _Nonnull)ID error:(NSError * _Nullable __autoreleasing * _Nullable)error NS_DESIGNATED_INITIALIZER;
+- (instancetype _Nullable)initWithID:(NSString * _Nonnull)ID additionalValue:(NSValue * _Nullable)additionalValue error:(NSError * _Nullable __autoreleasing * _Nullable)error NS_DESIGNATED_INITIALIZER;
 
 // Copy constructor
 - (instancetype _Nonnull)initWithExampleClass:(SCExampleDeliveredClass * _Nonnull)exampleClass NS_DESIGNATED_INITIALIZER;
 
+// Builder support
++ (SCExampleDeliveredClassBuilder * _Nonnull)builder;
 
 @end
 
+@protocol SCMutableExampleDeliveredClass <SCExampleDeliveredClass, SCMutableExampleClass, SCTrackChanges>
 
+@property (nonatomic, strong, retain, readwrite) NSString * _Nullable description;
+@property (nonatomic, strong, retain, readwrite) NSArray<NSString *> * _Nonnull components;
+- (void)setCounter:(int)counter error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 
+@end
+
+@interface SCMutableExampleDeliveredClass : SCExampleDeliveredClass <SCMutableExampleDeliveredClass>
+
+@end
+
+@interface SCExampleDeliveredClassBuilder : SCExampleClassBuilder
+
+ @property (nonatomic, strong, readwrite, retain) NSValue * _Nullable additionalValue;
+
+- (SCExampleDeliveredClass * _Nullable)buildWithError:(NSError * _Nullable __autoreleasing * _Nullable)error;
+
+@end

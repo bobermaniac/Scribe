@@ -61,11 +61,13 @@ module Liquid
     end
 
     def constructor_could_fail?
-      @objc_class.properties.any? { |p| p.validate? and p.readonly? } or self.parent.constructor_could_fail?
+      self.parent.constructor_could_fail? unless self.parent.nil?
+      @objc_class.properties.any? { |p| p.validate? and p.readonly? }
     end
 
     def builder_could_fail?
-      @objc_class.properties.any? { |p| p.validate? } or self.parent.builder_could_fail?
+      self.parent.builder_could_fail? unless self.parent.nil?
+      @objc_class.properties.any? { |p| p.validate? }
     end
 
     def own_properties
@@ -104,11 +106,11 @@ module Liquid
       additional = [ class_name ]
       additional << parent.mutable_class_name if parent.supports_mutable_copy?
 
-      dump_protocols({ :track_changes => Scribe.default_interfaces[:tracking] }, additional)
+      dump_protocols({ :track_changes => Scribe.default_interfaces['tracking']['protocol'] }, additional)
     end
 
     def imports
-      import = @objc_class.ancestor.root? ? '<Foundation/Foundation.h>' : "\"#{@objc_class.ancestor.name}.h\""
+      import = @objc_class.ancestor.root? ? Scribe.default_interfaces['foundation'] : "\"#{@objc_class.ancestor.name}.h\""
       "#import #{import}\n#{@objc_class.imports}".strip
     end
 

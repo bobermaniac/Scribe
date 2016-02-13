@@ -131,11 +131,11 @@
 		E7C110E51C6E64DB008ADAE3 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				E7C110EA1C6E8C21008ADAE3 /* SCExampleDeliveredClass.h */,
-				E7C110EB1C6E8C21008ADAE3 /* SCExampleDeliveredClass.m */,
+				E7C110E61C6E6530008ADAE3 /* SCExampleClass.scribe.h */,
 				E7C110E71C6E67CA008ADAE3 /* SCExampleClass.h */,
 				E7C110E81C6E67CA008ADAE3 /* SCExampleClass.m */,
-				E7C110E61C6E6530008ADAE3 /* SCExampleClass.scribe.h */,
+				E7C110EA1C6E8C21008ADAE3 /* SCExampleDeliveredClass.h */,
+				E7C110EB1C6E8C21008ADAE3 /* SCExampleDeliveredClass.m */,
 			);
 			name = Example;
 			sourceTree = "<group>";
