@@ -12,7 +12,15 @@ module Objc
     def initialize(type_string, nullability)
       @type_string = type_string.strip
       @nullability = nullability
+      @base_type = @type_string
+      @generic_subtypes = nil
+
+      yield(self) if block_given?
     end
+
+    attr_accessor :nullability
+    attr_accessor :base_type
+    attr_accessor :generic_subtypes
 
     def qualified_string
       return self.unqualified_string if @nullability.nil?
@@ -27,6 +35,28 @@ module Objc
       self.class.reference_type? @type_string
     end
 
+    def collection_type?
+      collection_types = [ Type.array_types, Type.dictionary_types, Type.set_types ].flat_map { |s| s }
+      collection_types.include? @base_type
+    end
+
+    def array_type?
+      Type.array_types.include? @base_type
+    end
+
+    def dictionary_type?
+      Type.dictionary_types.include? @base_type
+    end
+
+    def set_type?
+      Type.set_types.include? @base_type
+    end
+
+    def to_s
+      return @base_type if @generic_subtypes.nil?
+      "#{@base_type} of #{@generic_subtypes.join ', '}"
+    end
+
     def self.reference_type?(type)
       return true if type[-1, 1] == '*'
       [ self.reference_types, self.block_types ].any? { |t| t.include? @type_string }
@@ -38,7 +68,7 @@ module Objc
     end
 
     def self.array_types
-      %w[ NSArray NSMutableArray ]
+      %w[ NSArray\ * NSMutableArray\ * ]
     end
 
     def self.reference_types
@@ -50,19 +80,19 @@ module Objc
     end
 
     def self.boxed_types
-      %w[ NSNumber NSValue ]
+      %w[ NSNumber\ * NSValue\ * ]
     end
 
     def self.value_types
-      %w[ NSInteger, NSUInteger, CGRect, CGSize, CGFloat ]
+      %w[ NSInteger NSUInteger CGRect CGSize CGFloat ]
     end
 
     def self.dictionary_types
-      %w[ NSDictionary, NSMutableDictionary ]
+      %w[ NSDictionary\ * NSMutableDictionary\ * ]
     end
 
     def self.set_types
-      %w[ NSSet, NSMutableSet ]
+      %w[ NSSet\ * NSMutableSet\ * ]
     end
   end
 end

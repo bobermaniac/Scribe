@@ -8,6 +8,10 @@ module Liquid
       @objc_property.type.unqualified_string
     end
 
+    def subsequent_generic_types
+      @objc_property.type.generic_subtypes.map { |t| t.qualified_string } or %q[ id\ _Nonnull ]
+    end
+
     def type_qualified
       @objc_property.type.qualified_string
     end
@@ -18,6 +22,16 @@ module Liquid
 
     def name
       @objc_property.name
+    end
+
+    def element_name
+      name = @objc_property.should(%i[ implement collection ]).reject{ |(c, _)| c.nil? }.map{ |(c, _)| c }.first
+      return name unless name.nil?
+      "#{self.name}Object"
+    end
+
+    def element_name_capitalized
+      @objc_property.name.upcase_1l
     end
 
     def copy_on_assign?
@@ -38,6 +52,22 @@ module Liquid
 
     def validators
       @objc_property.validators.map { |v| v.first }
+    end
+
+    def collection?
+      @objc_property.type.collection_type? and @objc_property.should %i[ implement collection ]
+    end
+
+    def array?
+      @objc_property.type.array_type?
+    end
+
+    def dictionary?
+      @objc_property.type.dictionary_type?
+    end
+
+    def set?
+      @objc_property.type.set_type?
     end
 
     def field_name

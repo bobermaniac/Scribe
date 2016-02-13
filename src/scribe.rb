@@ -1,4 +1,5 @@
 require_relative 'objc_class'
+require_relative 'objc_type'
 
 module Scribe
   class Directive
@@ -59,9 +60,17 @@ module Scribe
     Objc::Property.new do |a_property|
       a_property.scribes = self.parse_scribes({ global: context[:global_scribes], class: context[:class_scribes], property: property_definition.scribes  })
 
-      a_property.type = property_definition.type.to_s
+      a_property.type = self.parse_type property_definition.type
       a_property.options = property_definition.options.items.map { |option| option.option.value.to_sym }
       a_property.name = property_definition.identifier.value
+    end
+  end
+
+  def self.parse_type(type)
+    Objc::Type.new(type.to_s, nil) do |t|
+      t.base_type = "#{type.base_type.to_s} #{type.ref? ? '*' : ''}".strip
+      t.generic_subtypes = type.generic_type_params.types.map { |t| self.parse_type t } if type.generic?
+      t
     end
   end
 
@@ -140,7 +149,6 @@ module Objc
     def should(params)
       result = self.scribes.map{ |s| s.is params }.select { |r| r }
       result = false unless result.any?
-      puts "#{self.class} should #{params}: #{result}"
       result
     end
   end

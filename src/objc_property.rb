@@ -5,6 +5,7 @@ module Objc
     def initialize
       @options = []
       @type = nil
+      @builder_type = nil
       yield(self) if block_given?
     end
 
@@ -15,12 +16,16 @@ module Objc
     end
 
     def type
-      return @type if @type.is_a? Objc::Type
-      Objc::Type.new(@type, self.extract_option(%i[ nullable nonnull ]))
+      @type.nullability = self.extract_option(%i[ nullable nonnull ]) unless @type.nullability
+      @type
     end
 
     def builder_type
-      Objc::Type.new(self.type.unqualified_string, self.extract_option(%i[ nullable nonnull ]).nil? ? nil : :nullable)
+      if @builder_type.nil?
+        @builder_type = @type.clone
+        @builder_type.nullability = self.extract_option(%i[ nullable nonnull ]).nil? ? nil : :nullable
+      end
+      @builder_type
     end
 
     def options
@@ -32,7 +37,7 @@ module Objc
     end
 
     def reference_type?
-      Objc::Type.reference_type? @type
+      @type.reference_type?
     end
 
     def validate?

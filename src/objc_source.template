@@ -181,6 +181,32 @@
     }
 }
 
+{% if property.collection? %}
+{% if property.array? %}
+- (NSMutableArray *)_mutable{{ property.name | capitalize }} {
+    if ([{{ property.field_name }} isKindOfClass:[NSMutableArray class]]) {
+        return (NSMutableArray *){{ property.field_name }};
+    }
+    self.{{ property.name }} = [NSMutableArray arrayWithArray:{{ property.field_name }}];
+    return [self _mutable{{ property.name | capitalize }}];
+}
+
+- (void)add{{ property.element_name | capitalize }}:({{ property.subsequent_generic_types[0] }}){{ property.element_name }} {
+    [[self _mutable{{ property.name | capitalize }}] addObject:{{ property.element_name }}];
+}
+
+- (void)insert{{ property.element_name | capitalize }}:({{ property.subsequent_generic_types[0] }}){{ property.element_name }} atIndex:(NSUInteger)index {
+    [[self _mutable{{ property.name | capitalize }}] insertObject:{{ property.element_name }} atIndex:index];
+}
+
+- (void)remove{{ property.element_name | capitalize  }}:({{ property.subsequent_generic_types[0] }}){{ property.element_name }} {
+    [[self _mutable{{ property.name | capitalize }}] removeObject:{{ property.element_name }}];
+}
+{% elsif property.dictionary? %}
+{% elsif property.set? %}
+{% endif %}
+{% endif %}
+
 {% endfor %}@end
 {% endif %}
 

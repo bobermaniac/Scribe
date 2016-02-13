@@ -202,6 +202,8 @@
     }
 }
 
+
+
 @dynamic components;
 
 - (void)setComponents:(NSArray<NSString *> * _Nonnull)components {
@@ -215,6 +217,30 @@
     }
 }
 
+
+
+- (NSMutableArray *)_mutableComponents {
+    if ([_components isKindOfClass:[NSMutableArray class]]) {
+        return (NSMutableArray *)_components;
+    }
+    self.components = [NSMutableArray arrayWithArray:_components];
+    return [self _mutableComponents];
+}
+
+- (void)addComponent:(NSString *)component {
+    [[self _mutableComponents] addObject:component];
+}
+
+- (void)insertComponent:(NSString *)component atIndex:(NSUInteger)index {
+    [[self _mutableComponents] insertObject:component atIndex:index];
+}
+
+- (void)removeComponent:(NSString *)component {
+    [[self _mutableComponents] removeObject:component];
+}
+
+
+
 @dynamic counter;
 
 - (void)setCounter:(int)counter {
@@ -227,6 +253,8 @@
         [_tracker property:@"counter" afterChangeValue:@(_counter)];
     }
 }
+
+
 
 @end
 

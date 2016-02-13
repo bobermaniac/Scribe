@@ -24,10 +24,8 @@
     int _counter;
  }
 
-// Primary constructor
 - (instancetype _Nullable)initWithID:(NSString * _Nonnull)ID error:(NSError * _Nullable __autoreleasing * _Nullable)error NS_DESIGNATED_INITIALIZER;
 
-// Copy constructor
 - (instancetype _Nonnull)initWithExampleClass:(SCExampleClass * _Nonnull)exampleClass NS_DESIGNATED_INITIALIZER;
 
 // Builder support
@@ -39,6 +37,12 @@
 
 @property (nonatomic, strong, retain, readwrite) NSString * _Nullable objectDescription;
 @property (nonatomic, strong, retain, readwrite) NSArray<NSString *> * _Nonnull components;
+
+- (void)addComponent:(NSString * _Nonnull)component;
+- (void)insertComponent:(NSString * _Nonnull)component atIndex:(NSUInteger)index;
+- (void)removeComponent:(NSString * _Nonnull)component;
+
+
 @property (nonatomic, assign, readwrite) int counter;
 
 @end
