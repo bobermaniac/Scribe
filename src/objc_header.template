@@ -36,7 +36,10 @@
 - (void)insert{{ property.element_name | capitalize }}:({{ property.subsequent_generic_types[0] }} _Nonnull){{ property.element_name }} atIndex:(NSUInteger)index;
 - (void)remove{{ property.element_name | capitalize  }}:({{ property.subsequent_generic_types[0] }} _Nonnull){{ property.element_name }};
 {% elsif property.dictionary? %}
+- (void)set{{ property.element_name | capitalize }}:({{ property.subsequent_generic_types[1] }} _Nonnull){{ property.element_name }} forKey:({{ property.subsequent_generic_types[0] }} _Nonnull)key;
+- (void)remove{{ property.element_name | capitalize }}ForKey:({{ property.subsequent_generic_types[0] }} _Nonnull)key;
 {% elsif property.set? %}
+// Set is not supported yet
 {% endif %}
 {% endif %}
 {% endif %}{% endfor %}

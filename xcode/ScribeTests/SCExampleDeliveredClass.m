@@ -43,6 +43,7 @@
 
     if (self = [super initWithExampleClass:exampleClass]) { 
         _additionalValue = exampleClass->_additionalValue;
+        _tableOfNumbers = exampleClass->_tableOfNumbers;
     }
 
     NSAssert(self != nil, @"Internal error: object was not created");
@@ -61,6 +62,7 @@
         _objectDescription = [decoder decodeObjectForKey:@"objectDescription"];
         _components = [decoder decodeObjectForKey:@"components"];
         _counter = [decoder decodeIntForKey:@"counter"];
+        _tableOfNumbers = [decoder decodeObjectForKey:@"tableOfNumbers"];
         
     }
     return self;
@@ -72,6 +74,7 @@
     [encoder encodeObject:_components forKey:@"components"];
     [encoder encodeInt:_counter forKey:@"counter"];
     [encoder encodeObject:_additionalValue forKey:@"additionalValue"];
+    [encoder encodeObject:_tableOfNumbers forKey:@"tableOfNumbers"];
     
 }
 
@@ -86,6 +89,7 @@
         _objectDescription = builder.objectDescription;
         _components = builder.components;
         _counter = builder.counter;
+        _tableOfNumbers = builder.tableOfNumbers;
     }
 
     NSAssert(self != nil, @"Internal error: object was not created");
@@ -137,6 +141,12 @@
 
 - (NSValue * _Nullable)additionalValue {
     return _additionalValue;
+}
+
+@dynamic tableOfNumbers;
+
+- (NSDictionary<NSString *, NSNumber *> * _Nullable)tableOfNumbers {
+    return _tableOfNumbers;
 }
 
 @end
@@ -251,6 +261,39 @@
 
 
 
+@dynamic tableOfNumbers;
+
+- (void)setTableOfNumbers:(NSDictionary<NSString *, NSNumber *> * _Nullable)tableOfNumbers {
+    
+    if (![_tableOfNumbers isEqual:tableOfNumbers]) {
+        [_tracker property:@"tableOfNumbers" beforeChangeValue:_tableOfNumbers];
+        [self willChangeValueForKey:@"tableOfNumbers"];
+        _tableOfNumbers = tableOfNumbers;
+        [self didChangeValueForKey:@"tableOfNumbers"];
+        [_tracker property:@"tableOfNumbers" afterChangeValue:_tableOfNumbers];
+    }
+}
+
+
+
+- (NSMutableDictionary *)_mutableTableofnumbers {
+    if ([_tableOfNumbers isKindOfClass:[NSMutableDictionary class]]) {
+        return (NSMutableDictionary *)_tableOfNumbers;
+    }
+    self.tableOfNumbers = [NSMutableDictionary dictionaryWithDictionary:_tableOfNumbers];
+    return [self _mutableTableofnumbers];
+}
+
+- (void)setNumber:(NSNumber *)number forKey:(NSString *)key {
+    [[self _mutableTableofnumbers] setObject:number forKey:key];
+}
+
+- (void)removeNumberForKey:(NSString *)key {
+    [[self _mutableTableofnumbers] removeObjectForKey:key];
+}
+
+
+
 @end
 
 
@@ -258,6 +301,8 @@
 @implementation SCExampleDeliveredClassBuilder
 
 @synthesize additionalValue = _additionalValue;
+
+@synthesize tableOfNumbers = _tableOfNumbers;
 
 - (SCExampleDeliveredClass *)buildWithError:(NSError **)error {
     return [[SCExampleDeliveredClass alloc] initWithBuilder:self error:error];

@@ -20,4 +20,7 @@ scribe(implement mutable, builder, archivable, tracking)
 scribe(implement validator=SCNonnullValidator)
 @property (nonatomic, strong, readonly) NSValue *additionalValue;
 
+scribe(implement collection=number)
+@property (nonatomic, strong) NSDictionary<NSString *, NSNumber *> *tableOfNumbers;
+
 @end

@@ -10,12 +10,14 @@
 @protocol SCExampleDeliveredClass <SCExampleClass, NSCopying, NSMutableCopying, NSCoding>
 
 @property (nonatomic, strong, readonly, retain) NSValue * _Nullable additionalValue;
+@property (nonatomic, strong, retain, readonly) NSDictionary<NSString *, NSNumber *> * _Nullable tableOfNumbers;
 
 @end
 
 @interface SCExampleDeliveredClass : SCExampleClass <SCExampleDeliveredClass> {
     @protected
     NSValue * _Nullable _additionalValue;
+    NSDictionary<NSString *, NSNumber *> * _Nullable _tableOfNumbers;
  }
 
 - (instancetype _Nullable)initWithID:(NSString * _Nonnull)ID additionalValue:(NSValue * _Nullable)additionalValue error:(NSError * _Nullable __autoreleasing * _Nullable)error NS_DESIGNATED_INITIALIZER;
@@ -38,6 +40,12 @@
 
 
 @property (nonatomic, assign, readwrite) int counter;
+@property (nonatomic, strong, retain, readwrite) NSDictionary<NSString *, NSNumber *> * _Nullable tableOfNumbers;
+
+- (void)setNumber:(NSNumber * _Nonnull)number forKey:(NSString * _Nonnull)key;
+- (void)removeNumberForKey:(NSString * _Nonnull)key;
+
+
 
 @end
 
@@ -48,6 +56,7 @@
 @interface SCExampleDeliveredClassBuilder : SCExampleClassBuilder
 
  @property (nonatomic, strong, readwrite, retain) NSValue * _Nullable additionalValue;
+ @property (nonatomic, strong, retain, readwrite) NSDictionary<NSString *, NSNumber *> * _Nullable tableOfNumbers;
 
 - (SCExampleDeliveredClass * _Nullable)buildWithError:(NSError * _Nullable __autoreleasing * _Nullable)error;
 
