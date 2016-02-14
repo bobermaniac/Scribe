@@ -32,36 +32,18 @@
 @protocol SCMutableExampleDeliveredClass <SCExampleDeliveredClass, SCMutableExampleClass, SCTrackChanges>
 
 
-
 @property (nonatomic, strong, retain, readwrite) NSString * _Nullable objectDescription;
 
-
-
-
 - (void)setComponents:(NSArray<NSString *> * _Nonnull)components error:(NSError * _Nullable __autoreleasing * _Nullable)error;
-
-
-
 - (void)addComponent:(NSString * _Nonnull)component error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 - (void)insertComponent:(NSString * _Nonnull)component atIndex:(NSUInteger)index error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 - (void)removeComponent:(NSString * _Nonnull)component error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 
-
-
-
 @property (nonatomic, assign, readwrite) int counter;
 
-
-
-
 - (void)setTableOfNumbers:(NSDictionary<NSString *, NSNumber *> * _Nullable)tableOfNumbers error:(NSError * _Nullable __autoreleasing * _Nullable)error;
-
-
-
 - (void)setNumber:(NSNumber * _Nonnull)number forKey:(NSString * _Nonnull)key error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 - (void)removeNumberForKey:(NSString * _Nonnull)key error:(NSError * _Nullable __autoreleasing * _Nullable)error;
-
-
 
 @end
 
