@@ -183,37 +183,47 @@
 
 {% if property.collection? %}
 {% if property.array? %}
-- (void)add{{ property.element_name | capitalize }}:({{ property.subsequent_generic_types[0] }}){{ property.element_name }}{% if property.validate? %} {{ error_definition }}{% endif %} {
+- (void)add{{ property.element_name_capitalized }}:({{ property.subsequent_generic_types[0] }}){{ property.element_name }}{% if property.validate? %} {{ error_definition }}{% endif %} {
     NSMutableArray *{{ property.name }} = [self.{{ property.name }} mutableCopy] ?: [NSMutableArray array];
     [{{ property.name }} addObject:{{ property.element_name }}];
     [self {{ property.setter_name }}:{{ property.name }}{% if property.validate? %} error:error{% endif %}];
 }
 
-- (void)insert{{ property.element_name | capitalize }}:({{ property.subsequent_generic_types[0] }}){{ property.element_name }} atIndex:(NSUInteger)index{% if property.validate? %} {{ error_definition }}{% endif %} {
+- (void)insert{{ property.element_name_capitalized }}:({{ property.subsequent_generic_types[0] }}){{ property.element_name }} atIndex:(NSUInteger)index{% if property.validate? %} {{ error_definition }}{% endif %} {
     NSMutableArray *{{ property.name }} = [self.{{ property.name }} mutableCopy] ?: [NSMutableArray array];
     [{{ property.name }} insertObject:{{ property.element_name }} atIndex:index];
     [self {{ property.setter_name }}:{{ property.name }}{% if property.validate? %} error:error{% endif %}];
 }
 
-- (void)remove{{ property.element_name | capitalize  }}:({{ property.subsequent_generic_types[0] }}){{ property.element_name }}{% if property.validate? %} {{ error_definition }}{% endif %} {
+- (void)remove{{ property.element_name_capitalized  }}:({{ property.subsequent_generic_types[0] }}){{ property.element_name }}{% if property.validate? %} {{ error_definition }}{% endif %} {
     NSMutableArray *{{ property.name }} = [self.{{ property.name }} mutableCopy];
     [{{ property.name }} removeObject:{{ property.element_name }}];
     [self {{ property.setter_name }}:{{ property.name }}{% if property.validate? %} error:error{% endif %}];
 }
 {% elsif property.dictionary? %}
-- (void)set{{ property.element_name | capitalize }}:({{ property.subsequent_generic_types[1] }}){{ property.element_name }} forKey:({{ property.subsequent_generic_types[0] }})key{% if property.validate? %} {{ error_definition }}{% endif %} {
+- (void)set{{ property.element_name_capitalized }}:({{ property.subsequent_generic_types[1] }}){{ property.element_name }} forKey:({{ property.subsequent_generic_types[0] }})key{% if property.validate? %} {{ error_definition }}{% endif %} {
     NSMutableDictionary *{{ property.name }} = [self.{{ property.name }} mutableCopy] ?: [NSMutableDictionary dictionary];
     [{{ property.name }} setObject:{{ property.element_name }} forKey:key];
     [self {{ property.setter_name }}:{{ property.name }}{% if property.validate? %} error:error{% endif %}];
 }
 
-- (void)remove{{ property.element_name | capitalize }}ForKey:({{ property.subsequent_generic_types[0] }})key{% if property.validate? %} {{ error_definition }}{% endif %} {
+- (void)remove{{ property.element_name_capitalized }}ForKey:({{ property.subsequent_generic_types[0] }})key{% if property.validate? %} {{ error_definition }}{% endif %} {
     NSMutableDictionary *{{ property.name }} = [self.{{ property.name }} mutableCopy];
     [{{ property.name }} removeObjectForKey:key];
     [self {{ property.setter_name }}:{{ property.name }}{% if property.validate? %} error:error{% endif %}];
 }
 {% elsif property.set? %}
-// Set accessors is not implemented yet
+- (void)add{{ property.element_name_capitalized }}:({{ property.subsequent_generic_types[0] }}){{ property.element_name }}{% if property.validate? %} {{ error_definition }}{% endif %} {
+    NSMutableSet *{{ property.name }} = [self.{{ property.name }} mutableCopy] ?: [NSMutableSet set];
+    [{{ property.name }} addObject:{{ property.element_name }}];
+    [self {{ property.setter_name }}:{{ property.name }}{% if property.validate? %} error:error{% endif %}];
+}
+
+- (void)remove{{ property.element_name_capitalized  }}:({{ property.subsequent_generic_types[0] }}){{ property.element_name }}{% if property.validate? %} {{ error_definition }}{% endif %} {
+    NSMutableSet *{{ property.name }} = [self.{{ property.name }} mutableCopy];
+    [{{ property.name }} removeObject:{{ property.element_name }}];
+    [self {{ property.setter_name }}:{{ property.name }}{% if property.validate? %} error:error{% endif %}];
+}
 {% endif %}
 {% endif %}
 

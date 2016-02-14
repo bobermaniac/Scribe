@@ -4,6 +4,7 @@
 #import "SCValidator.h"
 #import "SCPropertyChangesTracker.h"
 #import "SCExampleClass.h"
+#import "SCExampleSetContainer.h"
 
 #import "SCNonemptyStringValidator.h"
 #import "SCExampleArrayValidator.h"

@@ -9,7 +9,8 @@ module Liquid
     end
 
     def subsequent_generic_types
-      @objc_property.type.generic_subtypes.map { |t| t.qualified_string } or %q[ id\ _Nonnull ]
+      return %w[ id id ] unless @objc_property.type.generic_subtypes
+      @objc_property.type.generic_subtypes.map { |t| t.qualified_string } or %w[ id id ]
     end
 
     def type_qualified
@@ -31,7 +32,7 @@ module Liquid
     end
 
     def element_name_capitalized
-      @objc_property.name.upcase_1l
+      self.element_name.upcase_1l
     end
 
     def copy_on_assign?

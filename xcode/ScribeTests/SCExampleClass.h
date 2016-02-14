@@ -5,6 +5,7 @@
 #import "SCTrackChanges.h"
 
 @class SCExampleDeliveredClass;
+@class SCExampleSetContainer;
 @class SCExampleClassBuilder;
 
 @protocol SCExampleClass <NSObject, NSCopying, NSMutableCopying, NSCoding>

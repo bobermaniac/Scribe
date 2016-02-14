@@ -32,13 +32,13 @@
 {% for property in class.all_mutable_properties %}
 {% if property.validate? %}- (void){{ property.setter_name }}:({{ property.type_qualified }}){{ property.name }} error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 {% else %}@property ({{property.attributes}}) {{ property.type_qualified }} {{ property.name }};
-{% endif %}{% if property.collection? %}{% if property.array? %}- (void)add{{ property.element_name | capitalize }}:({{ property.subsequent_generic_types[0] }} _Nonnull){{ property.element_name }}{% if property.validate? %} {{ error_definition }}{% endif %};
-- (void)insert{{ property.element_name | capitalize }}:({{ property.subsequent_generic_types[0] }} _Nonnull){{ property.element_name }} atIndex:(NSUInteger)index{% if property.validate? %} {{ error_definition }}{% endif %};
-- (void)remove{{ property.element_name | capitalize  }}:({{ property.subsequent_generic_types[0] }} _Nonnull){{ property.element_name }}{% if property.validate? %} {{ error_definition }}{% endif %};
-{% elsif property.dictionary? %}- (void)set{{ property.element_name | capitalize }}:({{ property.subsequent_generic_types[1] }} _Nonnull){{ property.element_name }} forKey:({{ property.subsequent_generic_types[0] }} _Nonnull)key{% if property.validate? %} {{ error_definition }}{% endif %};
-- (void)remove{{ property.element_name | capitalize }}ForKey:({{ property.subsequent_generic_types[0] }} _Nonnull)key{% if property.validate? %} {{ error_definition }}{% endif %};
-{% elsif property.set? %}
-// Set is not supported yet
+{% endif %}{% if property.collection? %}{% if property.array? %}- (void)add{{ property.element_name_capitalized }}:({{ property.subsequent_generic_types[0] }} _Nonnull){{ property.element_name }}{% if property.validate? %} {{ error_definition }}{% endif %};
+- (void)insert{{ property.element_name_capitalized }}:({{ property.subsequent_generic_types[0] }} _Nonnull){{ property.element_name }} atIndex:(NSUInteger)index{% if property.validate? %} {{ error_definition }}{% endif %};
+- (void)remove{{ property.element_name_capitalized  }}:({{ property.subsequent_generic_types[0] }} _Nonnull){{ property.element_name }}{% if property.validate? %} {{ error_definition }}{% endif %};
+{% elsif property.dictionary? %}- (void)set{{ property.element_name_capitalized }}:({{ property.subsequent_generic_types[1] }} _Nonnull){{ property.element_name }} forKey:({{ property.subsequent_generic_types[0] }} _Nonnull)key{% if property.validate? %} {{ error_definition }}{% endif %};
+- (void)remove{{ property.element_name_capitalized }}ForKey:({{ property.subsequent_generic_types[0] }} _Nonnull)key{% if property.validate? %} {{ error_definition }}{% endif %};
+{% elsif property.set? %}- (void)add{{ property.element_name_capitalized }}:({{ property.subsequent_generic_types[0] }} _Nonnull){{ property.element_name }}{% if property.validate? %} {{ error_definition }}{% endif %};
+- (void)remove{{ property.element_name_capitalized }}:({{ property.subsequent_generic_types[0] }} _Nonnull){{ property.element_name }}{% if property.validate? %} {{ error_definition }}{% endif %};
 {% endif %}{% endif %}{% endfor %}
 @end
 

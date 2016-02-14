@@ -22,6 +22,7 @@
 		E7C110F11C6FC091008ADAE3 /* SCNonemptyStringValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = E7C110EF1C6FC091008ADAE3 /* SCNonemptyStringValidator.h */; };
 		E7C110F21C6FC091008ADAE3 /* SCNonemptyStringValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C110F01C6FC091008ADAE3 /* SCNonemptyStringValidator.m */; };
 		E7C111061C70E971008ADAE3 /* SCExampleArrayValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C111051C70E971008ADAE3 /* SCExampleArrayValidator.m */; };
+		E7C111091C711979008ADAE3 /* SCExampleSetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C111081C711979008ADAE3 /* SCExampleSetContainer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		E7C110F01C6FC091008ADAE3 /* SCNonemptyStringValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNonemptyStringValidator.m; sourceTree = "<group>"; };
 		E7C111041C70E971008ADAE3 /* SCExampleArrayValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCExampleArrayValidator.h; sourceTree = "<group>"; };
 		E7C111051C70E971008ADAE3 /* SCExampleArrayValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCExampleArrayValidator.m; sourceTree = "<group>"; };
+		E7C111071C711979008ADAE3 /* SCExampleSetContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCExampleSetContainer.h; sourceTree = "<group>"; };
+		E7C111081C711979008ADAE3 /* SCExampleSetContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCExampleSetContainer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +153,8 @@
 				E7C110EB1C6E8C21008ADAE3 /* SCExampleDeliveredClass.m */,
 				E7C111041C70E971008ADAE3 /* SCExampleArrayValidator.h */,
 				E7C111051C70E971008ADAE3 /* SCExampleArrayValidator.m */,
+				E7C111071C711979008ADAE3 /* SCExampleSetContainer.h */,
+				E7C111081C711979008ADAE3 /* SCExampleSetContainer.m */,
 			);
 			name = Example;
 			sourceTree = "<group>";
@@ -277,6 +282,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7C111091C711979008ADAE3 /* SCExampleSetContainer.m in Sources */,
 				E7C110B11C67E730008ADAE3 /* ScribeTests.m in Sources */,
 				E7C110EC1C6E8C21008ADAE3 /* SCExampleDeliveredClass.m in Sources */,
 				E7C110E91C6E67CA008ADAE3 /* SCExampleClass.m in Sources */,

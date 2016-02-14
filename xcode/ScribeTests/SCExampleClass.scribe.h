@@ -24,3 +24,11 @@ scribe(implement collection=number, validator=SCExampleArrayValidator)
 @property (nonatomic, strong) NSDictionary<NSString *, NSNumber *> *tableOfNumbers;
 
 @end
+
+scribe(implement mutable)
+@interface SCExampleSetContainer : NSObject
+
+scribe(implement collection, validator=SCExampleArrayValidator)
+@property (nonatomic, strong) NSSet *set;
+
+@end
