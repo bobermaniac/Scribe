@@ -6,11 +6,13 @@
 #import "SCExampleDeliveredClass.h"
 
 #import "SCNonemptyStringValidator.h"
+#import "SCExampleArrayValidator.h"
 
 @interface SCExampleClass ()
 
 - (instancetype)initWithBuilder:(SCExampleClassBuilder *)builder error:(NSError **)error;
 + (BOOL)_validateID:(NSString *)ID forObject:(SCExampleClass *)object error:(NSError **)error;
++ (BOOL)_validateComponents:(NSArray<NSString *> *)components forObject:(SCExampleClass *)object error:(NSError **)error;
 
 @end
 
@@ -118,6 +120,15 @@
     return YES;
 }
 
++ (BOOL)_validateComponents:(NSArray<NSString *> *)components forObject:(SCExampleClass *)object error:(NSError **)error {
+    for (NSObject<SCValidator> *validator in @[ [[SCExampleArrayValidator alloc] init],  ]) {
+        if (![validator validateValue:components ofProperty:@"components" forObject:object error:error]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
 
 
 @dynamic ID;
@@ -206,7 +217,8 @@
 
 @dynamic components;
 
-- (void)setComponents:(NSArray<NSString *> * _Nonnull)components {
+- (void)setComponents:(NSArray<NSString *> * _Nonnull)components error:(NSError **)error{
+    if (![SCExampleClass _validateComponents:components forObject:self error:error]) { return; }
     
     if (![_components isEqual:components]) {
         [_tracker property:@"components" beforeChangeValue:_components];
@@ -219,24 +231,22 @@
 
 
 
-- (NSMutableArray *)_mutableComponents {
-    if ([_components isKindOfClass:[NSMutableArray class]]) {
-        return (NSMutableArray *)_components;
-    }
-    self.components = [NSMutableArray arrayWithArray:_components];
-    return [self _mutableComponents];
+- (void)addComponent:(NSString *)component error:(NSError **)error {
+    NSMutableArray *components = [self.components mutableCopy] ?: [NSMutableArray array];
+    [components addObject:component];
+    [self setComponents:components error:error];
 }
 
-- (void)addComponent:(NSString *)component {
-    [[self _mutableComponents] addObject:component];
+- (void)insertComponent:(NSString *)component atIndex:(NSUInteger)index error:(NSError **)error {
+    NSMutableArray *components = [self.components mutableCopy] ?: [NSMutableArray array];
+    [components insertObject:component atIndex:index];
+    [self setComponents:components error:error];
 }
 
-- (void)insertComponent:(NSString *)component atIndex:(NSUInteger)index {
-    [[self _mutableComponents] insertObject:component atIndex:index];
-}
-
-- (void)removeComponent:(NSString *)component {
-    [[self _mutableComponents] removeObject:component];
+- (void)removeComponent:(NSString *)component error:(NSError **)error {
+    NSMutableArray *components = [self.components mutableCopy];
+    [components removeObject:component];
+    [self setComponents:components error:error];
 }
 
 

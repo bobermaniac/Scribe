@@ -21,6 +21,7 @@
 		E7C110EE1C6FBB60008ADAE3 /* SCTracker.h in Headers */ = {isa = PBXBuildFile; fileRef = E7C110ED1C6FBB60008ADAE3 /* SCTracker.h */; };
 		E7C110F11C6FC091008ADAE3 /* SCNonemptyStringValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = E7C110EF1C6FC091008ADAE3 /* SCNonemptyStringValidator.h */; };
 		E7C110F21C6FC091008ADAE3 /* SCNonemptyStringValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C110F01C6FC091008ADAE3 /* SCNonemptyStringValidator.m */; };
+		E7C111061C70E971008ADAE3 /* SCExampleArrayValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C111051C70E971008ADAE3 /* SCExampleArrayValidator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,8 @@
 		E7C110ED1C6FBB60008ADAE3 /* SCTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCTracker.h; sourceTree = "<group>"; };
 		E7C110EF1C6FC091008ADAE3 /* SCNonemptyStringValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCNonemptyStringValidator.h; sourceTree = "<group>"; };
 		E7C110F01C6FC091008ADAE3 /* SCNonemptyStringValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCNonemptyStringValidator.m; sourceTree = "<group>"; };
+		E7C111041C70E971008ADAE3 /* SCExampleArrayValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCExampleArrayValidator.h; sourceTree = "<group>"; };
+		E7C111051C70E971008ADAE3 /* SCExampleArrayValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCExampleArrayValidator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +148,8 @@
 				E7C110E81C6E67CA008ADAE3 /* SCExampleClass.m */,
 				E7C110EA1C6E8C21008ADAE3 /* SCExampleDeliveredClass.h */,
 				E7C110EB1C6E8C21008ADAE3 /* SCExampleDeliveredClass.m */,
+				E7C111041C70E971008ADAE3 /* SCExampleArrayValidator.h */,
+				E7C111051C70E971008ADAE3 /* SCExampleArrayValidator.m */,
 			);
 			name = Example;
 			sourceTree = "<group>";
@@ -275,6 +280,7 @@
 				E7C110B11C67E730008ADAE3 /* ScribeTests.m in Sources */,
 				E7C110EC1C6E8C21008ADAE3 /* SCExampleDeliveredClass.m in Sources */,
 				E7C110E91C6E67CA008ADAE3 /* SCExampleClass.m in Sources */,
+				E7C111061C70E971008ADAE3 /* SCExampleArrayValidator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

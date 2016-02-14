@@ -8,7 +8,7 @@ scribe(implement validator=SCNonemptyStringValidator)
 @property (nonatomic, strong, readonly, nonnull) NSString * ID;
 @property (nonatomic, strong, nullable) NSString * objectDescription;
 
-scribe(implement collection=component)
+scribe(implement collection=component, validator=SCExampleArrayValidator)
 @property (nonatomic, strong, nonnull) NSArray<NSString *> * components;
 @property (nonatomic, assign) int counter;
 
@@ -20,7 +20,7 @@ scribe(implement mutable, builder, archivable, tracking)
 scribe(implement validator=SCNonnullValidator)
 @property (nonatomic, strong, readonly) NSValue *additionalValue;
 
-scribe(implement collection=number)
+scribe(implement collection=number, validator=SCExampleArrayValidator)
 @property (nonatomic, strong) NSDictionary<NSString *, NSNumber *> *tableOfNumbers;
 
 @end

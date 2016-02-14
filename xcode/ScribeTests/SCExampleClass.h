@@ -35,15 +35,27 @@
 
 @protocol SCMutableExampleClass <SCExampleClass, SCTrackChanges>
 
-@property (nonatomic, strong, retain, readwrite) NSString * _Nullable objectDescription;
-@property (nonatomic, strong, retain, readwrite) NSArray<NSString *> * _Nonnull components;
 
-- (void)addComponent:(NSString * _Nonnull)component;
-- (void)insertComponent:(NSString * _Nonnull)component atIndex:(NSUInteger)index;
-- (void)removeComponent:(NSString * _Nonnull)component;
+
+@property (nonatomic, strong, retain, readwrite) NSString * _Nullable objectDescription;
+
+
+
+
+- (void)setComponents:(NSArray<NSString *> * _Nonnull)components error:(NSError * _Nullable __autoreleasing * _Nullable)error;
+
+
+
+- (void)addComponent:(NSString * _Nonnull)component error:(NSError * _Nullable __autoreleasing * _Nullable)error;
+- (void)insertComponent:(NSString * _Nonnull)component atIndex:(NSUInteger)index error:(NSError * _Nullable __autoreleasing * _Nullable)error;
+- (void)removeComponent:(NSString * _Nonnull)component error:(NSError * _Nullable __autoreleasing * _Nullable)error;
+
+
 
 
 @property (nonatomic, assign, readwrite) int counter;
+
+
 
 @end
 

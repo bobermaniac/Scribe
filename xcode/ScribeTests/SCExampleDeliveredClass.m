@@ -6,13 +6,16 @@
 #import "SCExampleClass.h"
 
 #import "SCNonemptyStringValidator.h"
+#import "SCExampleArrayValidator.h"
 #import "SCNonnullValidator.h"
 
 @interface SCExampleDeliveredClass ()
 
 - (instancetype)initWithBuilder:(SCExampleDeliveredClassBuilder *)builder error:(NSError **)error;
 + (BOOL)_validateID:(NSString *)ID forObject:(SCExampleDeliveredClass *)object error:(NSError **)error;
++ (BOOL)_validateComponents:(NSArray<NSString *> *)components forObject:(SCExampleDeliveredClass *)object error:(NSError **)error;
 + (BOOL)_validateAdditionalValue:(NSValue *)additionalValue forObject:(SCExampleDeliveredClass *)object error:(NSError **)error;
++ (BOOL)_validateTableOfNumbers:(NSDictionary<NSString *, NSNumber *> *)tableOfNumbers forObject:(SCExampleDeliveredClass *)object error:(NSError **)error;
 
 @end
 
@@ -126,9 +129,27 @@
     return YES;
 }
 
++ (BOOL)_validateComponents:(NSArray<NSString *> *)components forObject:(SCExampleDeliveredClass *)object error:(NSError **)error {
+    for (NSObject<SCValidator> *validator in @[ [[SCExampleArrayValidator alloc] init],  ]) {
+        if (![validator validateValue:components ofProperty:@"components" forObject:object error:error]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
 + (BOOL)_validateAdditionalValue:(NSValue *)additionalValue forObject:(SCExampleDeliveredClass *)object error:(NSError **)error {
     for (NSObject<SCValidator> *validator in @[ [[SCNonnullValidator alloc] init],  ]) {
         if (![validator validateValue:additionalValue ofProperty:@"additionalValue" forObject:object error:error]) {
+            return NO;
+        }
+    }
+    return YES;
+}
+
++ (BOOL)_validateTableOfNumbers:(NSDictionary<NSString *, NSNumber *> *)tableOfNumbers forObject:(SCExampleDeliveredClass *)object error:(NSError **)error {
+    for (NSObject<SCValidator> *validator in @[ [[SCExampleArrayValidator alloc] init],  ]) {
+        if (![validator validateValue:tableOfNumbers ofProperty:@"tableOfNumbers" forObject:object error:error]) {
             return NO;
         }
     }
@@ -211,7 +232,8 @@
 
 @dynamic components;
 
-- (void)setComponents:(NSArray<NSString *> * _Nonnull)components {
+- (void)setComponents:(NSArray<NSString *> * _Nonnull)components error:(NSError **)error{
+    if (![SCExampleDeliveredClass _validateComponents:components forObject:self error:error]) { return; }
     
     if (![_components isEqual:components]) {
         [_tracker property:@"components" beforeChangeValue:_components];
@@ -224,24 +246,22 @@
 
 
 
-- (NSMutableArray *)_mutableComponents {
-    if ([_components isKindOfClass:[NSMutableArray class]]) {
-        return (NSMutableArray *)_components;
-    }
-    self.components = [NSMutableArray arrayWithArray:_components];
-    return [self _mutableComponents];
+- (void)addComponent:(NSString *)component error:(NSError **)error {
+    NSMutableArray *components = [self.components mutableCopy] ?: [NSMutableArray array];
+    [components addObject:component];
+    [self setComponents:components error:error];
 }
 
-- (void)addComponent:(NSString *)component {
-    [[self _mutableComponents] addObject:component];
+- (void)insertComponent:(NSString *)component atIndex:(NSUInteger)index error:(NSError **)error {
+    NSMutableArray *components = [self.components mutableCopy] ?: [NSMutableArray array];
+    [components insertObject:component atIndex:index];
+    [self setComponents:components error:error];
 }
 
-- (void)insertComponent:(NSString *)component atIndex:(NSUInteger)index {
-    [[self _mutableComponents] insertObject:component atIndex:index];
-}
-
-- (void)removeComponent:(NSString *)component {
-    [[self _mutableComponents] removeObject:component];
+- (void)removeComponent:(NSString *)component error:(NSError **)error {
+    NSMutableArray *components = [self.components mutableCopy];
+    [components removeObject:component];
+    [self setComponents:components error:error];
 }
 
 
@@ -263,7 +283,8 @@
 
 @dynamic tableOfNumbers;
 
-- (void)setTableOfNumbers:(NSDictionary<NSString *, NSNumber *> * _Nullable)tableOfNumbers {
+- (void)setTableOfNumbers:(NSDictionary<NSString *, NSNumber *> * _Nullable)tableOfNumbers error:(NSError **)error{
+    if (![SCExampleDeliveredClass _validateTableOfNumbers:tableOfNumbers forObject:self error:error]) { return; }
     
     if (![_tableOfNumbers isEqual:tableOfNumbers]) {
         [_tracker property:@"tableOfNumbers" beforeChangeValue:_tableOfNumbers];
@@ -276,20 +297,16 @@
 
 
 
-- (NSMutableDictionary *)_mutableTableofnumbers {
-    if ([_tableOfNumbers isKindOfClass:[NSMutableDictionary class]]) {
-        return (NSMutableDictionary *)_tableOfNumbers;
-    }
-    self.tableOfNumbers = [NSMutableDictionary dictionaryWithDictionary:_tableOfNumbers];
-    return [self _mutableTableofnumbers];
+- (void)setNumber:(NSNumber *)number forKey:(NSString *)key error:(NSError **)error {
+    NSMutableDictionary *tableOfNumbers = [self.tableOfNumbers mutableCopy] ?: [NSMutableDictionary dictionary];
+    [tableOfNumbers setObject:number forKey:key];
+    [self setTableOfNumbers:tableOfNumbers error:error];
 }
 
-- (void)setNumber:(NSNumber *)number forKey:(NSString *)key {
-    [[self _mutableTableofnumbers] setObject:number forKey:key];
-}
-
-- (void)removeNumberForKey:(NSString *)key {
-    [[self _mutableTableofnumbers] removeObjectForKey:key];
+- (void)removeNumberForKey:(NSString *)key error:(NSError **)error {
+    NSMutableDictionary *tableOfNumbers = [self.tableOfNumbers mutableCopy];
+    [tableOfNumbers removeObjectForKey:key];
+    [self setTableOfNumbers:tableOfNumbers error:error];
 }
 
 
