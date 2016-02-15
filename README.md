@@ -16,7 +16,8 @@ And this is only begining.
 
 With help of `scribe(implement mutable)` annotation you can generate a mutable copy. It'll have `Mutable` prefix (next to your class prefix), all readonly fields will remain readonly, but all others becomes mutable. And you will allow to make mutable copy of immutable class and then initialize immutable class with changed mutable data like `NSArray`/`NSMutableArray` simular clusters.
 
-Moreover, generator can solve [mutable/immutable class cluster inheritance problem](http://nshipster.com/nsorderedset/). Solution is pretty simple but requires to write tons of boilerplate Objective C code, and Scribe just allows to generate it instead of you. _Here's be ~~dragons~~ picture of solution idea... someday_
+Moreover, generator can solve [mutable/immutable class cluster inheritance problem](http://nshipster.com/nsorderedset/). Solution is pretty simple but requires to write tons of boilerplate Objective C code, and Scribe just allows to generate it instead of you. It looks like this:
+![Immutable/Mutable class cluster with inheritance](/doc/inheritance_diagram.png)
 
 Scribe can do much more useful stuff but I'm too lazy to write about it now. Engine is developing now, so it is completely not user-friendly, but if you find it and wanna use it, you can try to investigate sources and examples by yourself or just wait when it's done.
 
