@@ -2,7 +2,7 @@
 
 ## WTF is dat?
 
-Scribe is ~~powerfull~~~~useful~~~~helpful~~strange Ruby script that allows you to generate **tons of boilerplate Objective C code** using only simple class definitions. It is **extremely** a must if your payment depends on number lines of code you have written. In any other case it could help you to do your data structure more clear and determinate.
+Scribe is ~~powerfull~~ ~~useful~~ ~~helpful~~ strange Ruby script that allows you to generate **tons of boilerplate Objective C code** using only simple class definitions. It is **extremely** a must if your payment depends on number lines of code you have written. In any other case it could help you to do your data structure more clear and determinate.
 
 Scribe takes your headers written in Objective C (actually it could parse only subset of Objective C grammar but it covers ~90% of usage cases IMO) annotated with `scribe` preprocessor macro that specifies code generation rules.
 

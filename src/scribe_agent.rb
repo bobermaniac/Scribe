@@ -6,7 +6,6 @@ require 'liquid'
 require 'optparse'
 require_relative 'objc'
 require_relative 'scribe'
-require_relative 'objctemplar_parser'
 require_relative 'AST/scribe'
 
 parameters = { :source => [], :destination => Dir.pwd }
