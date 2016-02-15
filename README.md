@@ -49,6 +49,7 @@ Best regards.
 * TESTS
 * Scribe directives inheritance and overriding
 * Conflicts discovering and investigation
+    * ~~Basic validators for inconsistent state~~
     * Validation in descendants should be only more strict
     * Should allow to override property types and generate rules to process it correctly
 * Working with XCode project

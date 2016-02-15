@@ -8,12 +8,12 @@ scribe(implement validator=SomeValidatorInstance)
 @property (nonatomic, readonly, nonnull, copy) /* or here */ NSString *Id;
 
 scribe(implement validator=SomeValidatorInstance2, validator=SomeValidatorInstance3)
-@property (nonatomic) NSString *name;
+@property (nonatomic, nonnull) NSString *name;
 
 @property (nonatomic) NSNumber *counter;
 
 scribe(implement collection)
-@property (nonatomic) NSDictionary<NSString*,NSString*>*someArray;
+@property (nonatomic) NSMutableDictionary<NSString*,NSString*>*someArray;
 @property (nonatomic) int count;
 @property (nonatomic) NSInteger count2;
 

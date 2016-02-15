@@ -42,7 +42,6 @@ parser = parser_class.new
 
 results = parameters[:source].map do |s|
   result = parser.parse(sanitize IO.read s)
-  puts result
   abort "Error processing file #{s}: #{parser.failure_reason}" if result.nil?
   result
 end
@@ -57,6 +56,7 @@ else
       'validator' => { 'protocol' => 'SCValidator', 'in' => '"SCValidator.h"'}
   }
   classes = Scribe.to_objc results
+  abort '[ERROR] Validation failed for class graph. Please check messages above and fix all problems' unless Scribe.validate_classes classes
 
   for cls in classes
     other_classes = classes.reject { |c| c == cls }

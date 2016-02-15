@@ -52,6 +52,14 @@ module Objc
       Type.set_types.include? @base_type
     end
 
+    def block_type?
+      Type.block_types.include? @base_type
+    end
+
+    def immutable?
+      (not self.reference_type?) or Type.immutable_types.include? @base_type
+    end
+
     def to_s
       return @base_type if @generic_subtypes.nil?
       "#{@base_type} of #{@generic_subtypes.join ', '}"
@@ -65,6 +73,10 @@ module Objc
     def coding_method
       return 'Object' if self.reference_type?
       Objc.typename_without_prefix(@type_string).upcase_1l
+    end
+
+    def self.immutable_types
+      %w[ NSArray\ * NSNumber\ * NSValue\ * NSDictionary\ * NSSet\ * NSString\ * ] + self.block_types
     end
 
     def self.array_types

@@ -1,5 +1,6 @@
 require_relative 'objc_class'
 require_relative 'objc_type'
+require_relative 'validation'
 
 module Scribe
   class Directive
