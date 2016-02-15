@@ -33,7 +33,7 @@
 @protocol SCMutableExampleDeliveredClass <SCExampleDeliveredClass, SCMutableExampleClass, SCTrackChanges>
 
 
-@property (nonatomic, strong, setter, retain, readwrite) NSString * _Nullable objectDescription;
+@property (nonatomic, strong, setter=applyObjectDescription:, retain, readwrite) NSString * _Nullable objectDescription;
 
 - (void)setComponents:(NSArray<NSString *> * _Nonnull)components error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 - (void)addComponent:(NSString * _Nonnull)component error:(NSError * _Nullable __autoreleasing * _Nullable)error;

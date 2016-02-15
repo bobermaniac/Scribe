@@ -61,9 +61,15 @@ module Scribe
       a_property.scribes = self.parse_scribes({ global: context[:global_scribes], class: context[:class_scribes], property: property_definition.scribes  })
 
       a_property.type = self.parse_type property_definition.type
-      a_property.options = property_definition.options.items.map { |option| option.option.value.to_sym }
+      a_property.options = property_definition.options.items.map { |option| self.parse_option option }
       a_property.name = property_definition.identifier.value
     end
+  end
+
+  def self.parse_option(option)
+    opt_sym = option.option.value.to_sym
+    return opt_sym unless option.option_parameter
+    [ opt_sym, option.option_parameter ]
   end
 
   def self.parse_type(type)

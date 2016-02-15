@@ -87,7 +87,7 @@ module Liquid
 
     def attributes_string(attributes)
       attributes.reject { |opt| [:nullable, :nonnull].include? opt }
-                .map { |opt| opt.to_s }
+                .map { |opt| opt.kind_of?(Array) ? opt.join('=') : opt.to_s }
                 .reduce { |f, s| f + ', ' + s }
     end
 
@@ -96,7 +96,7 @@ module Liquid
     end
 
     def readonly_attributes
-      attributes_string(@objc_property.options.map { |opt| opt == :readwrite ? :readonly : opt })
+      attributes_string(@objc_property.options.map { |opt| opt == :readwrite ? :readonly : opt }.reject { |opt| opt.kind_of?(Array) and opt.first == :setter })
     end
 
     def builder_attributes
@@ -109,8 +109,16 @@ module Liquid
       attributes_string(options)
     end
 
+    def getter_name
+      getter = @objc_property.options.select{ |o| o.kind_of? Array }.select{ |(o, _)| o == :getter }.first
+      return getter.last unless getter.nil?
+      self.name
+    end
+
     def setter_name
-      "set#{name.upcase_1l}"
+      setter = @objc_property.options.select{ |o| o.kind_of? Array }.select{ |(o, _)| o == :setter }.first
+      return setter.last unless setter.nil?
+      "set#{self.name.upcase_1l}:"
     end
 
     def validator_name

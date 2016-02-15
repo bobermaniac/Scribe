@@ -134,7 +134,7 @@
 
 @dynamic ID;
 
-- (NSString * _Nonnull)ID {
+- (NSString * _Nonnull)internalID {
     return _ID;
 }
 
@@ -203,7 +203,7 @@
 
 @dynamic objectDescription;
 
-- (void)setObjectDescription:(NSString * _Nullable)objectDescription {
+- (void)applyObjectDescription:(NSString * _Nullable)objectDescription {
     
     if (![_objectDescription isEqual:objectDescription]) {
         [_tracker property:@"objectDescription" beforeChangeValue:_objectDescription];
