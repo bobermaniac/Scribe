@@ -5,8 +5,8 @@ scribe(implement mutable, builder, archivable, tracking)
 @interface SCExampleClass : NSObject
 
 scribe(implement validator=SCNonemptyStringValidator)
-@property (nonatomic, strong, readonly, nonnull) NSString * ID;
-@property (nonatomic, strong, nullable) NSString * objectDescription;
+@property (nonatomic, strong, readonly, nonnull, getter=internalID) NSString * ID;
+@property (nonatomic, strong, nullable, setter=applyObjectDescription:) NSString * objectDescription;
 
 scribe(implement collection=component, validator=SCExampleArrayValidator)
 @property (nonatomic, strong, nonnull) NSArray<NSString *> * components;

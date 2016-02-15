@@ -56,7 +56,7 @@ grammar Scribe
     end
 
     rule property_option
-        identifier (equals_sign identifier)? <PropertyOption>
+        identifier ( equals_sign identifier colon? )? <PropertyOption>
     end
 
     rule interface_token
