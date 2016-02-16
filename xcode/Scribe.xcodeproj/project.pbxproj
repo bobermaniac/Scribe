@@ -23,6 +23,13 @@
 		E7C110F21C6FC091008ADAE3 /* SCNonemptyStringValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C110F01C6FC091008ADAE3 /* SCNonemptyStringValidator.m */; };
 		E7C111061C70E971008ADAE3 /* SCExampleArrayValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C111051C70E971008ADAE3 /* SCExampleArrayValidator.m */; };
 		E7C111091C711979008ADAE3 /* SCExampleSetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C111081C711979008ADAE3 /* SCExampleSetContainer.m */; };
+		E7D117A61C730C72000E53C2 /* SCImmutableCopying.h in Headers */ = {isa = PBXBuildFile; fileRef = E7D117A51C730C72000E53C2 /* SCImmutableCopying.h */; };
+		E7D117A91C730CD8000E53C2 /* NSObject+SCImmutableCopying.h in Headers */ = {isa = PBXBuildFile; fileRef = E7D117A71C730CD8000E53C2 /* NSObject+SCImmutableCopying.h */; };
+		E7D117AA1C730CD8000E53C2 /* NSObject+SCImmutableCopying.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D117A81C730CD8000E53C2 /* NSObject+SCImmutableCopying.m */; };
+		E7D117AD1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.h in Headers */ = {isa = PBXBuildFile; fileRef = E7D117AB1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.h */; };
+		E7D117AE1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D117AC1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.m */; };
+		E7D117B11C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.h in Headers */ = {isa = PBXBuildFile; fileRef = E7D117AF1C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.h */; };
+		E7D117B21C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D117B01C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +67,13 @@
 		E7C111051C70E971008ADAE3 /* SCExampleArrayValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCExampleArrayValidator.m; sourceTree = "<group>"; };
 		E7C111071C711979008ADAE3 /* SCExampleSetContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCExampleSetContainer.h; sourceTree = "<group>"; };
 		E7C111081C711979008ADAE3 /* SCExampleSetContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCExampleSetContainer.m; sourceTree = "<group>"; };
+		E7D117A51C730C72000E53C2 /* SCImmutableCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCImmutableCopying.h; sourceTree = "<group>"; };
+		E7D117A71C730CD8000E53C2 /* NSObject+SCImmutableCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SCImmutableCopying.h"; sourceTree = "<group>"; };
+		E7D117A81C730CD8000E53C2 /* NSObject+SCImmutableCopying.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SCImmutableCopying.m"; sourceTree = "<group>"; };
+		E7D117AB1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SCImmutableCopying.h"; sourceTree = "<group>"; };
+		E7D117AC1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SCImmutableCopying.m"; sourceTree = "<group>"; };
+		E7D117AF1C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+SCImmutableCopying.h"; sourceTree = "<group>"; };
+		E7D117B01C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+SCImmutableCopying.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +116,7 @@
 		E7C110A31C67E730008ADAE3 /* Scribe */ = {
 			isa = PBXGroup;
 			children = (
+				E7D117A41C730C4D000E53C2 /* ImmutableCopy */,
 				E7C110C41C67E97B008ADAE3 /* Validating */,
 				E7C110BB1C67E75C008ADAE3 /* Tracking */,
 				E7C110A41C67E730008ADAE3 /* Scribe.h */,
@@ -159,6 +174,20 @@
 			name = Example;
 			sourceTree = "<group>";
 		};
+		E7D117A41C730C4D000E53C2 /* ImmutableCopy */ = {
+			isa = PBXGroup;
+			children = (
+				E7D117A51C730C72000E53C2 /* SCImmutableCopying.h */,
+				E7D117A71C730CD8000E53C2 /* NSObject+SCImmutableCopying.h */,
+				E7D117A81C730CD8000E53C2 /* NSObject+SCImmutableCopying.m */,
+				E7D117AB1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.h */,
+				E7D117AC1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.m */,
+				E7D117AF1C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.h */,
+				E7D117B01C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.m */,
+			);
+			name = ImmutableCopy;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -167,12 +196,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7C110BD1C67E788008ADAE3 /* SCTrackChanges.h in Headers */,
+				E7D117B11C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.h in Headers */,
+				E7D117A61C730C72000E53C2 /* SCImmutableCopying.h in Headers */,
 				E7C110EE1C6FBB60008ADAE3 /* SCTracker.h in Headers */,
 				E7C110F11C6FC091008ADAE3 /* SCNonemptyStringValidator.h in Headers */,
 				E7C110C91C67EA3F008ADAE3 /* SCNonnullValidator.h in Headers */,
 				E7C110C21C67E850008ADAE3 /* SCPropertyChangesTracker.h in Headers */,
 				E7C110A51C67E730008ADAE3 /* Scribe.h in Headers */,
+				E7D117A91C730CD8000E53C2 /* NSObject+SCImmutableCopying.h in Headers */,
 				E7C110C61C67E98D008ADAE3 /* SCValidator.h in Headers */,
+				E7D117AD1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +307,10 @@
 			files = (
 				E7C110C31C67E850008ADAE3 /* SCPropertyChangesTracker.m in Sources */,
 				E7C110CA1C67EA3F008ADAE3 /* SCNonnullValidator.m in Sources */,
+				E7D117B21C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.m in Sources */,
+				E7D117AA1C730CD8000E53C2 /* NSObject+SCImmutableCopying.m in Sources */,
 				E7C110F21C6FC091008ADAE3 /* SCNonemptyStringValidator.m in Sources */,
+				E7D117AE1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
