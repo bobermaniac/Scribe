@@ -17,4 +17,6 @@ scribe(implement collection)
 @property (nonatomic) int count;
 @property (nonatomic) NSInteger count2;
 
+@property (nonatomic) EXBase *baseRef;
+
 @end

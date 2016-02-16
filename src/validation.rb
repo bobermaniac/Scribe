@@ -53,6 +53,14 @@ module Scribe
     end
   end
 
+  class ShouldAllowImmutableCopySemanticsForAllPropertyTypesValidator < Validator
+    def validate_classes(classes)
+      self.all_properties_should_satisfy(classes) do |a_class, a_prop|
+        next true
+      end
+    end
+  end
+
   class ClassCouldNotBeSerializableWithBlockPropertiesValidator < Validator
     def validate_classes(classes)
       self.all_properties_should_satisfy(classes) do |a_class, a_prop|

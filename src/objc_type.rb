@@ -1,3 +1,5 @@
+require_relative 'objc_known_types'
+
 module Objc
   class Type
     @@markers = {
@@ -31,33 +33,36 @@ module Objc
       @type_string
     end
 
+    def type_traits
+      Type.known_types[@base_type] or []
+    end
+
     def reference_type?
-      self.class.reference_type? @type_string
+      self.type_traits.include? :reference
     end
 
     def collection_type?
-      collection_types = [ Type.array_types, Type.dictionary_types, Type.set_types ].flat_map { |s| s }
-      collection_types.include? @base_type
+      (self.type_traits & %i[ array dictionary set ordered_set ]).any?
     end
 
     def array_type?
-      Type.array_types.include? @base_type
+      self.type_traits.include? :array
     end
 
     def dictionary_type?
-      Type.dictionary_types.include? @base_type
+      self.type_traits.include? :dictionary
     end
 
     def set_type?
-      Type.set_types.include? @base_type
+      self.type_traits.include? :set
     end
 
     def block_type?
-      Type.block_types.include? @base_type
+      self.type_traits.include? :block
     end
 
     def immutable?
-      (not self.reference_type?) or Type.immutable_types.include? @base_type
+      (self.type_traits & %i[ value immutable ]).any?
     end
 
     def to_s
@@ -65,46 +70,9 @@ module Objc
       "#{@base_type} of #{@generic_subtypes.join ', '}"
     end
 
-    def self.reference_type?(type)
-      return true if type[-1, 1] == '*'
-      [ self.reference_types, self.block_types ].any? { |t| t.include? @type_string }
-    end
-
     def coding_method
       return 'Object' if self.reference_type?
       Objc.typename_without_prefix(@type_string).upcase_1l
-    end
-
-    def self.immutable_types
-      %w[ NSArray\ * NSNumber\ * NSValue\ * NSDictionary\ * NSSet\ * NSString\ * ] + self.block_types
-    end
-
-    def self.array_types
-      %w[ NSArray\ * NSMutableArray\ * ]
-    end
-
-    def self.reference_types
-      %w[ id ]
-    end
-
-    def self.block_types
-      %w[ dispatch_block_t dispatch_function_t dispatch_data_applier_t dispatch_io_handler_t ]
-    end
-
-    def self.boxed_types
-      %w[ NSNumber\ * NSValue\ * ]
-    end
-
-    def self.value_types
-      %w[ NSInteger NSUInteger CGRect CGSize CGFloat ]
-    end
-
-    def self.dictionary_types
-      %w[ NSDictionary\ * NSMutableDictionary\ * ]
-    end
-
-    def self.set_types
-      %w[ NSSet\ * NSMutableSet\ * ]
     end
   end
 end
