@@ -8,8 +8,23 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ *  Conform this protocol to declare your class as immutable or give possibility to make immutable copy of it
+ */
 @protocol SCImmutableCopying <NSObject>
 
-- (id)immutableCopyWithZone:(NSZone *)zone;
+/**
+ *  Returns YES if class declared as immutable
+ */
+@property (nonatomic, readonly, getter=isImmutable) BOOL immutable;
+
+/**
+ *  Returns instance of immutable verison of current class with same data (e.g. NSArray for NSMutableArray)
+ *
+ *  @param error Variable to return possible error info
+ *
+ *  @return Immutable class instance
+ */
+- (id _Nullable)immutableCopyWithError:(NSError * _Nullable __autoreleasing * _Nullable)error;
 
 @end

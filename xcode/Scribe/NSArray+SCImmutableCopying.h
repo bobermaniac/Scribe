@@ -1,5 +1,5 @@
 //
-//  NSMutableDictionary+SCImmutableCopying.h
+//  NSMutableArray+SCImmutableCopying.h
 //  Scribe
 //
 //  Created by Victor Bryksin on 16/02/16.
@@ -9,6 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "SCImmutableCopying.h"
 
-@interface NSMutableDictionary (SCImmutableCopying) <SCImmutableCopying>
+@interface NSArray (SCImmutableCopying) <SCImmutableCopying>
+
+@end
+
+@interface NSMutableArray (SCImmutableCopying) <SCImmutableCopying>
 
 @end

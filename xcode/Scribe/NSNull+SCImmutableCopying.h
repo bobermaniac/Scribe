@@ -1,5 +1,5 @@
 //
-//  NSObject+SCImmutableCopying.h
+//  NSNull+SCImmutableCopying.h
 //  Scribe
 //
 //  Created by Victor Bryksin on 16/02/16.
@@ -7,9 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SCImmutableCopying.h"
 
-@interface NSObject (SCImmutableCopying)
-
-- (nullable id)immutableCopy;
+@interface NSNull (SCImmutableCopying) <SCImmutableCopying>
 
 @end

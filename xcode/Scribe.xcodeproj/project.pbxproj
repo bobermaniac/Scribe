@@ -24,12 +24,17 @@
 		E7C111061C70E971008ADAE3 /* SCExampleArrayValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C111051C70E971008ADAE3 /* SCExampleArrayValidator.m */; };
 		E7C111091C711979008ADAE3 /* SCExampleSetContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = E7C111081C711979008ADAE3 /* SCExampleSetContainer.m */; };
 		E7D117A61C730C72000E53C2 /* SCImmutableCopying.h in Headers */ = {isa = PBXBuildFile; fileRef = E7D117A51C730C72000E53C2 /* SCImmutableCopying.h */; };
-		E7D117A91C730CD8000E53C2 /* NSObject+SCImmutableCopying.h in Headers */ = {isa = PBXBuildFile; fileRef = E7D117A71C730CD8000E53C2 /* NSObject+SCImmutableCopying.h */; };
-		E7D117AA1C730CD8000E53C2 /* NSObject+SCImmutableCopying.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D117A81C730CD8000E53C2 /* NSObject+SCImmutableCopying.m */; };
-		E7D117AD1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.h in Headers */ = {isa = PBXBuildFile; fileRef = E7D117AB1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.h */; };
-		E7D117AE1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D117AC1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.m */; };
-		E7D117B11C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.h in Headers */ = {isa = PBXBuildFile; fileRef = E7D117AF1C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.h */; };
-		E7D117B21C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D117B01C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.m */; };
+		E7D117AD1C730DAE000E53C2 /* NSArray+SCImmutableCopying.h in Headers */ = {isa = PBXBuildFile; fileRef = E7D117AB1C730DAE000E53C2 /* NSArray+SCImmutableCopying.h */; };
+		E7D117AE1C730DAE000E53C2 /* NSArray+SCImmutableCopying.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D117AC1C730DAE000E53C2 /* NSArray+SCImmutableCopying.m */; };
+		E7D117B11C730E23000E53C2 /* NSDictionary+SCImmutableCopying.h in Headers */ = {isa = PBXBuildFile; fileRef = E7D117AF1C730E23000E53C2 /* NSDictionary+SCImmutableCopying.h */; };
+		E7D117B21C730E23000E53C2 /* NSDictionary+SCImmutableCopying.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D117B01C730E23000E53C2 /* NSDictionary+SCImmutableCopying.m */; };
+		E7D117B41C739E52000E53C2 /* SCImmutableCopyingHelpers.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D117B31C739E52000E53C2 /* SCImmutableCopyingHelpers.m */; };
+		E7D117B81C73A093000E53C2 /* NSNull+SCImmutableCopying.h in Headers */ = {isa = PBXBuildFile; fileRef = E7D117B61C73A093000E53C2 /* NSNull+SCImmutableCopying.h */; };
+		E7D117B91C73A093000E53C2 /* NSNull+SCImmutableCopying.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D117B71C73A093000E53C2 /* NSNull+SCImmutableCopying.m */; };
+		E7D117BC1C73A5FE000E53C2 /* NSSet+SCImmutableCopying.h in Headers */ = {isa = PBXBuildFile; fileRef = E7D117BA1C73A5FE000E53C2 /* NSSet+SCImmutableCopying.h */; };
+		E7D117BD1C73A5FE000E53C2 /* NSSet+SCImmutableCopying.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D117BB1C73A5FE000E53C2 /* NSSet+SCImmutableCopying.m */; };
+		E7D117C01C73A705000E53C2 /* NSString+SCImmutableCopying.h in Headers */ = {isa = PBXBuildFile; fileRef = E7D117BE1C73A705000E53C2 /* NSString+SCImmutableCopying.h */; };
+		E7D117C11C73A705000E53C2 /* NSString+SCImmutableCopying.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D117BF1C73A705000E53C2 /* NSString+SCImmutableCopying.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,12 +73,18 @@
 		E7C111071C711979008ADAE3 /* SCExampleSetContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCExampleSetContainer.h; sourceTree = "<group>"; };
 		E7C111081C711979008ADAE3 /* SCExampleSetContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCExampleSetContainer.m; sourceTree = "<group>"; };
 		E7D117A51C730C72000E53C2 /* SCImmutableCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCImmutableCopying.h; sourceTree = "<group>"; };
-		E7D117A71C730CD8000E53C2 /* NSObject+SCImmutableCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SCImmutableCopying.h"; sourceTree = "<group>"; };
-		E7D117A81C730CD8000E53C2 /* NSObject+SCImmutableCopying.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SCImmutableCopying.m"; sourceTree = "<group>"; };
-		E7D117AB1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+SCImmutableCopying.h"; sourceTree = "<group>"; };
-		E7D117AC1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+SCImmutableCopying.m"; sourceTree = "<group>"; };
-		E7D117AF1C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableDictionary+SCImmutableCopying.h"; sourceTree = "<group>"; };
-		E7D117B01C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableDictionary+SCImmutableCopying.m"; sourceTree = "<group>"; };
+		E7D117AB1C730DAE000E53C2 /* NSArray+SCImmutableCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+SCImmutableCopying.h"; sourceTree = "<group>"; };
+		E7D117AC1C730DAE000E53C2 /* NSArray+SCImmutableCopying.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+SCImmutableCopying.m"; sourceTree = "<group>"; };
+		E7D117AF1C730E23000E53C2 /* NSDictionary+SCImmutableCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+SCImmutableCopying.h"; sourceTree = "<group>"; };
+		E7D117B01C730E23000E53C2 /* NSDictionary+SCImmutableCopying.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+SCImmutableCopying.m"; sourceTree = "<group>"; };
+		E7D117B31C739E52000E53C2 /* SCImmutableCopyingHelpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCImmutableCopyingHelpers.m; sourceTree = "<group>"; };
+		E7D117B51C739E63000E53C2 /* SCImmutableCopyingHelpers.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCImmutableCopyingHelpers.h; sourceTree = "<group>"; };
+		E7D117B61C73A093000E53C2 /* NSNull+SCImmutableCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNull+SCImmutableCopying.h"; sourceTree = "<group>"; };
+		E7D117B71C73A093000E53C2 /* NSNull+SCImmutableCopying.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNull+SCImmutableCopying.m"; sourceTree = "<group>"; };
+		E7D117BA1C73A5FE000E53C2 /* NSSet+SCImmutableCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSSet+SCImmutableCopying.h"; sourceTree = "<group>"; };
+		E7D117BB1C73A5FE000E53C2 /* NSSet+SCImmutableCopying.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet+SCImmutableCopying.m"; sourceTree = "<group>"; };
+		E7D117BE1C73A705000E53C2 /* NSString+SCImmutableCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SCImmutableCopying.h"; sourceTree = "<group>"; };
+		E7D117BF1C73A705000E53C2 /* NSString+SCImmutableCopying.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SCImmutableCopying.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,12 +189,18 @@
 			isa = PBXGroup;
 			children = (
 				E7D117A51C730C72000E53C2 /* SCImmutableCopying.h */,
-				E7D117A71C730CD8000E53C2 /* NSObject+SCImmutableCopying.h */,
-				E7D117A81C730CD8000E53C2 /* NSObject+SCImmutableCopying.m */,
-				E7D117AB1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.h */,
-				E7D117AC1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.m */,
-				E7D117AF1C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.h */,
-				E7D117B01C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.m */,
+				E7D117B51C739E63000E53C2 /* SCImmutableCopyingHelpers.h */,
+				E7D117B31C739E52000E53C2 /* SCImmutableCopyingHelpers.m */,
+				E7D117B61C73A093000E53C2 /* NSNull+SCImmutableCopying.h */,
+				E7D117B71C73A093000E53C2 /* NSNull+SCImmutableCopying.m */,
+				E7D117AB1C730DAE000E53C2 /* NSArray+SCImmutableCopying.h */,
+				E7D117AC1C730DAE000E53C2 /* NSArray+SCImmutableCopying.m */,
+				E7D117AF1C730E23000E53C2 /* NSDictionary+SCImmutableCopying.h */,
+				E7D117B01C730E23000E53C2 /* NSDictionary+SCImmutableCopying.m */,
+				E7D117BA1C73A5FE000E53C2 /* NSSet+SCImmutableCopying.h */,
+				E7D117BB1C73A5FE000E53C2 /* NSSet+SCImmutableCopying.m */,
+				E7D117BE1C73A705000E53C2 /* NSString+SCImmutableCopying.h */,
+				E7D117BF1C73A705000E53C2 /* NSString+SCImmutableCopying.m */,
 			);
 			name = ImmutableCopy;
 			sourceTree = "<group>";
@@ -195,17 +212,19 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7D117B81C73A093000E53C2 /* NSNull+SCImmutableCopying.h in Headers */,
 				E7C110BD1C67E788008ADAE3 /* SCTrackChanges.h in Headers */,
-				E7D117B11C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.h in Headers */,
+				E7D117B11C730E23000E53C2 /* NSDictionary+SCImmutableCopying.h in Headers */,
 				E7D117A61C730C72000E53C2 /* SCImmutableCopying.h in Headers */,
 				E7C110EE1C6FBB60008ADAE3 /* SCTracker.h in Headers */,
 				E7C110F11C6FC091008ADAE3 /* SCNonemptyStringValidator.h in Headers */,
 				E7C110C91C67EA3F008ADAE3 /* SCNonnullValidator.h in Headers */,
 				E7C110C21C67E850008ADAE3 /* SCPropertyChangesTracker.h in Headers */,
+				E7D117C01C73A705000E53C2 /* NSString+SCImmutableCopying.h in Headers */,
 				E7C110A51C67E730008ADAE3 /* Scribe.h in Headers */,
-				E7D117A91C730CD8000E53C2 /* NSObject+SCImmutableCopying.h in Headers */,
 				E7C110C61C67E98D008ADAE3 /* SCValidator.h in Headers */,
-				E7D117AD1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.h in Headers */,
+				E7D117AD1C730DAE000E53C2 /* NSArray+SCImmutableCopying.h in Headers */,
+				E7D117BC1C73A5FE000E53C2 /* NSSet+SCImmutableCopying.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,12 +324,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7D117B41C739E52000E53C2 /* SCImmutableCopyingHelpers.m in Sources */,
+				E7D117B91C73A093000E53C2 /* NSNull+SCImmutableCopying.m in Sources */,
 				E7C110C31C67E850008ADAE3 /* SCPropertyChangesTracker.m in Sources */,
+				E7D117C11C73A705000E53C2 /* NSString+SCImmutableCopying.m in Sources */,
 				E7C110CA1C67EA3F008ADAE3 /* SCNonnullValidator.m in Sources */,
-				E7D117B21C730E23000E53C2 /* NSMutableDictionary+SCImmutableCopying.m in Sources */,
-				E7D117AA1C730CD8000E53C2 /* NSObject+SCImmutableCopying.m in Sources */,
+				E7D117BD1C73A5FE000E53C2 /* NSSet+SCImmutableCopying.m in Sources */,
+				E7D117B21C730E23000E53C2 /* NSDictionary+SCImmutableCopying.m in Sources */,
 				E7C110F21C6FC091008ADAE3 /* SCNonemptyStringValidator.m in Sources */,
-				E7D117AE1C730DAE000E53C2 /* NSMutableArray+SCImmutableCopying.m in Sources */,
+				E7D117AE1C730DAE000E53C2 /* NSArray+SCImmutableCopying.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
