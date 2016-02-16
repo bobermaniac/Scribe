@@ -3,16 +3,17 @@
 #import <Foundation/Foundation.h>
 
 #import "SCTrackChanges.h"
+#import "SCImmutableCopying.h"
 
 @class SCExampleDeliveredClass;
 @class SCExampleSetContainer;
 @class SCExampleClassBuilder;
 
-@protocol SCExampleClass <NSObject, NSCopying, NSMutableCopying, NSCoding>
+@protocol SCExampleClass <NSObject, NSCopying, SCImmutableCopying, NSMutableCopying, NSCoding>
 
 @property (nonatomic, strong, readonly, getter=internalID, retain) NSString * _Nonnull ID;
 @property (nonatomic, strong, retain, readonly) NSString * _Nullable objectDescription;
-@property (nonatomic, strong, retain, readonly) NSArray<NSString *> * _Nonnull components;
+@property (nonatomic, strong, retain, readonly) NSArray<NSString *> * _Nullable components;
 @property (nonatomic, assign, readonly) int counter;
 
 @end
@@ -21,7 +22,7 @@
     @protected
     NSString * _Nonnull _ID;
     NSString * _Nullable _objectDescription;
-    NSArray<NSString *> * _Nonnull _components;
+    NSArray<NSString *> * _Nullable _components;
     int _counter;
  }
 
@@ -39,7 +40,7 @@
 
 @property (nonatomic, strong, setter=applyObjectDescription:, retain, readwrite) NSString * _Nullable objectDescription;
 
-- (void)setComponents:(NSArray<NSString *> * _Nonnull)components error:(NSError * _Nullable __autoreleasing * _Nullable)error;
+- (void)setComponents:(NSArray<NSString *> * _Nullable)components error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 - (void)addComponent:(NSString * _Nonnull)component error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 - (void)insertComponent:(NSString * _Nonnull)component atIndex:(NSUInteger)index error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 - (void)removeComponent:(NSString * _Nonnull)component error:(NSError * _Nullable __autoreleasing * _Nullable)error;

@@ -9,7 +9,7 @@ scribe(implement validator=SCNonemptyStringValidator)
 @property (nonatomic, strong, nullable, setter=applyObjectDescription:) NSString * objectDescription;
 
 scribe(implement collection=component, validator=SCExampleArrayValidator)
-@property (nonatomic, strong, nonnull) NSArray<NSString *> * components;
+@property (nonatomic, strong, nullable) NSArray<NSString *> * components;
 @property (nonatomic, assign) int counter;
 
 @end

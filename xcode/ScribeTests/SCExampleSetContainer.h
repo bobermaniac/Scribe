@@ -2,12 +2,13 @@
 
 #import <Foundation/Foundation.h>
 
+#import "SCImmutableCopying.h"
 
 @class SCExampleClass;
 @class SCExampleDeliveredClass;
 
 
-@protocol SCExampleSetContainer <NSObject, NSCopying, NSMutableCopying>
+@protocol SCExampleSetContainer <NSObject, NSCopying, SCImmutableCopying, NSMutableCopying>
 
 @property (nonatomic, strong, retain, readonly) NSSet * _Nullable set;
 

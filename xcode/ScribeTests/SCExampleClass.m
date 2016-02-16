@@ -103,6 +103,15 @@
     return self;
 }
 
+- (BOOL)isImmutable {
+    return YES;
+}
+
+- (id)immutableCopyWithError:(NSError **)error {
+    SCExampleClass *exampleClass = self;
+    return [[SCExampleClass alloc] initWithExampleClass:exampleClass];
+}
+
 
 - (id)mutableCopyWithZone:(NSZone *)zone {
     SCExampleClass *exampleClass = self;
@@ -146,7 +155,7 @@
 
 @dynamic components;
 
-- (NSArray<NSString *> * _Nonnull)components {
+- (NSArray<NSString *> * _Nullable)components {
     return _components;
 }
 
@@ -197,8 +206,12 @@
 
 
 - (id)copyWithZone:(NSZone *)zone {
-    SCExampleClass *exampleClass = self;
-    return [[SCExampleClass allocWithZone:zone] initWithExampleClass:exampleClass];
+    SCMutableExampleClass *exampleClass = self;
+    return [[SCMutableExampleClass allocWithZone:zone] initWithExampleClass:exampleClass];
+}
+
+- (BOOL)isImmutable {
+    return NO;
 }
 
 @dynamic objectDescription;
@@ -218,7 +231,7 @@
 
 @dynamic components;
 
-- (void)setComponents:(NSArray<NSString *> * _Nonnull)components error:(NSError **)error{
+- (void)setComponents:(NSArray<NSString *> * _Nullable)components error:(NSError **)error{
     if (![SCExampleClass _validateComponents:components forObject:self error:error]) { return; }
     
     if (![_components isEqual:components]) {

@@ -43,6 +43,15 @@
     return self;
 }
 
+- (BOOL)isImmutable {
+    return YES;
+}
+
+- (id)immutableCopyWithError:(NSError **)error {
+    SCExampleSetContainer *exampleSetContainer = self;
+    return [[SCExampleSetContainer alloc] initWithExampleSetContainer:exampleSetContainer];
+}
+
 
 - (id)mutableCopyWithZone:(NSZone *)zone {
     SCExampleSetContainer *exampleSetContainer = self;
@@ -80,8 +89,12 @@
 
 
 - (id)copyWithZone:(NSZone *)zone {
-    SCExampleSetContainer *exampleSetContainer = self;
-    return [[SCExampleSetContainer allocWithZone:zone] initWithExampleSetContainer:exampleSetContainer];
+    SCMutableExampleSetContainer *exampleSetContainer = self;
+    return [[SCMutableExampleSetContainer allocWithZone:zone] initWithExampleSetContainer:exampleSetContainer];
+}
+
+- (BOOL)isImmutable {
+    return NO;
 }
 
 @dynamic set;

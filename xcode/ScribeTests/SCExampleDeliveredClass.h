@@ -3,12 +3,13 @@
 #import "SCExampleClass.h"
 
 #import "SCTrackChanges.h"
+#import "SCImmutableCopying.h"
 
 @class SCExampleClass;
 @class SCExampleSetContainer;
 @class SCExampleDeliveredClassBuilder;
 
-@protocol SCExampleDeliveredClass <SCExampleClass, NSCopying, NSMutableCopying, NSCoding>
+@protocol SCExampleDeliveredClass <SCExampleClass, NSCopying, SCImmutableCopying, NSMutableCopying, NSCoding>
 
 @property (nonatomic, strong, readonly, retain) NSValue * _Nullable additionalValue;
 @property (nonatomic, strong, retain, readonly) NSDictionary<NSString *, NSNumber *> * _Nullable tableOfNumbers;
@@ -35,7 +36,7 @@
 
 @property (nonatomic, strong, setter=applyObjectDescription:, retain, readwrite) NSString * _Nullable objectDescription;
 
-- (void)setComponents:(NSArray<NSString *> * _Nonnull)components error:(NSError * _Nullable __autoreleasing * _Nullable)error;
+- (void)setComponents:(NSArray<NSString *> * _Nullable)components error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 - (void)addComponent:(NSString * _Nonnull)component error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 - (void)insertComponent:(NSString * _Nonnull)component atIndex:(NSUInteger)index error:(NSError * _Nullable __autoreleasing * _Nullable)error;
 - (void)removeComponent:(NSString * _Nonnull)component error:(NSError * _Nullable __autoreleasing * _Nullable)error;

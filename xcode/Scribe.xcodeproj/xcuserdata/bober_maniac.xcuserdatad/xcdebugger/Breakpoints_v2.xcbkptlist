@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "125"
             endingLineNumber = "125"
-            landmarkName = "+_validateComponents:forObject:error:"
+            landmarkName = "+_validateID:forObject:error:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

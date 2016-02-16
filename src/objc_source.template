@@ -93,8 +93,13 @@
     return self;
 }
 
-- (id)immutableCopyWithZone:(NSZone *)zone {
-    return self;
+- (BOOL)isImmutable {
+    return YES;
+}
+
+- (id)immutableCopyWithError:(NSError **)error {
+    {{ class.class_name }} *{{ class.copy_ctor_param }} = self;
+    return [[{{class.class_name}} alloc] init{{ class.copy_ctor_call }}];
 }
 
 {% if class.supports_mutable_copy? %}
@@ -171,9 +176,8 @@
     return [[{{ class.mutable_class_name }} allocWithZone:zone] init{{ class.copy_ctor_call }}];
 }
 
-- (id)immutableCopyWithZone:(NSZone *)zone {
-    {{ class.mutable_class_name }} *{{ class.copy_ctor_param }} = self;
-    return [[{{ class.class_name }} allocWithZone:zone] init{{ class.copy_ctor_call }}];
+- (BOOL)isImmutable {
+    return NO;
 }
 
 {% for property in class.all_mutable_properties %}@dynamic {{ property.name }};
