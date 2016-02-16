@@ -26,7 +26,7 @@
     int _counter;
  }
 
-- (instancetype _Nullable)initWithID:(NSString * _Nonnull)ID error:(NSError * _Nullable __autoreleasing * _Nullable)error NS_DESIGNATED_INITIALIZER;
+- (instancetype _Nullable)initWithID:(NSString * _Nonnull)ID  error:(NSError * _Nullable __autoreleasing * _Nullable)error NS_DESIGNATED_INITIALIZER;
 
 - (instancetype _Nonnull)initWithExampleClass:(SCExampleClass * _Nonnull)exampleClass NS_DESIGNATED_INITIALIZER;
 

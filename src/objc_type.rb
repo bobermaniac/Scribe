@@ -65,6 +65,10 @@ module Objc
       (self.type_traits & %i[ value immutable ]).any?
     end
 
+    def requires_immutable_copy?
+      self.type_traits.include? :immutable_copy
+    end
+
     def to_s
       return @base_type if @generic_subtypes.nil?
       "#{@base_type} of #{@generic_subtypes.join ', '}"

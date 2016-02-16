@@ -14,5 +14,5 @@
 
 @end
 
-BOOL SCObjectIsImmutable(id _Nonnull obj);
-id _Nullable SCObjectImmutableCopy(id _Nonnull obj, NSError * _Nullable __autoreleasing * _Nullable error);
+BOOL SCObjectIsImmutable(id _Nullable obj);
+id _Nullable SCObjectImmutableCopy(id _Nullable obj, NSError * _Nullable __autoreleasing * _Nullable error);

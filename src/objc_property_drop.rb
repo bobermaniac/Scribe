@@ -134,7 +134,9 @@ module Liquid
     end
 
     def immutable_copy_method
-
+      return '<v>' unless @objc_property.type.reference_type?
+      return 'SCObjectImmutableCopy(<v>, error)' if @objc_property.type.requires_immutable_copy?
+      '<v>'
     end
   end
 end

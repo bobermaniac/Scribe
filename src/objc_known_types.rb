@@ -6,8 +6,8 @@ module Objc
       return @@known_types unless @@known_types.nil?
       @@known_types = {
           # Reference types
-          'id' => %i[ reference mutable ],
-          'NSObject *' => %i[ reference immutable ],
+          'id' => %i[ reference ],
+          'NSObject *' => %i[ reference ],
           'dispatch_block_t' => %i[ reference block immutable copy ],
           'dispatch_function_t' => %i[  reference block immutable copy ],
           'dispatch_data_applier_t' => %i[ reference block immutable copy ],

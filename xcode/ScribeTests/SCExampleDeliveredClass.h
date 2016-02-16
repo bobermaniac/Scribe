@@ -22,7 +22,7 @@
     NSDictionary<NSString *, NSNumber *> * _Nullable _tableOfNumbers;
  }
 
-- (instancetype _Nullable)initWithID:(NSString * _Nonnull)ID additionalValue:(NSValue * _Nullable)additionalValue error:(NSError * _Nullable __autoreleasing * _Nullable)error NS_DESIGNATED_INITIALIZER;
+- (instancetype _Nullable)initWithID:(NSString * _Nonnull)ID additionalValue:(NSValue * _Nullable)additionalValue  error:(NSError * _Nullable __autoreleasing * _Nullable)error NS_DESIGNATED_INITIALIZER;
 
 - (instancetype _Nonnull)initWithExampleClass:(SCExampleDeliveredClass * _Nonnull)exampleClass NS_DESIGNATED_INITIALIZER;
 

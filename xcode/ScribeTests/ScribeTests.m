@@ -28,12 +28,12 @@
 - (void)testExampleClass {
     NSError *error = nil;
     SCExampleClassBuilder *builder = [SCExampleClass builder];
-    builder.ID = @"SomeID";
+    builder.ID = [NSMutableString stringWithString:@"Some ID"];
     builder.objectDescription = @"some description";
     builder.counter = 5;
     SCExampleClass *class = [builder buildWithError:&error];
     SCMutableExampleClass *mutableClass = [class mutableCopy];
-    [mutableClass addComponent:@"Component 1" error:&error];
+    [mutableClass addComponent:[NSMutableString stringWithString:@"Component 1"] error:&error];
     [mutableClass addComponent:@"Component 2" error:&error];
     class = [[SCExampleClass alloc] initWithExampleClass:mutableClass];
 }

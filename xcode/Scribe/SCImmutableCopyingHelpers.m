@@ -29,11 +29,15 @@
 
 - (instancetype)initWithDomain:(NSString *)domain code:(NSInteger)code userInfo:(NSDictionary *)dict {
     @throw [NSException exceptionWithName:@"Forbidden" reason:@"This initializer is forbidden for call" userInfo:@{}];
+    return [self initWithObject:self];
 }
 
 @end
 
-BOOL SCObjectIsImmutable(id _Nonnull obj) {
+BOOL SCObjectIsImmutable(id _Nullable obj) {
+    if (!obj) {
+        return YES;
+    }
     if (![obj conformsToProtocol:@protocol(SCImmutableCopying)]) {
         return NO;
     }
@@ -43,7 +47,10 @@ BOOL SCObjectIsImmutable(id _Nonnull obj) {
     return YES;
 }
 
-id _Nullable SCObjectImmutableCopy(id _Nonnull obj, NSError * _Nullable __autoreleasing * _Nullable error) {
+id _Nullable SCObjectImmutableCopy(id _Nullable obj, NSError * _Nullable __autoreleasing * _Nullable error) {
+    if (!obj) {
+        return obj;
+    }
     if (![obj conformsToProtocol:@protocol(SCImmutableCopying)]) {
         if (error) {
             *error = [[SCObjectCantBeImmutableError alloc] initWithObject:obj];
