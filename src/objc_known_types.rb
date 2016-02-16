@@ -25,6 +25,8 @@ module Objc
           'NSMutableOrderedSet *' => %i[ reference ordered_set mutable copy immutable_copy mutable_copy ],
           'NSDictionary *' => %i[ reference dictionary immutable copy immutable_copy mutable_copy ],
           'NSMutableDictionary *' => %i[ reference dictionary mutable copy immutable_copy mutable_copy ],
+          'NSData *' => %i[ reference immutable copy immutable_copy mutable_copy ],
+          'NSMutableData *' => %i[ reference mutable copy immutable_copy mutable_copy ],
           'NSDate *' => %i[ reference immutable ],
           'UIFont *' => %i[ reference immutable ],
 

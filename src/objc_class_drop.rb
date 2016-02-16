@@ -99,7 +99,8 @@ module Liquid
     end
 
     def protocols
-      dump_protocols({ mutable_copy: 'NSMutableCopying', make_archivable: 'NSCoding' }, [ @objc_class.ancestor.name, 'NSCopying' ] )
+      immutable_copy = Scribe.default_interfaces['immutable copy']['protocol']
+      dump_protocols({ mutable_copy: 'NSMutableCopying', make_archivable: 'NSCoding' }, [ @objc_class.ancestor.name, 'NSCopying', immutable_copy ] )
     end
 
     def mutable_protocols

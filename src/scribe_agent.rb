@@ -53,7 +53,8 @@ else
       'foundation' => '<Foundation/Foundation.h>',
       'tracking' => { 'protocol' => 'SCTrackChanges', 'in' => '"SCTrackChanges.h"' },
       'tracker' => { 'class' => 'SCPropertyChangesTracker', 'protocol' => { 'ext' => 'SCTracker', 'int' => 'SCTracking' }, 'in' => '"SCPropertyChangesTracker.h"'},
-      'validator' => { 'protocol' => 'SCValidator', 'in' => '"SCValidator.h"'}
+      'validator' => { 'protocol' => 'SCValidator', 'in' => '"SCValidator.h"'},
+      'immutable copy' => { 'protocol' => 'SCImmutableCopying','in' => '"SCImmutableCopying.h"' }
   }
   classes = Scribe.to_objc results
   abort '[ERROR] Validation failed for class graph. Please check messages above and fix all problems' unless Scribe.validate_classes classes

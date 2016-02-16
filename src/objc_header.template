@@ -3,6 +3,7 @@
 {{ class.imports }}
 {% if class.supports_track_changes? %}
 #import {{ interfaces['tracking']['in'] }}{% endif %}
+#import {{ interfaces['immutable copy']['in'] }}
 
 {% for other_class in other_classes %}@class {{ other_class }};
 {% endfor %}{% if class.supports_builder? %}@class {{ class.class_name }}Builder;{% endif %}

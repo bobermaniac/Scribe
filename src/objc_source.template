@@ -93,6 +93,10 @@
     return self;
 }
 
+- (id)immutableCopyWithZone:(NSZone *)zone {
+    return self;
+}
+
 {% if class.supports_mutable_copy? %}
 - (id)mutableCopyWithZone:(NSZone *)zone {
     {{ class.class_name }} *{{ class.copy_ctor_param }} = self;
@@ -163,7 +167,12 @@
 {% endif %}
 
 - (id)copyWithZone:(NSZone *)zone {
-    {{ class.class_name }} *{{ class.copy_ctor_param }} = self;
+    {{ class.mutable_class_name }} *{{ class.copy_ctor_param }} = self;
+    return [[{{ class.mutable_class_name }} allocWithZone:zone] init{{ class.copy_ctor_call }}];
+}
+
+- (id)immutableCopyWithZone:(NSZone *)zone {
+    {{ class.mutable_class_name }} *{{ class.copy_ctor_param }} = self;
     return [[{{ class.class_name }} allocWithZone:zone] init{{ class.copy_ctor_call }}];
 }
 
