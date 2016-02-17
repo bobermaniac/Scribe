@@ -9,6 +9,17 @@
 #import <XCTest/XCTest.h>
 #import <Scribe/Scribe.h>
 
+@interface SCTestClassWithFields : NSObject
+
+@property (nonatomic, strong) NSString *f1;
+@property (nonatomic, assign) int f2;
+
+@end
+
+@implementation SCTestClassWithFields
+
+@end
+
 @interface SCTrackerTests : XCTestCase
 
 @end
@@ -70,6 +81,20 @@
     [tracking property:@"p" afterChangeValue:@"g"];
     XCTAssertEqualObjects([tracking initialValueForKey:@"p"], nil);
     XCTAssertEqualObjects([tracking finalValueForKey:@"p"], @"g");
+}
+
+- (void)testTrackerWritingSingleChangeAutomatic {
+    SCTestClassWithFields *c = [[SCTestClassWithFields alloc] init];
+    
+    id<SCTracking> tracking = [[SCPropertyChangesTracker alloc] initWithTrackingObject:c mode:SCPropertyChangesTrackerAutomaticMode];
+    c.f1 = @"Hello";
+    c.f2 = 5;
+    XCTAssertTrue([tracking.changedKeys containsObject:@"f1"]);
+    XCTAssertEqualObjects([tracking initialValueForKey:@"f1"], nil);
+    XCTAssertEqualObjects([tracking finalValueForKey:@"f1"], @"Hello");
+    XCTAssertTrue([tracking.changedKeys containsObject:@"f2"]);
+    XCTAssertEqualObjects([tracking initialValueForKey:@"f2"], @0);
+    XCTAssertEqualObjects([tracking finalValueForKey:@"f2"], @5);
 }
 
 @end
