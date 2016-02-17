@@ -12,9 +12,7 @@
 @implementation NSSet (SCImmutableCopying)
 
 - (BOOL)isImmutable {
-    return [self objectsPassingTest:^BOOL(id  _Nonnull obj, BOOL * _Nonnull stop) {
-        return !SCObjectIsImmutable(obj);
-    }].count == 0;
+    return SCEnumerableContentsAreImmutable(self);
 }
 
 - (id)immutableCopyWithError:(NSError *__autoreleasing  _Nullable *)error {

@@ -12,9 +12,7 @@
 @implementation NSArray (SCImmutableCopying)
 
 - (BOOL)isImmutable {
-    return [self indexOfObjectPassingTest:^BOOL(id _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        return !SCObjectIsImmutable(obj);
-    }] == NSNotFound;
+    return SCEnumerableContentsAreImmutable(self);
 }
 
 - (id)immutableCopyWithError:(NSError *__autoreleasing  _Nullable *)error {

@@ -9,6 +9,15 @@
 #import "SCImmutableCopyingHelpers.h"
 #import "SCImmutableCopying.h"
 
+NSString * const SCImmutableCopyingErrorDomain = @"Scribe::ImmutableCopying";
+NSInteger const SCCannotMakeImmutableCopyOfComplexObjectErrorCode = -1;
+
+@interface SCObjectCantBeImmutableError : NSError
+
+- (nonnull instancetype)initWithObject:(id _Nonnull)object NS_DESIGNATED_INITIALIZER;
+
+@end
+
 @implementation SCObjectCantBeImmutableError
 
 - (instancetype)initWithObject:(id)object {
@@ -21,7 +30,7 @@
                                NSLocalizedRecoverySuggestionErrorKey : localizedRecoverySuggestion,
                                };
     
-    if (self = [super initWithDomain:@"Scribe" code:-1 userInfo:userInfo]) {
+    if (self = [super initWithDomain:SCImmutableCopyingErrorDomain code:SCCannotMakeImmutableCopyOfComplexObjectErrorCode userInfo:userInfo]) {
         
     }
     return self;
@@ -43,6 +52,15 @@ BOOL SCObjectIsImmutable(id _Nullable obj) {
     }
     if (![obj isImmutable]) {
         return NO;
+    }
+    return YES;
+}
+
+BOOL SCEnumerableContentsAreImmutable(id<NSFastEnumeration> _Nullable enumerable) {
+    for (id _Nonnull obj in enumerable) {
+        if (!SCObjectIsImmutable(obj)) {
+            return NO;
+        }
     }
     return YES;
 }

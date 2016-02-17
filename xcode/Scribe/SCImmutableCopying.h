@@ -8,16 +8,25 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * _Nonnull const SCImmutableCopyingErrorDomain;
+extern NSInteger const SCCannotMakeImmutableCopyOfComplexObjectErrorCode;
+
 /**
  *  Conform this protocol to declare your class as immutable or give possibility to make immutable copy of it
  */
 @protocol SCImmutableCopying <NSObject>
 
+#pragma mark - Required
+
+@required
 /**
  *  Returns YES if class declared as immutable
  */
 @property (nonatomic, readonly, getter=isImmutable) BOOL immutable;
 
+#pragma mark - Optional
+
+@optional
 /**
  *  Returns instance of immutable verison of current class with same data (e.g. NSArray for NSMutableArray)
  *

@@ -14,16 +14,16 @@
     return YES;
 }
 
-- (id)immutableCopyWithError:(NSError *__autoreleasing  _Nullable *)error {
-    return [NSString stringWithString:self];
-}
-
 @end
 
 @implementation NSMutableString (SCImmutableCopying)
 
 - (BOOL)isImmutable {
     return NO;
+}
+
+- (id)immutableCopyWithError:(NSError *__autoreleasing  _Nullable *)error {
+    return [NSString stringWithString:self];
 }
 
 @end

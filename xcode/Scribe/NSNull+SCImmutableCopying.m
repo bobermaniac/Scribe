@@ -14,8 +14,4 @@
     return YES;
 }
 
-- (id)immutableCopyWithError:(NSError *__autoreleasing  _Nullable *)error {
-    return [NSNull null];
-}
-
 @end
