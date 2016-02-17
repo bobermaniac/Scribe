@@ -43,7 +43,7 @@ Property-level annotations allows you to generate:
 Full documentation ongoing.
 
 ## TODO
-* Check object graph
+* ~~Check object graph~~
 * ~~Builder support~~
 * ~~Abstract class support~~
 * ~~getter= and setter= support~~
@@ -51,6 +51,8 @@ Full documentation ongoing.
 * ~~Common Objective C library with implementations used in generated files~~
 * ~~Validation?~~
     * Automatic validators for `_Notnull` type annotation.
+* Undo manager
+    * Based on tracker? It is possible if we ask him to save all history on demand
 * ~~TESTS~~
     * Tests for parser/gen — how to test them? Check it out
 * Scribe directives inheritance and overriding

@@ -13,6 +13,9 @@
 @required
 @property (nonatomic, readonly, nonnull) NSArray<NSString *> *changedKeys;
 
+- (id _Nullable)initialValueForKey:(NSString * _Nonnull)key;
+- (id _Nullable)finalValueForKey:(NSString * _Nonnull)key;
+
 @end
 
 @protocol SCTracking <SCTracker, NSCopying>

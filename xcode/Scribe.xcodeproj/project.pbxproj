@@ -46,6 +46,7 @@
 		E7D117C41C74F4A8000E53C2 /* SCImmutableCopyingHelpers.h in Headers */ = {isa = PBXBuildFile; fileRef = E7D117B51C739E63000E53C2 /* SCImmutableCopyingHelpers.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E7D117C71C7500AB000E53C2 /* SCValidatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D117C61C7500AB000E53C2 /* SCValidatorTests.m */; };
 		E7D117C91C75020E000E53C2 /* SCValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D117C81C75020E000E53C2 /* SCValidator.m */; };
+		E7D117CB1C7506FD000E53C2 /* SCTrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E7D117CA1C7506FD000E53C2 /* SCTrackerTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		E7D117C21C74F35B000E53C2 /* SCImmutableCopyingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCImmutableCopyingTests.m; sourceTree = "<group>"; };
 		E7D117C61C7500AB000E53C2 /* SCValidatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCValidatorTests.m; sourceTree = "<group>"; };
 		E7D117C81C75020E000E53C2 /* SCValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCValidator.m; sourceTree = "<group>"; };
+		E7D117CA1C7506FD000E53C2 /* SCTrackerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCTrackerTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				E7C110E51C6E64DB008ADAE3 /* Example */,
+				E7D117CA1C7506FD000E53C2 /* SCTrackerTests.m */,
 				E7D117C21C74F35B000E53C2 /* SCImmutableCopyingTests.m */,
 				E7D117C61C7500AB000E53C2 /* SCValidatorTests.m */,
 				E7C110B21C67E730008ADAE3 /* Info.plist */,
@@ -406,6 +409,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7C111091C711979008ADAE3 /* SCExampleSetContainer.m in Sources */,
+				E7D117CB1C7506FD000E53C2 /* SCTrackerTests.m in Sources */,
 				E7C110EC1C6E8C21008ADAE3 /* SCExampleDeliveredClass.m in Sources */,
 				E7D117C71C7500AB000E53C2 /* SCValidatorTests.m in Sources */,
 				E7C110E91C6E67CA008ADAE3 /* SCExampleClass.m in Sources */,

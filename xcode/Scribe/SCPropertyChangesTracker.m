@@ -35,6 +35,14 @@
     
 }
 
+- (id)initialValueForKey:(NSString *)key {
+    return nil;
+}
+
+- (id)finalValueForKey:(NSString *)key {
+    return nil;
+}
+
 - (NSArray<NSString *> *)changedKeys {
     return @[ ];
 }
