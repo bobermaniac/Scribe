@@ -1,6 +1,6 @@
 # Scribe
 
-## WTF is dat?
+## What is that?
 
 Scribe is ~~powerfull~~ ~~useful~~ ~~helpful~~ strange Ruby script that allows you to generate **tons of boilerplate Objective C code** using only simple class definitions. It is **extremely** a must if your payment depends on number lines of code you have written. In any other case it could help you to do your data structure more clear and determinate.
 
@@ -23,19 +23,24 @@ Scribe can do much more useful stuff but I'm too lazy to write about it now. Eng
 
 Best regards.
 
-## Basic capabilities
-* Parse simple header files
-* Make class graph
-* Extract public class interfaces
-* Use extended annotations to generate usefull stuff such as:
-    * Mutable copy based on `NSMutableCopying` interface
-    * Abstract classes (runtime type check in initializer)
-    * Builder pattern
-    * Archivable based on `NSCoding` interface
-    * Changes tracker for mutable class version
-    * Constructors with nessesary parameters based on readonly fields
-    * Property mutators data validation
-    * Collection properties extended access syntax
+## How should I do to make magic happens?
+
+By default Scribe only extracts interfaces and generates immutable class. Maybe it's pretty helpful but definitely not all you might need. For extended features you should use annotations.
+
+There's 2 annotations level: class-level annotations and property-level annotations. All of them defined with keyword `scribe` written in code above statement with nessesary requirements inside.
+
+Class level annotations allows you to generate:
+1. Mutable version of class with `implement mutable`
+2. Abstract classes using `make abstract`
+3. Builder class by defining `implement builder`
+4. Serialization code for `NSArchiver` by implementing `NSCoding` with `implement archivable`
+5. Code for tracking changes of mutable objects by using `implement tracking`
+
+Property-level annotations allows you to generate:
+1. Validation code by defining `implement validator`
+2. Collection extended access code with `implement collection`
+
+Full documentation ongoing.
 
 ## TODO
 * Check object graph
