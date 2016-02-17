@@ -16,9 +16,13 @@
     }
     
     if (error) {
-        *error = [NSError errorWithDomain:@"" code:0 userInfo:@{}];
+        *error = [SCValidationError validationErrorWithValidator:self];
     }
     return NO;
+}
+
++ (instancetype)validator {
+    return [[self alloc] init];
 }
 
 @end

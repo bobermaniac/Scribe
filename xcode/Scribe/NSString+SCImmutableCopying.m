@@ -19,6 +19,7 @@
 @implementation NSMutableString (SCImmutableCopying)
 
 - (BOOL)isImmutable {
+    BOOL mutableString = [self isKindOfClass:[NSMutableString class]];
     return NO;
 }
 

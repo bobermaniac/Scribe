@@ -20,5 +20,9 @@ FOUNDATION_EXPORT const unsigned char ScribeVersionString[];
 #import <Scribe/SCTrackChanges.h>
 #import <Scribe/SCPropertyChangesTracker.h>
 #import <Scribe/SCImmutableCopying.h>
+#import <Scribe/SCImmutableCopyingHelpers.h>
+
+#import <Scribe/SCNonnullValidator.h>
+#import <Scribe/SCNonemptyStringValidator.h>
 
 #define scribe(...)

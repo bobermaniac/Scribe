@@ -51,7 +51,8 @@ Full documentation ongoing.
 * ~~Common Objective C library with implementations used in generated files~~
 * ~~Validation?~~
     * Automatic validators for `_Notnull` type annotation.
-* TESTS
+* ~~TESTS~~
+    * Tests for parser/gen — how to test them? Check it out
 * Scribe directives inheritance and overriding
 * Conflicts discovering and investigation
     * ~~Basic validators for inconsistent state~~

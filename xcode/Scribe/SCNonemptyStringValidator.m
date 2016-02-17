@@ -11,13 +11,23 @@
 @implementation SCNonemptyStringValidator
 
 - (BOOL)validateValue:(id)value ofProperty:(NSString *)property forObject:(id)object error:(NSError **)error {
-    if (!property.length) {
+    if (value && ![value isKindOfClass:[NSString class]]) {
         if (error) {
-            *error = [NSError errorWithDomain:@"" code:0 userInfo:nil];
+            *error = [SCValidationError invalidTypeWithValidator:self];
+        }
+        return NO;
+    }
+    if (![value length]) {
+        if (error) {
+            *error = [SCValidationError validationErrorWithValidator:self];
         }
         return NO;
     }
     return YES;
+}
+
++ (instancetype)validator {
+    return [[self alloc] init];
 }
 
 @end
