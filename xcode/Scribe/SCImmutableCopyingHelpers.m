@@ -14,7 +14,7 @@ NSInteger const SCCannotMakeImmutableCopyOfComplexObjectErrorCode = -1;
 
 @interface SCObjectCantBeImmutableError : NSError
 
-- (nonnull instancetype)initWithObject:(id _Nonnull)object NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithObject:(id)object NS_DESIGNATED_INITIALIZER;
 
 @end
 
@@ -43,7 +43,7 @@ NSInteger const SCCannotMakeImmutableCopyOfComplexObjectErrorCode = -1;
 
 @end
 
-BOOL SCObjectIsImmutable(id _Nullable obj) {
+BOOL SCObjectIsImmutable(id obj) {
     if (!obj) {
         return YES;
     }
@@ -56,8 +56,8 @@ BOOL SCObjectIsImmutable(id _Nullable obj) {
     return YES;
 }
 
-BOOL SCEnumerableContentsAreImmutable(id<NSFastEnumeration> _Nullable enumerable) {
-    for (id _Nonnull obj in enumerable) {
+BOOL SCEnumerableContentsAreImmutable(id<NSFastEnumeration> enumerable) {
+    for (id obj in enumerable) {
         if (!SCObjectIsImmutable(obj)) {
             return NO;
         }
@@ -65,7 +65,7 @@ BOOL SCEnumerableContentsAreImmutable(id<NSFastEnumeration> _Nullable enumerable
     return YES;
 }
 
-id _Nullable SCObjectImmutableCopy(id _Nullable obj, NSError * _Nullable __autoreleasing * _Nullable error) {
+id SCObjectImmutableCopy(id obj, NSError ** error) {
     if (!obj) {
         return obj;
     }
