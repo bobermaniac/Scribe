@@ -53,6 +53,8 @@ Full documentation ongoing.
     * Automatic validators for `_Notnull` type annotation.
 * Undo manager
     * Based on tracker? It is possible if we ask him to save all history on demand
+* isEqual: method code generation
+    * Based on scribe definition or generate always?
 * ~~TESTS~~
     * Tests for parser/gen — how to test them? Check it out
 * Scribe directives inheritance and overriding
