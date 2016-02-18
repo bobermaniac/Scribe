@@ -24,6 +24,8 @@ extern NSInteger const SCCannotMakeImmutableCopyOfComplexObjectErrorCode;
  */
 @property (nonatomic, readonly, getter=isImmutable) BOOL immutable;
 
+@property (nonatomic, readonly) NSUInteger deepHash;
+
 #pragma mark - Optional
 
 @optional

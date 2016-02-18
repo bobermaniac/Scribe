@@ -14,4 +14,8 @@
     return YES;
 }
 
+- (NSUInteger)deepHash {
+    return self.hash;
+}
+
 @end

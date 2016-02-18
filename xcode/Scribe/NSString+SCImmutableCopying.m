@@ -8,10 +8,16 @@
 
 #import "NSString+SCImmutableCopying.h"
 
+Class SCImmutableCopying__NSCFConstantStringClass = nil;
+
 @implementation NSString (SCImmutableCopying)
 
 - (BOOL)isImmutable {
     return YES;
+}
+
+- (NSUInteger)deepHash {
+    return self.hash;
 }
 
 @end
@@ -19,7 +25,12 @@
 @implementation NSMutableString (SCImmutableCopying)
 
 - (BOOL)isImmutable {
-    BOOL mutableString = [self isKindOfClass:[NSMutableString class]];
+    if (!SCImmutableCopying__NSCFConstantStringClass) {
+        SCImmutableCopying__NSCFConstantStringClass = NSClassFromString(@"__NSCFConstantString");
+    }
+    if (self.class == SCImmutableCopying__NSCFConstantStringClass) {
+        return [super isImmutable];
+    }
     return NO;
 }
 

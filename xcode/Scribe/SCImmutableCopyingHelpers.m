@@ -80,3 +80,7 @@ id SCObjectImmutableCopy(id obj, NSError ** error) {
     }
     return [obj immutableCopyWithError:error];
 }
+
+NSUInteger SCObjectHash(id _Nullable obj) {
+    return [obj hash];
+}
