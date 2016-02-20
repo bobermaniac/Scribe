@@ -105,6 +105,10 @@
     XCTAssertNotEqual(SCObjectHash(d1), SCObjectHash(d3));
 }
 
+- (void)testNSDataHash {
+    XCTFail(@"Here's be dragons");
+}
+
 - (void)testNSArrayHash {
     NSArray *a1 = @[ (@1).h, (@2).h, (@3).h, (@4).h, (@5).h ];
     NSArray *a2 = @[ (@1).h, (@2).h, (@3).h, (@4).h, (@5).h ];
