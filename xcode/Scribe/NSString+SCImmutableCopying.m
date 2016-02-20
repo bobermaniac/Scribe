@@ -16,7 +16,7 @@ Class SCImmutableCopying__NSCFConstantStringClass = nil;
     return YES;
 }
 
-- (NSUInteger)deepHash {
+- (NSUInteger)SC_hash {
     return self.hash;
 }
 

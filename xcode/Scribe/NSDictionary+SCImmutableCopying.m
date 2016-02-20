@@ -29,6 +29,10 @@
     return [NSDictionary dictionaryWithDictionary:result];
 }
 
+- (NSUInteger)SC_hash {
+    return SCDictionaryHash(self);
+}
+
 @end
 
 @implementation NSMutableDictionary (SCImmutableCopying)

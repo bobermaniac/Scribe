@@ -27,6 +27,10 @@
     return [NSSet setWithSet:result];
 }
 
+- (NSUInteger)SC_hash {
+    return SCEnumerableHash(self, NO);
+}
+
 @end
 
 @implementation NSMutableSet (SCImmutableCopying)

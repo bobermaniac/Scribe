@@ -27,6 +27,10 @@
     return [NSArray arrayWithArray:result];
 }
 
+- (NSUInteger)SC_hash {
+    return SCEnumerableHash(self, YES);
+}
+
 @end
 
 @implementation NSMutableArray (SCImmutableCopying) 

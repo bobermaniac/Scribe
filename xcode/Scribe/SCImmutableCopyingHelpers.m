@@ -82,5 +82,61 @@ id SCObjectImmutableCopy(id obj, NSError ** error) {
 }
 
 NSUInteger SCObjectHash(id _Nullable obj) {
-    return [obj hash];
+    return [obj conformsToProtocol:@protocol(SCImmutableCopying)] ? [obj SC_hash] : [obj hash];
+}
+
+#define NSUINT_BIT (CHAR_BIT * sizeof(NSUInteger))
+#define NSUINTROTATE(val, howmuch) ((((NSUInteger)(val)) << (howmuch)) | (((NSUInteger)(val)) >> (NSUINT_BIT - (howmuch))))
+
+NSUInteger _SCEnumerableHashPositionAware(id<NSFastEnumeration> _Nullable enumerable) {
+    NSUInteger hash = 0;
+    for (id obj in enumerable) {
+        hash = NSUINTROTATE(hash, 7) ^ SCObjectHash(obj);
+    }
+    return hash;
+}
+
+NSUInteger SCDictionaryHash(NSDictionary * _Nullable dictionary) {
+    NSUInteger *elementHashes = malloc(dictionary.count * sizeof(NSUInteger));
+    
+    size_t index = 0;
+    for (id<NSCopying> key in dictionary) {
+        id value = dictionary[key];
+        
+        NSUInteger keyHash = SCObjectHash(key);
+        NSUInteger valueHash = SCObjectHash(value);
+        NSUInteger rotation = valueHash % NSUINT_BIT;
+        
+        elementHashes[index++] = NSUINTROTATE(keyHash, rotation) ^ valueHash;
+    }
+    
+    NSUInteger hash = 0;
+    for (index = 0; index < dictionary.count; index++) {
+        hash = hash ^ elementHashes[index];
+    }
+
+    free(elementHashes);
+    return hash;
+}
+
+#undef NSUINT_BIT
+#undef NSUINTROTATE
+
+NSUInteger _SCEnumerableHashPositionUnaware(id<NSFastEnumeration> _Nullable enumerable) {
+    NSUInteger hash = 0;
+    for (id<SCImmutableCopying> obj in enumerable) {
+        hash = hash ^ ([obj conformsToProtocol:@protocol(SCImmutableCopying)] ? obj.SC_hash : obj.hash);
+    }
+    return hash;
+}
+
+NSUInteger SCEnumerableHash(id<NSFastEnumeration> _Nullable enumerable, BOOL positionAware) {
+    if (!enumerable) {
+        return 0;
+    }
+    if (positionAware) {
+        return _SCEnumerableHashPositionAware(enumerable);
+    } else {
+        return _SCEnumerableHashPositionUnaware(enumerable);
+    }
 }

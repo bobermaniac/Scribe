@@ -14,7 +14,7 @@
     return YES;
 }
 
-- (NSUInteger)deepHash {
+- (NSUInteger)SC_hash {
     return self.hash;
 }
 

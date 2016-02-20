@@ -14,6 +14,10 @@
     return YES;
 }
 
+- (NSUInteger)SC_hash {
+    return self.hash;
+}
+
 @end
 
 @implementation NSMutableData (SCImmutableCopying)

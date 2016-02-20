@@ -27,6 +27,10 @@
     return [NSOrderedSet orderedSetWithOrderedSet:result];
 }
 
+- (NSUInteger)SC_hash {
+    return SCEnumerableHash(self, YES);
+}
+
 @end
 
 @implementation NSMutableOrderedSet (SCImmutableCopying)
