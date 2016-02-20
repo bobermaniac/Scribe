@@ -134,212 +134,167 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScribeTests/SCImmutableCopyingTests.m"
-            timestampString = "477434362.872943"
+            timestampString = "477698912.974847"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "-testNSMutableString"
             landmarkType = "5">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[SCImmutableCopyingTests testNSMutableString]"
                   moduleName = "ScribeTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
-                  timestampString = "477698559.087707"
+                  timestampString = "477699068.350003"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
                   offsetFromSymbolStart = "442">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[SCImmutableCopyingTests testNSMutableString]"
                   moduleName = "ScribeTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
-                  timestampString = "477698559.087934"
+                  timestampString = "477699068.350197"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
                   offsetFromSymbolStart = "1022">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[SCImmutableCopyingTests testNSMutableString]"
                   moduleName = "ScribeTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
-                  timestampString = "477698559.08822"
+                  timestampString = "477699068.350429"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
                   offsetFromSymbolStart = "1495">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[SCImmutableCopyingTests testNSMutableString]"
                   moduleName = "ScribeTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
-                  timestampString = "477698559.088413"
+                  timestampString = "477699068.35067"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
                   offsetFromSymbolStart = "1857">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[SCImmutableCopyingTests testNSMutableString]"
                   moduleName = "ScribeTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
-                  timestampString = "477698559.08862"
+                  timestampString = "477699068.350844"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
                   offsetFromSymbolStart = "1881">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[SCImmutableCopyingTests testNSMutableString]"
                   moduleName = "ScribeTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
-                  timestampString = "477698559.088832"
+                  timestampString = "477699068.351048"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
                   offsetFromSymbolStart = "2409">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[SCImmutableCopyingTests testNSMutableString]"
                   moduleName = "ScribeTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
-                  timestampString = "477698559.089072"
+                  timestampString = "477699068.351239"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
                   offsetFromSymbolStart = "2890">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[SCImmutableCopyingTests testNSMutableString]"
                   moduleName = "ScribeTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
-                  timestampString = "477698559.089279"
+                  timestampString = "477699068.351463"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
                   offsetFromSymbolStart = "3279">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[SCImmutableCopyingTests testNSMutableString]"
                   moduleName = "ScribeTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
-                  timestampString = "477698559.089475"
+                  timestampString = "477699068.351666"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
-                  offsetFromSymbolStart = "3841">
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "3508">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[SCImmutableCopyingTests testNSMutableString]"
                   moduleName = "ScribeTests"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
-                  timestampString = "477698559.089657"
+                  timestampString = "477699068.351804"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
-                  offsetFromSymbolStart = "4326">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[SCImmutableCopyingTests testNSMutableString]"
-                  moduleName = "ScribeTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
-                  timestampString = "477698559.089834"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
-                  offsetFromSymbolStart = "4704">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[SCImmutableCopyingTests testNSMutableString]"
-                  moduleName = "ScribeTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
-                  timestampString = "477698559.089995"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
-                  offsetFromSymbolStart = "4922">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[SCImmutableCopyingTests testNSMutableString]"
-                  moduleName = "ScribeTests"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
-                  timestampString = "477698559.090191"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "51"
-                  endingLineNumber = "51"
-                  offsetFromSymbolStart = "5407">
+                  startingLineNumber = "53"
+                  endingLineNumber = "53"
+                  offsetFromSymbolStart = "3993">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -351,11 +306,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScribeTests/SCImmutableCopyingTests.m"
-            timestampString = "477434362.872943"
+            timestampString = "477698912.974847"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "-testNSValue"
             landmarkType = "5">
          </BreakpointContent>
@@ -367,11 +322,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScribeTests/SCImmutableCopyingTests.m"
-            timestampString = "477434362.872943"
+            timestampString = "477699067.989396"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "-testNSMutableSet"
             landmarkType = "5">
          </BreakpointContent>
@@ -687,6 +642,100 @@
                   offsetFromSymbolStart = "9995">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScribeTests/SCImmutableCopyingTests.m"
+            timestampString = "477699067.989396"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "-testNSData"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SCImmutableCopyingTests testNSData]"
+                  moduleName = "ScribeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
+                  timestampString = "477698932.999029"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SCImmutableCopyingTests testNSData]"
+                  moduleName = "ScribeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
+                  timestampString = "477698932.999176"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "499">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SCImmutableCopyingTests testNSData]"
+                  moduleName = "ScribeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
+                  timestampString = "477698932.999403"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "1052">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SCImmutableCopyingTests testNSData]"
+                  moduleName = "ScribeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
+                  timestampString = "477698932.999577"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "1174">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScribeTests/SCImmutableCopyingTests.m"
+            timestampString = "477699067.989396"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
+            landmarkName = "-testNSMutableData"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
