@@ -9,7 +9,10 @@
 {% endfor %}
 {{ class.impl_imports }}
 
-@interface {{ class.class_name }} ()
+@interface {{ class.class_name }} () {
+    @protected
+    NSUInteger _SC_hash;
+}
 
 {% if class.supports_builder? %}- (instancetype)initWithBuilder:({{ class.class_name }}Builder *)builder{% if class.constructor_could_fail? %} error:(NSError **)error{% endif %};
 {% endif %}{% for property in class.all_properties %}{% if property.validate? %}+ (BOOL){{ property.validator_name }}:({{ property.type }}){{ property.name }} forObject:({{ class.class_name }} *)object error:(NSError **)error;
@@ -108,6 +111,17 @@
     return [[{{class.class_name}} alloc] init{{ class.copy_ctor_call }}];
 }
 
+- (NSUInteger)SC_hash {
+    if (!_SC_hash) {
+        _SC_hash = SCEnumerableHash(@[ {% for property in class.all_properties %}{{ property.field_name_boxed }}, {% endfor%} ], YES);
+    }
+    return _SC_hash;
+}
+
+- (NSUInteger)hash {
+    return self.SC_hash;
+}
+
 {% if class.supports_mutable_copy? %}
 - (id)mutableCopyWithZone:(NSZone *)zone {
     {{ class.class_name }} *{{ class.copy_ctor_param }} = self;
@@ -195,6 +209,7 @@
         {% if class.supports_track_changes? %}[_tracker property:@"{{ property.name }}" beforeChangeValue:{{ property.field_name_boxed }}];{% endif %}
         [self willChangeValueForKey:@"{{ property.name }}"];
         {{ property.field_name }} = {% if property.copy_on_assign? %}[{{ property.name}} copy]{% else %}{{ property.name }}{% endif %};
+        _SC_hash = 0;
         [self didChangeValueForKey:@"{{ property.name }}"];
         {% if class.supports_track_changes? %}[_tracker property:@"{{ property.name }}" afterChangeValue:{{ property.field_name_boxed }}];{% endif %}
     }

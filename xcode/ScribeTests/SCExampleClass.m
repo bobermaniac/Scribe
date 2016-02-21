@@ -11,7 +11,10 @@
 #import "SCNonemptyStringValidator.h"
 #import "SCExampleArrayValidator.h"
 
-@interface SCExampleClass ()
+@interface SCExampleClass () {
+    @protected
+    NSUInteger _SC_hash;
+}
 
 - (instancetype)initWithBuilder:(SCExampleClassBuilder *)builder error:(NSError **)error;
 + (BOOL)_validateID:(NSString *)ID forObject:(SCExampleClass *)object error:(NSError **)error;
@@ -116,6 +119,17 @@
 - (id)immutableCopyWithError:(NSError **)error {
     SCExampleClass *exampleClass = self;
     return [[SCExampleClass alloc] initWithExampleClass:exampleClass];
+}
+
+- (NSUInteger)SC_hash {
+    if (!_SC_hash) {
+        _SC_hash = SCEnumerableHash(@[ _ID, _objectDescription, _components, @(_counter),  ], YES);
+    }
+    return _SC_hash;
+}
+
+- (NSUInteger)hash {
+    return self.SC_hash;
 }
 
 
@@ -228,6 +242,7 @@
         [_tracker property:@"objectDescription" beforeChangeValue:_objectDescription];
         [self willChangeValueForKey:@"objectDescription"];
         _objectDescription = objectDescription;
+        _SC_hash = 0;
         [self didChangeValueForKey:@"objectDescription"];
         [_tracker property:@"objectDescription" afterChangeValue:_objectDescription];
     }
@@ -244,6 +259,7 @@
         [_tracker property:@"components" beforeChangeValue:_components];
         [self willChangeValueForKey:@"components"];
         _components = components;
+        _SC_hash = 0;
         [self didChangeValueForKey:@"components"];
         [_tracker property:@"components" afterChangeValue:_components];
     }
@@ -279,6 +295,7 @@
         [_tracker property:@"counter" beforeChangeValue:@(_counter)];
         [self willChangeValueForKey:@"counter"];
         _counter = counter;
+        _SC_hash = 0;
         [self didChangeValueForKey:@"counter"];
         [_tracker property:@"counter" afterChangeValue:@(_counter)];
     }

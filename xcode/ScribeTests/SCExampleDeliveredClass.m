@@ -12,7 +12,10 @@
 #import "SCExampleArrayValidator.h"
 #import "SCNonnullValidator.h"
 
-@interface SCExampleDeliveredClass ()
+@interface SCExampleDeliveredClass () {
+    @protected
+    NSUInteger _SC_hash;
+}
 
 - (instancetype)initWithBuilder:(SCExampleDeliveredClassBuilder *)builder error:(NSError **)error;
 + (BOOL)_validateID:(NSString *)ID forObject:(SCExampleDeliveredClass *)object error:(NSError **)error;
@@ -125,6 +128,17 @@
 - (id)immutableCopyWithError:(NSError **)error {
     SCExampleDeliveredClass *exampleClass = self;
     return [[SCExampleDeliveredClass alloc] initWithExampleClass:exampleClass];
+}
+
+- (NSUInteger)SC_hash {
+    if (!_SC_hash) {
+        _SC_hash = SCEnumerableHash(@[ _ID, _objectDescription, _components, @(_counter), _additionalValue, _tableOfNumbers,  ], YES);
+    }
+    return _SC_hash;
+}
+
+- (NSUInteger)hash {
+    return self.SC_hash;
 }
 
 
@@ -243,6 +257,7 @@
         [_tracker property:@"objectDescription" beforeChangeValue:_objectDescription];
         [self willChangeValueForKey:@"objectDescription"];
         _objectDescription = objectDescription;
+        _SC_hash = 0;
         [self didChangeValueForKey:@"objectDescription"];
         [_tracker property:@"objectDescription" afterChangeValue:_objectDescription];
     }
@@ -259,6 +274,7 @@
         [_tracker property:@"components" beforeChangeValue:_components];
         [self willChangeValueForKey:@"components"];
         _components = components;
+        _SC_hash = 0;
         [self didChangeValueForKey:@"components"];
         [_tracker property:@"components" afterChangeValue:_components];
     }
@@ -294,6 +310,7 @@
         [_tracker property:@"counter" beforeChangeValue:@(_counter)];
         [self willChangeValueForKey:@"counter"];
         _counter = counter;
+        _SC_hash = 0;
         [self didChangeValueForKey:@"counter"];
         [_tracker property:@"counter" afterChangeValue:@(_counter)];
     }
@@ -310,6 +327,7 @@
         [_tracker property:@"tableOfNumbers" beforeChangeValue:_tableOfNumbers];
         [self willChangeValueForKey:@"tableOfNumbers"];
         _tableOfNumbers = tableOfNumbers;
+        _SC_hash = 0;
         [self didChangeValueForKey:@"tableOfNumbers"];
         [_tracker property:@"tableOfNumbers" afterChangeValue:_tableOfNumbers];
     }

@@ -15,7 +15,6 @@ id _Nullable SCObjectImmutableCopy(id _Nullable obj, NSError * _Nullable __autor
 NSUInteger SCObjectHash(id _Nullable obj);
 NSUInteger _SCStructHash(const void * _Nonnull aStruct, size_t structSize);
 NSUInteger SCEnumerableHash(id<NSFastEnumeration> _Nullable enumerable, BOOL positionAware);
-NSUInteger SCEnumerableHash(id<NSFastEnumeration> _Nullable enumerable, BOOL positionAware);
 NSUInteger SCDictionaryHash(NSDictionary * _Nullable dictionary);
 
 #define SCStructHash(s) _SCStructHash(&s, sizeof(s))

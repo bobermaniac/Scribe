@@ -9,7 +9,10 @@
 
 #import "SCExampleArrayValidator.h"
 
-@interface SCExampleSetContainer ()
+@interface SCExampleSetContainer () {
+    @protected
+    NSUInteger _SC_hash;
+}
 
 + (BOOL)_validateSet:(NSSet *)set forObject:(SCExampleSetContainer *)object error:(NSError **)error;
 
@@ -55,6 +58,17 @@
 - (id)immutableCopyWithError:(NSError **)error {
     SCExampleSetContainer *exampleSetContainer = self;
     return [[SCExampleSetContainer alloc] initWithExampleSetContainer:exampleSetContainer];
+}
+
+- (NSUInteger)SC_hash {
+    if (!_SC_hash) {
+        _SC_hash = SCEnumerableHash(@[ _set,  ], YES);
+    }
+    return _SC_hash;
+}
+
+- (NSUInteger)hash {
+    return self.SC_hash;
 }
 
 
@@ -111,6 +125,7 @@
         
         [self willChangeValueForKey:@"set"];
         _set = set;
+        _SC_hash = 0;
         [self didChangeValueForKey:@"set"];
         
     }
