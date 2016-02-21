@@ -113,7 +113,9 @@
 
 - (NSUInteger)SC_hash {
     if (!_SC_hash) {
-        _SC_hash = SCEnumerableHash(@[ {% for property in class.all_properties %}{{ property.field_name_boxed }}, {% endfor%} ], YES);
+        _SC_hash = SCEnumerableHash(@[
+            {% for property in class.all_properties %}{{ property.field_name_boxed }} ?: [NSNull null],
+            {% endfor%}], YES);
     }
     return _SC_hash;
 }

@@ -62,7 +62,9 @@
 
 - (NSUInteger)SC_hash {
     if (!_SC_hash) {
-        _SC_hash = SCEnumerableHash(@[ _set,  ], YES);
+        _SC_hash = SCEnumerableHash(@[
+            _set ?: [NSNull null],
+            ], YES);
     }
     return _SC_hash;
 }

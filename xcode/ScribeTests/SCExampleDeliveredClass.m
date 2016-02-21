@@ -132,7 +132,14 @@
 
 - (NSUInteger)SC_hash {
     if (!_SC_hash) {
-        _SC_hash = SCEnumerableHash(@[ _ID, _objectDescription, _components, @(_counter), _additionalValue, _tableOfNumbers,  ], YES);
+        _SC_hash = SCEnumerableHash(@[
+            _ID ?: [NSNull null],
+            _objectDescription ?: [NSNull null],
+            _components ?: [NSNull null],
+            @(_counter) ?: [NSNull null],
+            _additionalValue ?: [NSNull null],
+            _tableOfNumbers ?: [NSNull null],
+            ], YES);
     }
     return _SC_hash;
 }
