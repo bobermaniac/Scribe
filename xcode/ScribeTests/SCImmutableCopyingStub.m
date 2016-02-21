@@ -42,4 +42,16 @@
     return self.SC_hash;
 }
 
+- (id)copyWithZone:(NSZone *)zone {
+    return [[SCImmutableCopyingStub alloc] initWithUnsignedInteger:_hash mutable:!_immutable];
+}
+
+- (BOOL)isEqual:(id)object {
+    if ([object isKindOfClass:[SCImmutableCopyingStub class]]) {
+        SCImmutableCopyingStub *second = object;
+        return second->_hash == _hash;
+    }
+    return NO;
+}
+
 @end

@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScribeTests/SCImmutableCopyingTests.m"
-            timestampString = "477699306.121669"
+            timestampString = "477776205.952395"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
             landmarkName = "-testNSNull"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScribeTests/SCImmutableCopyingTests.m"
-            timestampString = "477699306.121669"
+            timestampString = "477776205.952395"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "-testNSString"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScribeTests/SCImmutableCopyingTests.m"
-            timestampString = "477699306.121669"
+            timestampString = "477776205.952395"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "-testNSMutableString"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScribeTests/SCImmutableCopyingTests.m"
-            timestampString = "477699306.121669"
+            timestampString = "477776205.952395"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "-testNSMutableString"
             landmarkType = "5">
             <Locations>
@@ -306,11 +306,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScribeTests/SCImmutableCopyingTests.m"
-            timestampString = "477699306.121669"
+            timestampString = "477776205.952395"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "-testNSValue"
             landmarkType = "5">
          </BreakpointContent>
@@ -322,11 +322,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScribeTests/SCImmutableCopyingTests.m"
-            timestampString = "477699306.121669"
+            timestampString = "477777388.7987"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "197"
-            endingLineNumber = "197"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
             landmarkName = "-testNSMutableSet"
             landmarkType = "5">
          </BreakpointContent>
@@ -432,11 +432,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScribeTests/SCImmutableCopyingTests.m"
-            timestampString = "477699306.121669"
+            timestampString = "477776205.952395"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "-testNSString"
             landmarkType = "5">
             <Locations>
@@ -526,11 +526,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScribeTests/SCImmutableCopyingTests.m"
-            timestampString = "477699306.121669"
+            timestampString = "477776205.952395"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "-testNSMutableString"
             landmarkType = "5">
          </BreakpointContent>
@@ -558,11 +558,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScribeTests/SCHasingTests.m"
-            timestampString = "477753922.730295"
+            timestampString = "477775962.555373"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
             landmarkName = "-testNSDictionaryHash"
             landmarkType = "5">
             <Locations>
@@ -651,11 +651,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScribeTests/SCImmutableCopyingTests.m"
-            timestampString = "477699306.121669"
+            timestampString = "477776205.952395"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "-testNSData"
             landmarkType = "5">
             <Locations>
@@ -729,11 +729,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScribeTests/SCImmutableCopyingTests.m"
-            timestampString = "477699306.121669"
+            timestampString = "477776205.952395"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "-testNSMutableData"
             landmarkType = "5">
          </BreakpointContent>
@@ -745,11 +745,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScribeTests/SCHasingTests.m"
-            timestampString = "477773172.70324"
+            timestampString = "477775962.555373"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "175"
-            endingLineNumber = "175"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "-testStructHash"
             landmarkType = "5">
          </BreakpointContent>
@@ -761,11 +761,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScribeTests/SCHasingTests.m"
-            timestampString = "477773173.067272"
+            timestampString = "477775962.555373"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "174"
-            endingLineNumber = "174"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "-testStructHash"
             landmarkType = "5">
          </BreakpointContent>
@@ -777,11 +777,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ScribeTests/SCHasingTests.m"
-            timestampString = "477773287.978015"
+            timestampString = "477775962.555373"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "-testStructHash"
             landmarkType = "5">
             <Locations>
@@ -859,6 +859,84 @@
                   startingLineNumber = "186"
                   endingLineNumber = "186"
                   offsetFromSymbolStart = "5541">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScribeTests/SCImmutableCopyingTests.m"
+            timestampString = "477776221.871347"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
+            landmarkName = "-testNSArrayWithMutableData"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__53-[SCImmutableCopyingTests testNSArrayWithMutableData]_block_invoke"
+                  moduleName = "ScribeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
+                  timestampString = "477776367.115121"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "118"
+                  endingLineNumber = "118"
+                  offsetFromSymbolStart = "97">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__53-[SCImmutableCopyingTests testNSArrayWithMutableData]_block_invoke"
+                  moduleName = "ScribeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
+                  timestampString = "477776367.115481"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "118"
+                  endingLineNumber = "118"
+                  offsetFromSymbolStart = "663">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__53-[SCImmutableCopyingTests testNSArrayWithMutableData]_block_invoke"
+                  moduleName = "ScribeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
+                  timestampString = "477776367.115846"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "118"
+                  endingLineNumber = "118"
+                  offsetFromSymbolStart = "1091">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__53-[SCImmutableCopyingTests testNSArrayWithMutableData]_block_invoke"
+                  moduleName = "ScribeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCImmutableCopyingTests.m"
+                  timestampString = "477776367.116102"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "118"
+                  endingLineNumber = "118"
+                  offsetFromSymbolStart = "1213">
                </Location>
             </Locations>
          </BreakpointContent>

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Scribe/Scribe.h>
 
-@interface SCImmutableCopyingStub : NSObject<SCImmutableCopying>
+@interface SCImmutableCopyingStub : NSObject<SCImmutableCopying, NSCopying>
 
 - (instancetype _Nonnull)initWithUnsignedInteger:(NSUInteger)unsignedInteger mutable:(BOOL)mut;
 

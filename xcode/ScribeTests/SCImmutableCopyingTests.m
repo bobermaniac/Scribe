@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import <Scribe/Scribe.h>
+#import "SCImmutableCopyingStub.h"
 
 @interface SCImmutableCopyingTests : XCTestCase
 
@@ -96,7 +97,7 @@
 
 - (void)testNSArrayWithImmutableData {
     NSError *error = nil;
-    NSArray *array = @[ @1, @2, @3, @4, @5 ];
+    NSArray *array = @[ IS(1), IS(2), IS(3), IS(4), IS(5) ];
     
     XCTAssertTrue(SCObjectIsImmutable(array));
     XCTAssertEqualObjects(SCObjectImmutableCopy(array, &error), array);
@@ -105,7 +106,7 @@
 
 - (void)testNSArrayWithMutableData {
     NSError *error = nil;
-    NSArray *array = @[ @1, @2, @3, @4, @5, @"6".mutableCopy ];
+    NSArray *array = @[ IS(1), IS(2), IS(3), IS(4), MS(5) ];
     
     XCTAssertFalse(SCObjectIsImmutable(array));
     NSArray *copy = SCObjectImmutableCopy(array, &error);
@@ -121,7 +122,7 @@
 
 - (void)testNSMutableArray {
     NSError *error = nil;
-    NSMutableArray *array = @[ @1, @2, @3, @4, @5 ].mutableCopy;
+    NSMutableArray *array = @[ IS(1), IS(2), IS(3), IS(4), IS(5) ].mutableCopy;
     
     XCTAssertFalse(SCObjectIsImmutable(array));
     NSArray *copy = SCObjectImmutableCopy(array, &error);
@@ -138,9 +139,9 @@
 - (void)testNSDictionaryWithImmutableData {
     NSError *error = nil;
     NSDictionary *dict = @{
-                           @1 : [NSDate date],
-                           @2 : [NSDate date],
-                           @3 : [NSDate date],
+                           IS(100) : IS(1),
+                           IS(200) : IS(2),
+                           IS(300) : IS(3),
                            };
     
     XCTAssertTrue(SCObjectIsImmutable(dict));
@@ -151,10 +152,30 @@
 - (void)testNSDictionaryWithMutableData {
     NSError *error = nil;
     NSDictionary *dict = @{
-                           @1 : @"1".mutableCopy,
-                           @2 : @"2".mutableCopy,
-                           @3 : @"3".mutableCopy,
+                           IS(100) : IS(1),
+                           IS(200) : IS(2),
+                           IS(300) : MS(3),
                            };
+    
+    XCTAssertFalse(SCObjectIsImmutable(dict));
+    NSDictionary *copy = SCObjectImmutableCopy(dict, &error);
+    XCTAssertNil(error);
+    XCTAssertNotNil(copy);
+    XCTAssertTrue(SCObjectIsImmutable(copy));
+    
+    [copy enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+        XCTAssertTrue([obj isEqual:dict[key]]);
+        XCTAssertTrue(SCObjectIsImmutable(obj));
+    }];
+}
+
+- (void)testNSMutableDictionary {
+    NSError *error = nil;
+    NSDictionary *dict = @{
+                           IS(100) : IS(1),
+                           MS(200) : IS(2),
+                           IS(300) : MS(3),
+                           }.mutableCopy;
     
     XCTAssertFalse(SCObjectIsImmutable(dict));
     NSDictionary *copy = SCObjectImmutableCopy(dict, &error);
@@ -170,7 +191,7 @@
 
 - (void)testNSSetWithImmutableData {
     NSError *error = nil;
-    NSSet *set = [NSSet setWithArray:@[ @1, @2, @3, @4, @5 ]];
+    NSSet *set = [NSSet setWithArray:@[ IS(1), IS(2), IS(3), IS(4), IS(5) ]];
     
     XCTAssertTrue(SCObjectIsImmutable(set));
     XCTAssertEqualObjects(SCObjectImmutableCopy(set, &error), set);
@@ -179,7 +200,7 @@
 
 - (void)testNSSetWithMutableData {
     NSError *error = nil;
-    NSSet *set = [NSSet setWithArray:@[ @1, @2, @3, @4, @5, @"6".mutableCopy ]];
+    NSSet *set = [NSSet setWithArray:@[ IS(1), IS(2), IS(3), IS(4), MS(5) ]];
     
     XCTAssertFalse(SCObjectIsImmutable(set));
     NSSet *copy = SCObjectImmutableCopy(set, &error);
@@ -195,7 +216,7 @@
 
 - (void)testNSMutableSet {
     NSError *error = nil;
-    NSMutableSet *set = [NSMutableSet setWithArray:@[ @1, @2, @3, @4, @"6".mutableCopy ]];
+    NSMutableSet *set = [NSMutableSet setWithArray:@[ IS(1), IS(2), IS(3), IS(4), IS(5) ]];
     
     XCTAssertFalse(SCObjectIsImmutable(set));
     NSSet *copy = SCObjectImmutableCopy(set, &error);

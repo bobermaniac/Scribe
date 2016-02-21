@@ -8,55 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import <Scribe/Scribe.h>
-
-@interface SCHashingTest_HashPlaceholder : NSObject<SCImmutableCopying> {
-    @private
-    NSUInteger _hash;
-}
-
-- (instancetype)initWithHash:(NSUInteger)hash;
-
-@end
-
-@implementation SCHashingTest_HashPlaceholder
-
-- (instancetype)initWithHash:(NSUInteger)hash {
-    if (self = [super init]) {
-        _hash = hash;
-    }
-    return self;
-}
-
-- (BOOL)isImmutable {
-    return YES;
-}
-
-- (NSUInteger)SC_hash {
-    return _hash;
-}
-
-- (BOOL)isEqual:(SCHashingTest_HashPlaceholder *)object {
-    if ([object isKindOfClass:[SCHashingTest_HashPlaceholder class]]) {
-        return object->_hash == _hash;
-    }
-    return NO;
-}
-
-@end
-
-@interface NSNumber (SCHashingTest_HashPlaceholder)
-
-@property (nonatomic, readonly, assign) SCHashingTest_HashPlaceholder *h;
-
-@end
-
-@implementation NSNumber (SCHashingTest_HashPlaceholder)
-
-- (SCHashingTest_HashPlaceholder *)h {
-    return [[SCHashingTest_HashPlaceholder alloc] initWithHash:self.unsignedIntegerValue];
-}
-
-@end
+#import "SCImmutableCopyingStub.h"
 
 @interface SCHasingTests : XCTestCase
 
@@ -118,11 +70,11 @@
 }
 
 - (void)testNSArrayHash {
-    NSArray *a1 = @[ (@1).h, (@2).h, (@3).h, (@4).h, (@5).h ];
-    NSArray *a2 = @[ (@1).h, (@2).h, (@3).h, (@4).h, (@5).h ];
-    NSArray *a3 = @[ (@9).h, (@7).h, (@5).h, (@4).h, (@5).h ];
-    NSArray *a4 = @[ (@1).h, (@2).h, (@3).h, (@4).h ];
-    NSArray *a5 = @[ (@5).h, (@4).h, (@3).h, (@2).h, (@1).h ];
+    NSArray *a1 = @[ IS(1), IS(2), IS(3), IS(4), IS(5) ];
+    NSArray *a2 = @[ IS(1), IS(2), IS(3), IS(4), IS(5) ];
+    NSArray *a3 = @[ IS(9), IS(7), IS(5), IS(4), IS(5) ];
+    NSArray *a4 = @[ IS(1), IS(2), IS(3), IS(4) ];
+    NSArray *a5 = @[ IS(5), IS(4), IS(3), IS(2), IS(1) ];
     
     XCTAssertEqual(SCObjectHash(a1), SCObjectHash(a2));
     XCTAssertNotEqual(SCObjectHash(a1), SCObjectHash(a3));
@@ -131,12 +83,12 @@
 }
 
 - (void)testNSDictionaryHash {
-    NSDictionary *d1 = @{ @"k" : @1, @"v" : @2 };
-    NSDictionary *d2 = @{ @"k" : @1, @"v" : @2 };
-    NSDictionary *d3 = @{ @"k" : @2, @"v" : @1 };
-    NSDictionary *d4 = @{ @"a" : @1, @"b" : @2 };
-    NSDictionary *d5 = @{ @"k" : @1, @"v" : @2, @"b" : @3 };
-    NSDictionary *d6 = @{ @"v" : @2, @"k" : @1 };
+    NSDictionary *d1 = @{ IS(100) : IS(1), IS(200) : IS(2) };
+    NSDictionary *d2 = @{ IS(100) : IS(1), IS(200) : IS(2) };
+    NSDictionary *d3 = @{ IS(100) : IS(2), IS(200) : IS(1) };
+    NSDictionary *d4 = @{ IS(300) : IS(1), IS(400) : IS(2) };
+    NSDictionary *d5 = @{ IS(100) : IS(1), IS(200) : IS(2), IS(400) : IS(2) };
+    NSDictionary *d6 = @{ IS(200) : IS(2), IS(100) : IS(1) };
     
     XCTAssertEqual(SCObjectHash(d1), SCObjectHash(d2));
     XCTAssertNotEqual(SCObjectHash(d1), SCObjectHash(d3));
@@ -146,11 +98,11 @@
 }
 
 - (void)testNSSetHash {
-    NSSet *a1 = [NSSet setWithArray:@[ (@1).h, (@2).h, (@3).h, (@4).h, (@5).h ]];
-    NSSet *a2 = [NSSet setWithArray:@[ (@1).h, (@2).h, (@3).h, (@4).h, (@5).h ]];
-    NSSet *a3 = [NSSet setWithArray:@[ (@9).h, (@7).h, (@3).h, (@4).h, (@5).h ]];
-    NSSet *a4 = [NSSet setWithArray:@[ (@1).h, (@2).h, (@3).h, (@4).h ]];
-    NSSet *a5 = [NSSet setWithArray:@[ (@5).h, (@4).h, (@3).h, (@2).h, (@1).h ]];
+    NSSet *a1 = [NSSet setWithArray:@[ IS(1), IS(2), IS(3), IS(4), IS(5) ]];
+    NSSet *a2 = [NSSet setWithArray:@[ IS(1), IS(2), IS(3), IS(4), IS(5) ]];
+    NSSet *a3 = [NSSet setWithArray:@[ IS(9), IS(7), IS(3), IS(4), IS(5) ]];
+    NSSet *a4 = [NSSet setWithArray:@[ IS(1), IS(2), IS(3), IS(4) ]];
+    NSSet *a5 = [NSSet setWithArray:@[ IS(5), IS(4), IS(3), IS(2), IS(1) ]];
     
     XCTAssertEqual(SCObjectHash(a1), SCObjectHash(a2));
     XCTAssertNotEqual(SCObjectHash(a1), SCObjectHash(a3));
@@ -159,11 +111,11 @@
 }
 
 - (void)testNSOrderedSetHash {
-    NSOrderedSet *a1 = [NSOrderedSet orderedSetWithArray:@[ (@1).h, (@2).h, (@3).h, (@4).h, (@5).h ]];
-    NSOrderedSet *a2 = [NSOrderedSet orderedSetWithArray:@[ (@1).h, (@2).h, (@3).h, (@4).h, (@5).h ]];
-    NSOrderedSet *a3 = [NSOrderedSet orderedSetWithArray:@[ (@9).h, (@7).h, (@3).h, (@4).h, (@5).h ]];
-    NSOrderedSet *a4 = [NSOrderedSet orderedSetWithArray:@[ (@1).h, (@2).h, (@3).h, (@4).h ]];
-    NSOrderedSet *a5 = [NSOrderedSet orderedSetWithArray:@[ (@5).h, (@4).h, (@3).h, (@2).h, (@1).h ]];
+    NSOrderedSet *a1 = [NSOrderedSet orderedSetWithArray:@[ IS(1), IS(2), IS(3), IS(4), IS(5) ]];
+    NSOrderedSet *a2 = [NSOrderedSet orderedSetWithArray:@[ IS(1), IS(2), IS(3), IS(4), IS(5) ]];
+    NSOrderedSet *a3 = [NSOrderedSet orderedSetWithArray:@[ IS(9), IS(7), IS(3), IS(4), IS(5) ]];
+    NSOrderedSet *a4 = [NSOrderedSet orderedSetWithArray:@[ IS(1), IS(2), IS(3), IS(4) ]];
+    NSOrderedSet *a5 = [NSOrderedSet orderedSetWithArray:@[ IS(5), IS(4), IS(3), IS(2), IS(1) ]];
     
     XCTAssertEqual(SCObjectHash(a1), SCObjectHash(a2));
     XCTAssertNotEqual(SCObjectHash(a1), SCObjectHash(a3));
