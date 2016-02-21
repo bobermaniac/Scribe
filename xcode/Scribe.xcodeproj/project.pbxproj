@@ -16,6 +16,7 @@
 		93C693051C7445A60006C6AE /* NSDate+SCImmutableCopying.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C693031C7445A60006C6AE /* NSDate+SCImmutableCopying.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		93C693061C7445A60006C6AE /* NSDate+SCImmutableCopying.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C693041C7445A60006C6AE /* NSDate+SCImmutableCopying.m */; };
 		E73CA3421C76831F0074FF2F /* SCHasingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E73CA3411C76831F0074FF2F /* SCHasingTests.m */; };
+		E7AD09071C7A3EEF00B3C2E8 /* SCImmutableCopyingStub.m in Sources */ = {isa = PBXBuildFile; fileRef = E7AD09061C7A3EEF00B3C2E8 /* SCImmutableCopyingStub.m */; };
 		E7C110A51C67E730008ADAE3 /* Scribe.h in Headers */ = {isa = PBXBuildFile; fileRef = E7C110A41C67E730008ADAE3 /* Scribe.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E7C110AC1C67E730008ADAE3 /* Scribe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7C110A11C67E730008ADAE3 /* Scribe.framework */; };
 		E7C110BD1C67E788008ADAE3 /* SCTrackChanges.h in Headers */ = {isa = PBXBuildFile; fileRef = E7C110BC1C67E788008ADAE3 /* SCTrackChanges.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -70,6 +71,8 @@
 		93C693031C7445A60006C6AE /* NSDate+SCImmutableCopying.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+SCImmutableCopying.h"; sourceTree = "<group>"; };
 		93C693041C7445A60006C6AE /* NSDate+SCImmutableCopying.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+SCImmutableCopying.m"; sourceTree = "<group>"; };
 		E73CA3411C76831F0074FF2F /* SCHasingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCHasingTests.m; sourceTree = "<group>"; };
+		E7AD09051C7A3EEF00B3C2E8 /* SCImmutableCopyingStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCImmutableCopyingStub.h; sourceTree = "<group>"; };
+		E7AD09061C7A3EEF00B3C2E8 /* SCImmutableCopyingStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCImmutableCopyingStub.m; sourceTree = "<group>"; };
 		E7C110A11C67E730008ADAE3 /* Scribe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Scribe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7C110A41C67E730008ADAE3 /* Scribe.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Scribe.h; sourceTree = "<group>"; };
 		E7C110A61C67E730008ADAE3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -203,6 +206,8 @@
 		E7C110AF1C67E730008ADAE3 /* ScribeTests */ = {
 			isa = PBXGroup;
 			children = (
+				E7AD09051C7A3EEF00B3C2E8 /* SCImmutableCopyingStub.h */,
+				E7AD09061C7A3EEF00B3C2E8 /* SCImmutableCopyingStub.m */,
 				E7C110E51C6E64DB008ADAE3 /* Example */,
 				E7D117CA1C7506FD000E53C2 /* SCTrackerTests.m */,
 				E7D117C21C74F35B000E53C2 /* SCImmutableCopyingTests.m */,
@@ -418,6 +423,7 @@
 				E7C110E91C6E67CA008ADAE3 /* SCExampleClass.m in Sources */,
 				E73CA3421C76831F0074FF2F /* SCHasingTests.m in Sources */,
 				E7D117C31C74F35B000E53C2 /* SCImmutableCopyingTests.m in Sources */,
+				E7AD09071C7A3EEF00B3C2E8 /* SCImmutableCopyingStub.m in Sources */,
 				E7C111061C70E971008ADAE3 /* SCExampleArrayValidator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
