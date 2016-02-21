@@ -738,5 +738,130 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScribeTests/SCHasingTests.m"
+            timestampString = "477773172.70324"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
+            landmarkName = "-testStructHash"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScribeTests/SCHasingTests.m"
+            timestampString = "477773173.067272"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
+            landmarkName = "-testStructHash"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ScribeTests/SCHasingTests.m"
+            timestampString = "477773287.978015"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "-testStructHash"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SCHasingTests testStructHash]"
+                  moduleName = "ScribeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCHasingTests.m"
+                  timestampString = "477773292.68153"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186"
+                  offsetFromSymbolStart = "2798">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SCHasingTests testStructHash]"
+                  moduleName = "ScribeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCHasingTests.m"
+                  timestampString = "477773292.681873"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186"
+                  offsetFromSymbolStart = "2908">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SCHasingTests testStructHash]"
+                  moduleName = "ScribeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCHasingTests.m"
+                  timestampString = "477773292.68208"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186"
+                  offsetFromSymbolStart = "4608">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SCHasingTests testStructHash]"
+                  moduleName = "ScribeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCHasingTests.m"
+                  timestampString = "477773292.682232"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186"
+                  offsetFromSymbolStart = "5413">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[SCHasingTests testStructHash]"
+                  moduleName = "ScribeTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/bober_maniac/Documents/Dev/Scribe/xcode/ScribeTests/SCHasingTests.m"
+                  timestampString = "477773292.682509"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "186"
+                  endingLineNumber = "186"
+                  offsetFromSymbolStart = "5541">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

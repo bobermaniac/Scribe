@@ -171,4 +171,20 @@
     XCTAssertNotEqual(SCObjectHash(a1), SCObjectHash(a5));
 }
 
+- (void)testStructHash {
+    int i1 = 255;
+    int i2 = 255;
+    int i3 = 855;
+    
+    XCTAssertEqual(SCStructHash(i1), SCStructHash(i2));
+    XCTAssertNotEqual(SCStructHash(i1), SCStructHash(i3));
+    
+    CGRect r1 = CGRectMake(0., 0., 200., 200.);
+    CGRect r2 = CGRectMake(0., 0., 200., 200.);
+    CGRect r3 = CGRectMake(5., 5., 195., 195.);
+    
+    XCTAssertEqual(SCStructHash(r1), SCStructHash(r2));
+    XCTAssertNotEqual(SCStructHash(r1), SCStructHash(r3));
+}
+
 @end

@@ -110,9 +110,6 @@ NSUInteger SCDictionaryHash(NSDictionary * _Nullable dictionary) {
     return hash;
 }
 
-#undef NSUINT_BIT
-#undef NSUINTROTATE
-
 NSUInteger _SCEnumerableHashPositionUnaware(id<NSFastEnumeration> _Nullable enumerable) {
     NSUInteger hash = 0;
     for (id<SCImmutableCopying> obj in enumerable) {
@@ -131,3 +128,18 @@ NSUInteger SCEnumerableHash(id<NSFastEnumeration> _Nullable enumerable, BOOL pos
         return _SCEnumerableHashPositionUnaware(enumerable);
     }
 }
+
+NSUInteger _SCStructHash(const void * _Nonnull data, size_t size) {
+    NSUInteger result = 0;
+    for (size_t offset = 0; offset < size; offset++) {
+        size_t rof = offset % sizeof(result);
+        if (rof == 0 && offset != 0) {
+            result = NSUINTROTATE(result, 7);
+        }
+        ((uint8_t *)&result)[rof] ^= ((const uint8_t *)data)[offset];
+    }
+    return result;
+}
+
+#undef NSUINT_BIT
+#undef NSUINTROTATE
