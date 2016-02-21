@@ -97,9 +97,7 @@ NSUInteger _SCEnumerableHashPositionAware(id<NSFastEnumeration> _Nullable enumer
 }
 
 NSUInteger SCDictionaryHash(NSDictionary * _Nullable dictionary) {
-    NSUInteger *elementHashes = malloc(dictionary.count * sizeof(NSUInteger));
-    
-    size_t index = 0;
+    NSUInteger hash = 0;
     for (id<NSCopying> key in dictionary) {
         id value = dictionary[key];
         
@@ -107,15 +105,8 @@ NSUInteger SCDictionaryHash(NSDictionary * _Nullable dictionary) {
         NSUInteger valueHash = SCObjectHash(value);
         NSUInteger rotation = valueHash % NSUINT_BIT;
         
-        elementHashes[index++] = NSUINTROTATE(keyHash, rotation) ^ valueHash;
+        hash = hash ^ (NSUINTROTATE(keyHash, rotation) ^ valueHash);
     }
-    
-    NSUInteger hash = 0;
-    for (index = 0; index < dictionary.count; index++) {
-        hash = hash ^ elementHashes[index];
-    }
-
-    free(elementHashes);
     return hash;
 }
 

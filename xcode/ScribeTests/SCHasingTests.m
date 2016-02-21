@@ -106,7 +106,15 @@
 }
 
 - (void)testNSDataHash {
-    XCTFail(@"Here's be dragons");
+    NSData *d1 = [@"Here's be dragons" dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *d2 = [[NSString stringWithFormat:@"Here's be %@", @"dragons"] dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *d3 = [@"That's all folks" dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *d4 = [NSMutableData dataWithData:[@"That's all folks" dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    XCTAssertEqual(SCObjectHash(d1), SCObjectHash(d2));
+    XCTAssertEqual(SCObjectHash(d3), SCObjectHash(d4));
+    XCTAssertNotEqual(SCObjectHash(d1), SCObjectHash(d3));
+    XCTAssertNotEqual(SCObjectHash(d1), SCObjectHash(d4));
 }
 
 - (void)testNSArrayHash {
