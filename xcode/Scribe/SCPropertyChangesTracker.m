@@ -63,11 +63,13 @@
 }
 
 - (instancetype)initWithTrackingObject:(id)object mode:(SCPropertyChangesTrackerMode)mode {
-    NSParameterAssert(mode == SCPropertyChangesTrackerManualMode);
     if (self = [super init]) {
         _trackingObject = object;
         _mode = mode;
         _changes = [NSMutableDictionary dictionary];
+        if (mode == SCPropertyChangesTrackerAutomaticMode) {
+            [self _registerObserverForObject:object];
+        }
     }
     return self;
 }
@@ -77,6 +79,10 @@
         _changes = [tracker->_changes copy];
     }
     return self;
+}
+
+- (void)_registerObserverForObject:(id)object {
+    @throw [NSException exceptionWithName:@"Not supported" reason:@"Automatic tracking mode is not supported now" userInfo:nil];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
