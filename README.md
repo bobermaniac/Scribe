@@ -46,6 +46,11 @@ Full documentation ongoing.
 * ~~Check object graph~~
 * ~~Builder support~~
 * ~~Abstract class support~~
+* Extract changes from `Mutable` as `ChangesDelta` class
+    * Allows operation like:
+        * `Immutable` + `ChangesDelta` = `Mutalbe`
+        * `ChangesDelta` + `ChangesDelta` = `ChangesDelta`
+        * `ChangesDelta`<sup>-1</sup> — Is it nessesary? Could be helpful for UndoManager implementation.
 * ~~getter= and setter= support~~
 * ~~Inheritance of common base builder if exists~~
 * ~~Common Objective C library with implementations used in generated files~~
@@ -53,7 +58,7 @@ Full documentation ongoing.
     * Automatic validators for `_Notnull` type annotation.
 * Undo manager
     * Based on tracker? It is possible if we ask him to save all history on demand
-* isEqual: method code generation
+* `isEqual:` method code generation
     * Based on scribe definition or generate always?
 * ~~TESTS~~
     * Tests for parser/gen — how to test them? Check it out
@@ -63,7 +68,7 @@ Full documentation ongoing.
     * Validation in descendants should be only more strict
     * Should allow to override property types and generate rules to process it correctly
 * Working with XCode project
-* Replace 'implement' with 'derive'
+* Replace `implement` with `derive`
 
 ## Deal with
 * https://www.bignerdranch.com/blog/about-mutability/ — cool Apple optimizations breaks class model and my cool optimizations, it's so sad.
