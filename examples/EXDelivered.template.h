@@ -1,4 +1,4 @@
-scribe(implement archivable)
+scribe(derive archivable)
 @interface EXDelivered : EXBase
 
 @property (nonatomic, readonly) NSData *customData;

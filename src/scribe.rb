@@ -165,7 +165,7 @@ module Objc
 
     def self.accepted_scribes
       {
-          implement: %i[ mutable, builder, archivable ],
+          derive: %i[ mutable, builder, archivable ],
           extract: %i[ interface ],
           make: %i[ abstract ]
       }

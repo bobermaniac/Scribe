@@ -68,7 +68,7 @@ Full documentation ongoing.
     * Validation in descendants should be only more strict
     * Should allow to override property types and generate rules to process it correctly
 * Working with XCode project
-* Replace `implement` with `derive`
+* ~~Replace `implement` with `derive`~~
 
 ## Deal with
 * https://www.bignerdranch.com/blog/about-mutability/ — cool Apple optimizations breaks class model and my cool optimizations, it's so sad.
