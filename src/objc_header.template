@@ -54,3 +54,15 @@
 - ({{ class.class_name }} * {% if class.builder_could_fail? %}_Nullable{% else %}_Nonnull{% endif %})build{% if class.builder_could_fail? %}WithError:(NSError * _Nullable __autoreleasing * _Nullable)error{% endif %};
 
 @end{% endif %}
+
+{% if class.changes_delta? %}@interface {{ class.class_name }}ChangesDelta : NSObject
+
+{% for property in class.all_properties %}@property (nonatomic, readonly) BOOL has{{ property.name_capitalized }}Value;
+@property ({{property.builder_attributes}}) {{ property.builder_type_qualified }} {{ property.name }}Value;
+- (void)remove{{ property.name_capitalized }}Value;
+{% endfor %}
++ (instancetype _Nullable)changesDeltaWithChangesOfItem:({{ class.mutable_class_name }} * _Nonnull)item;
++ (instancetype _Nonnull)changesDeltaFrom:({{ class.class_name }} * _Nonnull)source to:({{ class.class_name }} * _Nonnull)dest;
+- ({{ class.class_name }} _Nullable)applyChangesTo:({{ class.class_name }} * _Nonnull)item;
+
+@end{% endif %}

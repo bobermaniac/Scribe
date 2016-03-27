@@ -165,7 +165,8 @@ module Objc
 
     def self.accepted_scribes
       {
-          derive: %i[ mutable, builder, archivable ],
+          implement: %i[ archivable ],
+          derive: %i[ mutable builder delta ],
           extract: %i[ interface ],
           make: %i[ abstract ]
       }
@@ -188,7 +189,7 @@ module Objc
       {
           implement: %i[ validator ],
           hint: {
-              kind: %i[ object, value, array, dictionary, set, block, boxed ],
+              kind: %i[ object value array dictionary set block boxed ],
               primitive: nil,
               wrap: nil,
               unwrap: nil,

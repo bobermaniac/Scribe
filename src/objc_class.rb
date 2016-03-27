@@ -54,12 +54,13 @@ module Objc
 
     def supports
       Enumerator.new do |enumerator|
-        enumerator << :mutable_copy if self.should %i[ implement mutable ]
-        enumerator << :builder if self.should %i[ implement builder ]
+        enumerator << :mutable_copy if self.should %i[ derive mutable ]
+        enumerator << :builder if self.should %i[ derive builder ]
         enumerator << :abstract if self.should %i[ make abstract ]
         enumerator << :extract_interface if self.should %i[ extract interface ]
         enumerator << :make_archivable if self.should %i[ implement archivable ]
         enumerator << :track_changes if self.should %i[ implement tracking ]
+        enumerator << :changes_delta if self.should %i[ derive delta ]
       end
     end
   end

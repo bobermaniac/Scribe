@@ -37,7 +37,7 @@ module Liquid
     end
 
     def supports_mutable_copy?
-      @objc_class.should %i[ implement mutable ]
+      @objc_class.should %i[ derive mutable ]
     end
 
     def supports_track_changes?
@@ -45,7 +45,7 @@ module Liquid
     end
 
     def supports_builder?
-      @objc_class.should %i[ implement builder ]
+      @objc_class.should %i[ derive builder ]
     end
 
     def abstract?
@@ -57,7 +57,11 @@ module Liquid
     end
 
     def parent_have_builder?
-      @objc_class.ancestor.should %i[ implement builder ]
+      @objc_class.ancestor.should %i[ derive builder ]
+    end
+
+    def changes_delta?
+      @objc_class.should %i[ derive delta ]
     end
 
     def constructor_could_fail?

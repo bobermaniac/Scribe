@@ -25,6 +25,10 @@ module Liquid
       @objc_property.name
     end
 
+    def name_capitalized
+      self.name.upcase_1l
+    end
+
     def element_name
       name = @objc_property.should(%i[ implement collection ]).reject{ |(c, _)| c.nil? }.map{ |(c, _)| c }.first
       return name unless name.nil?
