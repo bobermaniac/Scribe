@@ -63,6 +63,6 @@
 {% endfor %}
 + (instancetype _Nullable)changesDeltaWithChangesOfItem:({{ class.mutable_class_name }} * _Nonnull)item;
 + (instancetype _Nonnull)changesDeltaFrom:({{ class.class_name }} * _Nonnull)source to:({{ class.class_name }} * _Nonnull)dest;
-- ({{ class.class_name }} _Nullable)applyChangesTo:({{ class.class_name }} * _Nonnull)item;
+- ({{ class.mutable_class_name }} * _Nullable)applyChangesTo:({{ class.class_name }} * _Nonnull)item{% if class.builder_could_fail? %} {{ error_definition}}{% endif %};
 
 @end{% endif %}
